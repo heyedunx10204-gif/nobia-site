@@ -1,356 +1,158 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>プレスルーム | Nobia 学生アプリラボ</title>
-<meta name="description" content="Nobia（学生アプリラボ）のプレスルーム。お知らせ・プレスリリース・メディア掲載情報を掲載しています。">
-<meta property="og:title" content="プレスルーム | Nobia 学生アプリラボ">
-<meta property="og:description" content="就活SNS「就トーク」と選考管理アプリ「シンプル就活」を開発するNobiaの最新情報をお届けします。">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://nobia-lab.com/press.html">
-<meta property="og:image" content="https://nobia-lab.com/ogp.png">
-<style>
-  :root {
-    --primary: #4f46e5;
-    --primary-dark: #3730a3;
-    --primary-light: #eef2ff;
-    --ink: #1e1b2e;
-    --ink-soft: #58596b;
-    --line: #e6e6ef;
-    --bg: #fafafa;
-    --card: #ffffff;
-    --tag-release: #4f46e5;
-    --tag-news: #0ea5a4;
-    --tag-media: #ea580c;
-  }
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    margin: 0;
-    font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif;
-    color: var(--ink);
-    background: var(--bg);
-    line-height: 1.75;
-  }
-  a { color: inherit; text-decoration: none; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>プレスルーム | Nobia</title>
 
-  /* Header */
-  header {
-    position: sticky;
-    top: 0;
-    z-index: 20;
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--line);
-  }
-  .nav-wrap {
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 14px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 800;
-    font-size: 1.05rem;
-    letter-spacing: 0.02em;
-  }
-  .logo .mark {
-    width: 28px; height: 28px;
-    border-radius: 8px;
-    background: linear-gradient(135deg, var(--primary), #8b5cf6);
-    color: #fff;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.85rem;
-  }
-  nav.links {
-    display: flex;
-    gap: 22px;
-    font-size: 0.88rem;
-    color: var(--ink-soft);
-  }
-  nav.links a:hover { color: var(--primary); }
-  nav.links .current { color: var(--primary); font-weight: 700; }
-  .back-home {
-    font-size: 0.82rem;
-    color: var(--primary);
-    font-weight: 600;
-    white-space: nowrap;
-  }
+  <!-- OGP -->
+  <meta property="og:title" content="プレスルーム | Nobia" />
+  <meta property="og:description" content="学生アプリラボNobiaの最新情報・プレスリリースをお届けします。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://nobia-lab.com/press.html" />
+  <meta property="og:site_name" content="学生アプリラボ Nobia" />
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:image" content="https://nobia-lab.com/ogp.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="プレスルーム | Nobia" />
+  <meta name="twitter:description" content="学生アプリラボNobiaの最新情報・プレスリリースをお届けします。" />
+  <meta name="twitter:image" content="https://nobia-lab.com/ogp.png" />
 
-  /* Hero */
-  .hero {
-    background: linear-gradient(160deg, var(--primary-light) 0%, #f5f3ff 60%, var(--bg) 100%);
-    padding: 64px 24px 40px;
-    text-align: center;
-  }
-  .hero .eyebrow {
-    display: inline-block;
-    font-size: 0.78rem;
-    font-weight: 700;
-    color: var(--primary);
-    background: #fff;
-    border: 1px solid var(--line);
-    padding: 5px 14px;
-    border-radius: 999px;
-    margin-bottom: 18px;
-  }
-  .hero h1 {
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
-    margin: 0 0 14px;
-    font-weight: 800;
-  }
-  .hero p {
-    color: var(--ink-soft);
-    max-width: 560px;
-    margin: 0 auto;
-    font-size: 0.98rem;
-  }
-
-  /* Main */
-  main {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 40px 24px 100px;
-  }
-
-  .filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 32px;
-  }
-  .filter-btn {
-    border: 1px solid var(--line);
-    background: #fff;
-    color: var(--ink-soft);
-    font-size: 0.85rem;
-    font-weight: 600;
-    padding: 8px 16px;
-    border-radius: 999px;
-    cursor: pointer;
-    transition: all 0.15s ease;
-  }
-  .filter-btn:hover { border-color: var(--primary); color: var(--primary); }
-  .filter-btn.active {
-    background: var(--primary);
-    border-color: var(--primary);
-    color: #fff;
-  }
-
-  .news-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  .news-card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    padding: 24px 26px;
-    transition: box-shadow 0.15s ease, transform 0.15s ease;
-  }
-  .news-card:hover {
-    box-shadow: 0 8px 24px rgba(79,70,229,0.08);
-    transform: translateY(-1px);
-  }
-  .news-meta {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-    flex-wrap: wrap;
-  }
-  .news-date {
-    font-size: 0.82rem;
-    color: var(--ink-soft);
-    font-variant-numeric: tabular-nums;
-  }
-  .tag {
-    font-size: 0.72rem;
-    font-weight: 700;
-    padding: 3px 10px;
-    border-radius: 999px;
-    color: #fff;
-  }
-  .tag.tag-プレスリリース { background: var(--tag-release); }
-  .tag.tag-お知らせ { background: var(--tag-news); }
-  .tag.tag-メディア掲載 { background: var(--tag-media); }
-  .news-card h2 {
-    font-size: 1.08rem;
-    margin: 0 0 8px;
-    font-weight: 700;
-  }
-  .news-card .body {
-    color: var(--ink-soft);
-    font-size: 0.92rem;
-    white-space: pre-line;
-    margin: 0 0 12px;
-  }
-  .news-card .link-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--primary);
-  }
-  .news-card .link-btn:hover { text-decoration: underline; }
-
-  .empty-state {
-    text-align: center;
-    color: var(--ink-soft);
-    font-size: 0.9rem;
-    padding: 60px 0;
-  }
-
-  footer {
-    border-top: 1px solid var(--line);
-    padding: 32px 24px;
-    text-align: center;
-    color: var(--ink-soft);
-    font-size: 0.8rem;
-  }
-  footer a { color: var(--primary); }
-
-  @media (max-width: 640px) {
-    nav.links { display: none; }
-  }
-</style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #FFFAF5;
+      font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', sans-serif;
+    }
+    .orange-gradient { background: linear-gradient(135deg, #FF6B2C, #FF8F5A); }
+    .card-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .card-hover:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,0.09); }
+  </style>
 </head>
 <body>
 
-<header>
-  <div class="nav-wrap">
-    <a class="logo" href="https://nobia-lab.com/">
-      <span class="mark">N</span>
-      Nobia
-    </a>
-    <nav class="links">
-      <a href="https://nobia-lab.com/#apps">アプリ紹介</a>
-      <a href="https://nobia-lab.com/#story">開発ストーリー</a>
-      <a href="https://nobia-lab.com/#team">チーム</a>
-      <a href="https://nobia-lab.com/#contact">お問い合わせ</a>
-      <a class="current" href="press.html">プレスルーム</a>
-    </nav>
-    <a class="back-home" href="https://nobia-lab.com/">← トップへ戻る</a>
+<!-- ヘッダー -->
+<header class="bg-white shadow-sm sticky top-0 z-50">
+  <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+    <div class="flex items-center gap-3">
+      <a href="index.html" class="flex items-center gap-2">
+        <div class="w-8 h-8 orange-gradient rounded-xl flex items-center justify-center shadow">
+          <span class="text-white font-black text-sm">N</span>
+        </div>
+        <span class="text-lg font-black" style="color: #FF6B2C;">Nobia</span>
+      </a>
+      <span class="text-gray-300">/</span>
+      <span class="text-sm text-gray-500 font-medium">プレスルーム</span>
+    </div>
+    <a href="index.html" class="text-xs text-gray-400 hover:text-orange-500 transition-colors">← トップへ</a>
   </div>
 </header>
 
-<section class="hero">
-  <span class="eyebrow">PRESS ROOM</span>
-  <h1>プレスルーム</h1>
-  <p>Nobia（学生アプリラボ）からのお知らせ・プレスリリース・メディア掲載情報をこちらで随時更新しています。</p>
-</section>
 
-<main>
-  <div class="filters" id="filters"></div>
-  <div class="news-list" id="news-list"></div>
-  <div class="empty-state" id="empty-state" style="display:none;">該当するお知らせはまだありません。</div>
+<!-- メインコンテンツ -->
+<main class="max-w-4xl mx-auto px-4 py-14">
+
+  <!-- ページタイトル -->
+  <div class="mb-12">
+    <p class="text-orange-500 text-xs font-bold tracking-widest uppercase mb-2">Press Room</p>
+    <h1 class="text-3xl md:text-4xl font-black text-gray-900 mb-3">プレスルーム</h1>
+    <p class="text-gray-500 text-sm leading-relaxed">
+      学生アプリラボNobiaの最新情報・プレスリリースを掲載しています。<br>
+      取材・掲載に関するお問い合わせは
+      <a href="mailto:nobia.lab.official@gmail.com" class="text-orange-500 hover:underline">nobia.lab.official@gmail.com</a>
+      までご連絡ください。
+    </p>
+  </div>
+
+
+  <!-- お知らせ一覧 -->
+  <div class="space-y-5">
+
+    <!-- ▼ 記事1（最新） -->
+    <article class="card-hover bg-white rounded-2xl border border-gray-100 shadow-sm p-6 md:p-8 flex flex-col md:flex-row gap-6">
+      <div class="flex-shrink-0 text-center md:text-left">
+        <time datetime="2026-07-08" class="text-xs font-bold text-gray-400 block">2026年7月8日</time>
+        <span class="inline-block mt-2 text-xs font-bold px-3 py-1 rounded-full bg-teal-100 text-teal-700">
+          プレスリリース
+        </span>
+      </div>
+      <div class="flex-1">
+        <h2 class="text-lg font-bold text-gray-900 mb-2">
+          選考管理アプリ「シンプル就活」、App Storeにて配信開始
+        </h2>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+          学生アプリラボNobiaは、就活生向け選考管理アプリ「シンプル就活」のiOS版をApp Storeにて無料配信開始しました。複数企業の選考ステータスやスケジュールをシンプルに一元管理できるアプリです。
+        </p>
+        <a href="https://apps.apple.com/jp/app/%E3%82%B7%E3%83%B3%E3%83%97%E3%83%AB%E5%B0%B1%E6%B4%BB/id6776132527?itscg=30200&itsct=apps_box_link&mttnsubad=6776132527" target="_blank" rel="noopener" class="text-orange-500 text-sm font-semibold hover:underline">App Store で見る →</a>
+      </div>
+    </article>
+    <!-- ▲ 記事1ここまで -->
+
+    <!-- ▼ 記事2 -->
+    <article class="card-hover bg-white rounded-2xl border border-gray-100 shadow-sm p-6 md:p-8 flex flex-col md:flex-row gap-6">
+      <div class="flex-shrink-0 text-center md:text-left">
+        <time datetime="2026-07-02" class="text-xs font-bold text-gray-400 block">2026年7月2日</time>
+        <span class="inline-block mt-2 text-xs font-bold px-3 py-1 rounded-full bg-purple-100 text-purple-700">
+          メディア掲載
+        </span>
+      </div>
+      <div class="flex-1">
+        <h2 class="text-lg font-bold text-gray-900 mb-2">
+          PRESSNOW プレスナウに掲載されました（就トーク）
+        </h2>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+          プレスリリースサイト「PRESSNOW プレスナウ」に、『就活は、ひとりじゃない。本音で語れる匿名SNS『就トーク』がクラウドファンディングを開始』が掲載されました。
+        </p>
+        <a href="https://pressnow.jp/2026/07/02/nobia-lab-2/" target="_blank" rel="noopener" class="text-orange-500 text-sm font-semibold hover:underline">掲載記事を見る →</a>
+      </div>
+    </article>
+    <!-- ▲ 記事2ここまで（就トーク） -->
+
+    <!-- ▼ 記事3 -->
+    <article class="card-hover bg-white rounded-2xl border border-gray-100 shadow-sm p-6 md:p-8 flex flex-col md:flex-row gap-6">
+      <div class="flex-shrink-0 text-center md:text-left">
+        <time datetime="2026-07-01" class="text-xs font-bold text-gray-400 block">2026年7月1日</time>
+        <span class="inline-block mt-2 text-xs font-bold px-3 py-1 rounded-full bg-purple-100 text-purple-700">
+          メディア掲載
+        </span>
+      </div>
+      <div class="flex-1">
+        <h2 class="text-lg font-bold text-gray-900 mb-2">
+          PRESSNOW プレスナウに掲載されました
+        </h2>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+          プレスリリースサイト「PRESSNOW プレスナウ」に、『手帳・スプレッドシート・メモアプリに分散する就活情報を一元化——タスク・カレンダー自動連携アプリ「シンプル就活」、クラウドファンディング開始』が掲載されました。
+        </p>
+        <a href="https://pressnow.jp/2026/07/01/nobia-lab/" target="_blank" rel="noopener" class="text-orange-500 text-sm font-semibold hover:underline">掲載記事を見る →</a>
+      </div>
+    </article>
+    <!-- ▲ 記事3ここまで（シンプル就活） -->
+
+  </div>
+  <!-- お知らせ一覧ここまで -->
+
 </main>
 
-<footer>
-  <p>取材・メディア掲載・パートナーシップ等のお問い合わせは <a href="mailto:nobia.lab.official@gmail.com">nobia.lab.official@gmail.com</a> までご連絡ください。</p>
-  <p>© 2026 学生アプリラボ Nobia. All rights reserved.</p>
+
+<!-- フッター -->
+<footer class="bg-gray-900 text-gray-500 text-xs py-8 px-4 mt-16">
+  <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-2">
+      <div class="w-7 h-7 orange-gradient rounded-lg flex items-center justify-center">
+        <span class="text-white font-black text-xs">N</span>
+      </div>
+      <span class="text-gray-300 font-bold">Nobia</span>
+      <span class="text-gray-600">学生アプリラボ</span>
+    </div>
+    <nav class="flex flex-wrap justify-center gap-x-5 gap-y-2">
+      <a href="index.html" class="hover:text-white transition-colors">トップページ</a>
+      <a href="privacy.html" class="hover:text-white transition-colors">プライバシーポリシー</a>
+      <a href="terms.html" class="hover:text-white transition-colors">利用規約</a>
+      <a href="mailto:nobia.lab.official@gmail.com" class="hover:text-white transition-colors">お問い合わせ</a>
+    </nav>
+    <p>© 2026 学生アプリラボ Nobia.</p>
+  </div>
 </footer>
-
-<script src="news-data.js"></script>
-<script>
-(function () {
-  const items = (typeof NEWS_ITEMS !== "undefined" ? NEWS_ITEMS.slice() : [])
-    .filter(i => i && i.date && i.title)
-    .sort((a, b) => new Date(b.date) - new Date(a.date));
-
-  const categories = ["すべて", ...Array.from(new Set(items.map(i => i.category).filter(Boolean)))];
-  let activeCategory = "すべて";
-
-  const filtersEl = document.getElementById("filters");
-  const listEl = document.getElementById("news-list");
-  const emptyEl = document.getElementById("empty-state");
-
-  function formatDate(dateStr) {
-    const d = new Date(dateStr);
-    if (isNaN(d)) return dateStr;
-    return `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, "0")}.${String(d.getDate()).padStart(2, "0")}`;
-  }
-
-  function renderFilters() {
-    filtersEl.innerHTML = "";
-    categories.forEach(cat => {
-      const btn = document.createElement("button");
-      btn.className = "filter-btn" + (cat === activeCategory ? " active" : "");
-      btn.textContent = cat;
-      btn.addEventListener("click", () => {
-        activeCategory = cat;
-        renderFilters();
-        renderList();
-      });
-      filtersEl.appendChild(btn);
-    });
-  }
-
-  function renderList() {
-    const filtered = activeCategory === "すべて"
-      ? items
-      : items.filter(i => i.category === activeCategory);
-
-    listEl.innerHTML = "";
-    emptyEl.style.display = filtered.length === 0 ? "block" : "none";
-
-    filtered.forEach(item => {
-      const card = document.createElement("article");
-      card.className = "news-card";
-
-      const meta = document.createElement("div");
-      meta.className = "news-meta";
-
-      const date = document.createElement("span");
-      date.className = "news-date";
-      date.textContent = formatDate(item.date);
-      meta.appendChild(date);
-
-      if (item.category) {
-        const tag = document.createElement("span");
-        tag.className = "tag tag-" + item.category;
-        tag.textContent = item.category;
-        meta.appendChild(tag);
-      }
-      card.appendChild(meta);
-
-      const h2 = document.createElement("h2");
-      h2.textContent = item.title;
-      card.appendChild(h2);
-
-      if (item.body) {
-        const body = document.createElement("p");
-        body.className = "body";
-        body.textContent = item.body;
-        card.appendChild(body);
-      }
-
-      if (item.link) {
-        const link = document.createElement("a");
-        link.className = "link-btn";
-        link.href = item.link;
-        link.target = "_blank";
-        link.rel = "noopener noreferrer";
-        link.textContent = (item.linkLabel || "詳しく見る") + " ↗";
-        card.appendChild(link);
-      }
-
-      listEl.appendChild(card);
-    });
-  }
-
-  renderFilters();
-  renderList();
-})();
-</script>
 
 </body>
 </html>
