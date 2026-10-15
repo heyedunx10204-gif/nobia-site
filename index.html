@@ -1,750 +1,1345 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>就活SNS「就トーク」・選考管理「シンプル就活」 | 学生アプリラボ Nobia</title>
-  <meta name="description" content="就活SNS「就トーク」と選考管理アプリ「シンプル就活」を開発する学生チーム・Nobia（ノビア）。代表の河野敦希が大分出身の学生として感じた地方と都市の就活格差をなくすべく設立。就活情報の共有と選考管理をサポートします。" />
-  <link rel="canonical" href="https://nobia-lab.com/" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>就活イベント・キャリア面談の予約一覧｜BizMatch（ビズマッチ）</title>
+<meta name="description" content="BizMatch（ビズマッチ）は、就活イベント・キャリア面談を条件ごとに比較して予約できるサイトです。日程・開催地・参加条件を一覧で確認できます。参加費・利用料はすべて無料。学生アプリラボ Nobia 運営。">
+<meta name="robots" content="index,follow">
+<meta name="format-detection" content="telephone=no">
+<link rel="canonical" href="https://bizmatch.nobia-lab.com/">
 
-  <!-- OGP -->
-  <meta property="og:title" content="Nobia | 学生アプリラボ" />
-  <meta property="og:description" content="就活SNS「就トーク」と選考管理アプリ「シンプル就活」を開発する学生チーム。地方の就活生が東京と同じスタートラインに立てる世界を目指しています。" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://nobia-lab.com/" />
-  <meta property="og:site_name" content="学生アプリラボ Nobia" />
-  <meta property="og:locale" content="ja_JP" />
-  <meta property="og:image" content="https://nobia-lab.com/ogp.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BizMatch">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:url" content="https://bizmatch.nobia-lab.com/">
+<meta property="og:title" content="就活イベント・キャリア面談の予約｜BizMatch（ビズマッチ）">
+<meta property="og:description" content="日程・開催地・参加条件を並べて比較できる就活イベント一覧。予約はすべて無料です。">
+<meta property="og:image" content="https://bizmatch.nobia-lab.com/ogp.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="就活イベント・キャリア面談の予約｜BizMatch（ビズマッチ）">
+<meta name="twitter:description" content="日程・開催地・参加条件を並べて比較できる就活イベント一覧。予約はすべて無料です。">
+<meta name="twitter:image" content="https://bizmatch.nobia-lab.com/ogp.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Outfit:wght@600;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   BizMatch 就活イベント一覧 / 申込ページ（単一HTML・スマホ最適化）
+   ============================================================ */
+:root{
+  --pop:#FF5A5F; --pop-d:#E23F44; --sub:#2BC4A8; --yellow:#FFD166; --line:#06C755;
+  --ink:#16181D; --ink2:#5A6070; --ink3:#9AA0AE;
+  --bg:#FFF8F3; --card:#FFF; --border:#ECE6E0;
+  --r:18px; --sh:0 4px 20px rgba(22,24,29,.07); --shl:0 12px 40px rgba(22,24,29,.16);
+  --max:600px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans JP',-apple-system,BlinkMacSystemFont,'Hiragino Sans',sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px;
+  -webkit-font-smoothing:antialiased;padding-bottom:98px}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,select,textarea{font-family:inherit;font-size:16px}
+a{color:inherit}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
+.en{font-family:'Outfit',sans-serif}
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Nobia | 学生アプリラボ" />
-  <meta name="twitter:description" content="就活SNS「就トーク」と選考管理アプリ「シンプル就活」を開発する学生チーム。地方の就活生が東京と同じスタートラインに立てる世界を目指しています。" />
-  <meta name="twitter:image" content="https://nobia-lab.com/ogp.png" />
+/* ヘッダー */
+.hd{position:sticky;top:0;z-index:50;background:rgba(255,248,243,.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.hd-in{max-width:var(--max);margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:10px}
+.logo{font-family:'Outfit';font-weight:800;font-size:19px;letter-spacing:-.02em}
+.logo span{color:var(--pop)}
+.hd-tag{margin-left:auto;font-size:10.5px;font-weight:700;color:var(--line);background:rgba(6,199,85,.1);padding:4px 9px;border-radius:99px}
 
-  <!-- 構造化データ (Person) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "河野敦希",
-    "alternateName": "Atsuki Kawano",
-    "jobTitle": "代表",
-    "worksFor": {
-      "@type": "Organization",
-      "name": "学生アプリラボ Nobia",
-      "alternateName": ["ノビア", "のびあ", "Nobia"],
-      "url": "https://nobia-lab.com"
-    },
-    "description": "学生アプリラボNobiaの代表。大分県出身。地方就活生の情報格差をなくすべく、就活SNS「就トーク」と選考管理アプリ「シンプル就活」を開発。",
-    "url": "https://nobia-lab.com"
+/* ヒーロー */
+.hero{padding:24px 0 18px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-130px;left:50%;transform:translateX(-50%);width:430px;height:290px;background:radial-gradient(closest-side,rgba(255,90,95,.17),transparent)}
+.hero-in{position:relative}
+.hbadge{display:inline-flex;align-items:center;gap:6px;background:var(--ink);color:#fff;font-size:11px;font-weight:700;padding:6px 13px;border-radius:99px;margin-bottom:13px}
+.hbadge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--yellow)}
+.hero h1{font-size:25px;font-weight:900;line-height:1.45;letter-spacing:-.01em}
+.hero h1 em{font-style:normal;background:linear-gradient(transparent 62%,rgba(255,209,102,.85) 62%);padding:0 2px}
+.hero p{margin-top:10px;font-size:13px;color:var(--ink2)}
+.stats{display:flex;gap:8px;margin-top:17px}
+.stat{flex:1;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:11px 4px;box-shadow:var(--sh)}
+.stat b{display:block;font-family:'Outfit';font-size:20px;font-weight:800;color:var(--pop);line-height:1.2}
+.stat small{font-size:10px;color:var(--ink3);font-weight:600}
+
+/* タブ + フィルター */
+.tabs{max-width:var(--max);margin:6px auto 0;padding:0 16px;display:flex;gap:6px}
+.tab{flex:1;font-size:12.5px;font-weight:800;color:var(--ink2);background:var(--card);border:1.5px solid var(--border);padding:10px 4px;border-radius:12px;transition:.15s;line-height:1.35}
+.tab small{display:block;font-size:9.5px;font-weight:600;color:var(--ink3);margin-top:1px}
+.tab[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.tab[aria-pressed="true"] small{color:rgba(255,255,255,.65)}
+.filters{position:sticky;top:49px;z-index:40;background:var(--bg);padding:12px 0 8px}
+.fs{display:flex;gap:7px;overflow-x:auto;padding:0 16px;scrollbar-width:none;max-width:var(--max);margin:0 auto}
+.fs::-webkit-scrollbar{display:none}
+.chip{flex:none;font-size:12.5px;font-weight:700;color:var(--ink2);background:var(--card);border:1.5px solid var(--border);padding:7px 14px;border-radius:99px;transition:.15s;white-space:nowrap}
+.chip[aria-pressed="true"]{background:var(--pop);border-color:var(--pop);color:#fff}
+.frow{max-width:var(--max);margin:0 auto 7px;display:flex;align-items:center;gap:8px}
+.flabel{flex:none;padding-left:16px;font-size:10.5px;font-weight:800;color:var(--ink3);letter-spacing:.03em;width:78px}
+.frow .fs{padding:0 16px 0 0}
+.fcount{max-width:var(--max);margin:9px auto 0;padding:0 16px;font-size:12px;color:var(--ink3);font-weight:600;display:flex;align-items:center;gap:10px}
+.freset{margin-left:auto;font-size:11.5px;font-weight:700;color:var(--ink2);background:#F3EFEB;border-radius:99px;padding:5px 12px;display:none}
+.freset.on{display:block}
+.fcount b{color:var(--pop);font-family:'Outfit';font-size:15px}
+
+/* カード */
+.list{display:flex;flex-direction:column;gap:14px;padding:6px 0 26px}
+.card{background:var(--card);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);border:1px solid var(--border);transition:transform .18s}
+.card:active{transform:scale(.987)}
+.card.end{opacity:.55}
+.ctop{position:relative;height:118px;display:flex;align-items:center;justify-content:center;padding:0 18px;text-align:center}
+.g0{background:linear-gradient(120deg,#FF5A5F,#FF8A5B)}
+.g1{background:linear-gradient(120deg,#2BC4A8,#3FA9F5)}
+.g2{background:linear-gradient(120deg,#7B61FF,#C56CFF)}
+.g3{background:linear-gradient(120deg,#F7674F,#FFB03A)}
+.g4{background:linear-gradient(120deg,#1F8FFF,#38D3C6)}
+.g5{background:linear-gradient(120deg,#FF6FA5,#FF9E6D)}
+.kv{color:#fff;font-weight:900;font-size:17.5px;line-height:1.45;text-shadow:0 2px 10px rgba(0,0,0,.2)}
+.kv small{display:block;font-size:11px;font-weight:700;opacity:.92;margin-top:4px}
+.rbs{position:absolute;top:10px;left:10px;display:flex;gap:5px;flex-wrap:wrap}
+.rb{font-size:10.5px;font-weight:800;padding:4px 9px;border-radius:7px;color:#fff;background:rgba(22,24,29,.68);backdrop-filter:blur(4px)}
+.rb.hot{background:var(--pop)}
+.rb.new{background:var(--sub)}
+.rb.yl{background:#F2A100}
+.state{position:absolute;bottom:10px;right:10px;background:#fff;border-radius:9px;padding:4px 10px;font-size:11px;font-weight:800;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.state.soon{color:var(--pop)}
+.state.ok{color:var(--ink2)}
+.state.end{color:#fff;background:var(--ink3)}
+
+.cbody{padding:14px 16px 16px}
+.ctitle{font-size:16.5px;font-weight:900;line-height:1.45;letter-spacing:-.01em}
+.csub{font-size:12px;color:var(--ink3);margin-top:3px;font-weight:500}
+.meta{margin-top:12px;display:flex;flex-direction:column;gap:7px}
+.mrow{display:flex;gap:8px;font-size:13px;align-items:flex-start}
+.mrow .ic{flex:none;width:18px;text-align:center;font-size:13px;line-height:1.55}
+.mrow .lb{flex:none;width:48px;font-size:11px;font-weight:800;color:var(--ink3);padding-top:2px}
+.mrow .vl{font-weight:600;flex:1}
+.mrow .vl b{color:var(--pop)}
+.dates{display:flex;flex-wrap:wrap;gap:5px;margin-top:2px}
+.dt{font-size:11.5px;font-weight:700;background:#FFF3F0;color:var(--pop-d);border:1px solid #FFDCD6;padding:3px 8px;border-radius:7px}
+.dt.pl{background:#F5F2EF;color:var(--ink2);border-color:var(--border)}
+
+.firms{margin-top:12px;padding:11px 12px;background:#FAF7F4;border-radius:12px}
+.fh{font-size:10.5px;font-weight:800;color:var(--ink3);letter-spacing:.04em;margin-bottom:7px}
+.ftags{display:flex;flex-wrap:wrap;gap:5px}
+.ft{font-size:11.5px;font-weight:700;background:#fff;border:1px solid var(--border);padding:4px 9px;border-radius:7px}
+.ft.more{background:transparent;border-style:dashed;color:var(--ink3)}
+.cond{margin-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.cd{font-size:11px;font-weight:700;color:#0B7A66;background:rgba(43,196,168,.12);padding:4px 9px;border-radius:7px}
+.cd.uni-flag{color:#8A6100;background:rgba(255,209,102,.28)}
+.ft.uni{background:#FFFBF0;border-color:#F2E2B8;color:#7A5600}
+.perk{margin-top:11px;display:flex;gap:7px;font-size:12px;font-weight:700;color:#8A6100;background:rgba(255,209,102,.2);border:1px dashed rgba(255,166,0,.45);padding:8px 11px;border-radius:10px;line-height:1.6}
+
+.cta{display:flex;gap:8px;margin-top:14px}
+.btn{border-radius:12px;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;gap:6px;padding:13px 16px;transition:.15s;text-decoration:none}
+.btn-p{flex:1;background:var(--pop);color:#fff;box-shadow:0 4px 14px rgba(255,90,95,.32)}
+.btn-p:active{background:var(--pop-d);transform:translateY(1px)}
+.btn-p:disabled{background:#DCD8D4;color:#fff;box-shadow:none;cursor:not-allowed}
+.btn-g{flex:none;width:84px;background:#F3EFEB;color:var(--ink2);font-size:13px}
+
+/* 理由 */
+.why{background:var(--card);border-radius:var(--r);border:1px solid var(--border);padding:20px 18px;margin:6px 0 26px;box-shadow:var(--sh)}
+.why h2{font-size:16px;font-weight:900;margin-bottom:12px;text-align:center}
+.why h2 span{color:var(--pop)}
+.wi{display:flex;gap:12px;padding:9px 0;align-items:flex-start}
+.wi .n{flex:none;width:28px;height:28px;border-radius:9px;background:var(--pop);color:#fff;font-family:'Outfit';font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+.wi b{display:block;font-size:13.5px;font-weight:800}
+.wi p{font-size:12.5px;color:var(--ink2);line-height:1.65;margin-top:2px}
+.faq{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:6px 16px;margin-bottom:26px;box-shadow:var(--sh)}
+.faq details{border-bottom:1px solid var(--border)}
+.faq details:last-child{border:none}
+.faq summary{padding:14px 0;font-size:13.5px;font-weight:800;cursor:pointer;list-style:none;display:flex;gap:8px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{content:'Q';font-family:'Outfit';color:var(--pop);font-weight:800}
+.faq p{padding:0 0 14px 20px;font-size:12.5px;color:var(--ink2);line-height:1.8}
+
+/* 運営元カード */
+.operator{display:flex;gap:13px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px 17px;margin-bottom:20px;box-shadow:var(--sh)}
+.op-badge{flex:none;width:42px;height:42px;border-radius:12px;background:var(--ink);color:#fff;font-family:'Outfit';font-weight:800;font-size:19px;display:flex;align-items:center;justify-content:center}
+.op-tx{flex:1}
+.op-tx small{display:block;font-size:10px;font-weight:800;color:var(--ink3);letter-spacing:.05em}
+.op-tx b{display:block;font-size:14.5px;font-weight:900;margin-top:1px}
+.op-tx p{font-size:12px;color:var(--ink2);line-height:1.7;margin-top:6px}
+.op-tx a{display:inline-block;margin-top:8px;font-size:12px;font-weight:800;color:var(--pop);text-decoration:none}
+
+/* 追従CTA */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-top:1px solid var(--border);padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
+.sticky-in{max-width:var(--max);margin:0 auto;display:flex;align-items:center;gap:12px}
+.stx{flex:1;font-size:11.5px;font-weight:700;color:var(--ink2);line-height:1.4}
+.stx b{display:block;font-size:13px;color:var(--ink)}
+.sticky .btn{flex:none;padding:13px 20px;font-size:13.5px}
+.btn-line{background:var(--line);color:#fff;box-shadow:0 4px 14px rgba(6,199,85,.3)}
+
+/* シート */
+.ov{position:fixed;inset:0;z-index:100;background:rgba(22,24,29,.5);backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:.22s}
+.ov.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:50%;bottom:0;transform:translateX(-50%) translateY(100%);width:100%;max-width:var(--max);height:94vh;z-index:101;
+  background:var(--bg);border-radius:22px 22px 0 0;display:flex;flex-direction:column;transition:transform .28s cubic-bezier(.2,.8,.2,1);box-shadow:var(--shl)}
+.sheet.on{transform:translateX(-50%) translateY(0)}
+.shd{flex:none;padding:15px 16px 12px;border-bottom:1px solid var(--border);background:var(--card);border-radius:22px 22px 0 0;display:flex;align-items:center;gap:10px;position:relative}
+.shd::before{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);width:36px;height:4px;border-radius:99px;background:var(--border)}
+.shd h3{font-size:15px;font-weight:900;flex:1}
+.x{flex:none;width:30px;height:30px;border-radius:50%;background:#F3EFEB;color:var(--ink2);font-size:15px;display:flex;align-items:center;justify-content:center}
+.sbd{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:18px 16px 26px}
+.sft{flex:none;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:var(--card);border-top:1px solid var(--border)}
+
+.dsec{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:15px;margin-bottom:12px}
+.dsec h4{font-size:13px;font-weight:900;margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.dsec h4::before{content:'';width:3px;height:14px;border-radius:2px;background:var(--pop)}
+.dsec ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.dsec li{font-size:12.5px;padding-left:19px;position:relative;color:var(--ink2);line-height:1.7}
+.dsec li::before{content:'✓';position:absolute;left:0;color:var(--sub);font-weight:900}
+.dsec ul.ng li::before{content:'✕';color:var(--ink3)}
+.dsec ul.dot li::before{content:'・';color:var(--ink3)}
+.dsec ul.hl li::before{content:'▸';color:var(--pop);font-weight:900}
+.dsec ul.hl li{color:var(--ink)}
+.dsec.more{background:#FAF7F4;border-style:dashed}
+.dsec.more p{font-size:12.5px;color:var(--ink2);line-height:1.8;margin:0}
+.dsec.more .more-step{margin-top:9px;padding-top:9px;border-top:1px dashed var(--border);font-size:11.5px;color:var(--ink3)}
+.ftnote{margin-top:8px;text-align:center;font-size:11px;color:var(--ink3);line-height:1.6}
+.btn-share{margin-top:9px;background:#fff;border:1.5px solid var(--border);color:var(--ink2);font-size:13.5px}
+.btn-share:active{background:#F7F3F0}
+.ic-share{display:inline-block;width:15px;height:15px;margin-right:2px;vertical-align:-2px;
+  border:2px solid var(--ink2);border-top:none;border-radius:0 0 3px 3px;position:relative}
+.ic-share::before{content:"";position:absolute;left:4.5px;bottom:4px;width:2px;height:11px;background:var(--ink2);border-radius:1px}
+.ic-share::after{content:"";position:absolute;left:1px;bottom:9px;width:7px;height:7px;
+  border-left:2px solid var(--ink2);border-top:2px solid var(--ink2);transform:rotate(45deg)}
+.toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%) translateY(12px);z-index:200;
+  background:var(--ink);color:#fff;font-size:12.5px;font-weight:700;padding:11px 20px;border-radius:99px;
+  opacity:0;pointer-events:none;transition:.22s;box-shadow:0 8px 24px rgba(0,0,0,.22)}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+.dsec ul.fw li::before{content:'✓';color:#1F8FFF;font-weight:900}
+.tt{display:flex;gap:11px;padding:8px 0;font-size:12.5px;border-bottom:1px dashed var(--border);line-height:1.65}
+.tt:last-child{border:none}
+.tt .t{flex:none;width:74px;font-family:'Outfit';font-weight:600;color:var(--pop);font-size:12px;padding-top:1px}
+.warn{background:rgba(255,90,95,.07);border:1.5px solid rgba(255,90,95,.3);border-radius:12px;padding:13px 14px;font-size:12.5px;color:var(--pop-d);line-height:1.75;font-weight:600;margin-bottom:12px}
+.warn > b:first-child{display:block;font-size:12.5px;margin-bottom:4px}
+.warn b{font-weight:800}
+
+/* ステップ・フォーム */
+.steps{display:flex;gap:6px;margin-bottom:18px}
+.stp{flex:1;text-align:center}
+.stp .bar{height:4px;border-radius:99px;background:var(--border);margin-bottom:6px}
+.stp.on .bar,.stp.done .bar{background:var(--pop)}
+.stp small{font-size:10px;font-weight:800;color:var(--ink3)}
+.stp.on small,.stp.done small{color:var(--pop)}
+.fld{margin-bottom:15px}
+.fld label{display:block;font-size:12.5px;font-weight:800;margin-bottom:6px}
+.req{font-size:10px;font-weight:800;color:#fff;background:var(--pop);padding:2px 6px;border-radius:4px;margin-left:6px;vertical-align:1px}
+.opt{font-size:10px;font-weight:800;color:var(--ink3);background:#EFEBE7;padding:2px 6px;border-radius:4px;margin-left:6px;vertical-align:1px}
+.fld input[type=text],.fld input[type=email],.fld input[type=tel],.fld select,.fld textarea{
+  width:100%;padding:13px 14px;border:1.5px solid var(--border);border-radius:12px;background:var(--card);color:var(--ink);transition:.15s}
+.fld textarea{min-height:80px;resize:vertical;line-height:1.6}
+.fld input:focus,.fld select:focus,.fld textarea:focus{outline:none;border-color:var(--pop);box-shadow:0 0 0 3px rgba(255,90,95,.12)}
+.hint{font-size:11px;color:var(--ink3);margin-top:5px;line-height:1.6}
+.err{font-size:11.5px;color:var(--pop);font-weight:700;margin-top:5px;display:none}
+.fld.bad input,.fld.bad select{border-color:var(--pop);background:rgba(255,90,95,.03)}
+.fld.bad .err{display:block}
+.radios{display:flex;flex-wrap:wrap;gap:7px}
+.radios label{margin:0;font-size:12.5px;font-weight:700;color:var(--ink2);border:1.5px solid var(--border);background:var(--card);padding:9px 14px;border-radius:11px;cursor:pointer;transition:.15s}
+.radios label:has(input:checked){background:var(--ink);border-color:var(--ink);color:#fff}
+.radios input{position:absolute;opacity:0;width:0;height:0}
+.picks{display:flex;flex-direction:column;gap:9px}
+.pick{display:flex;gap:11px;align-items:flex-start;background:var(--card);border:1.5px solid var(--border);border-radius:13px;padding:13px 14px;cursor:pointer;transition:.15s}
+.pick:has(input:checked){border-color:var(--pop);background:#FFF7F6;box-shadow:0 0 0 3px rgba(255,90,95,.1)}
+.pick input{width:19px;height:19px;flex:none;margin-top:2px;accent-color:var(--pop)}
+.pick .pl{flex:1}
+.pick b{display:block;font-size:13.5px;font-weight:800;line-height:1.45}
+.pick span{display:block;font-size:11.5px;color:var(--ink2);margin-top:3px;line-height:1.6}
+.chk{display:flex;gap:9px;align-items:flex-start;font-size:12.5px;color:var(--ink2);line-height:1.6}
+.chk input{width:19px;height:19px;flex:none;margin-top:2px;accent-color:var(--pop)}
+.chk a{color:var(--pop);font-weight:700}
+.sum{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:14px}
+.sr{display:flex;padding:12px 14px;border-bottom:1px solid var(--border);font-size:13px}
+.sr:last-child{border:none}
+.sr .k{flex:none;width:92px;font-size:11.5px;font-weight:800;color:var(--ink3);padding-top:2px}
+.sr .v{flex:1;font-weight:600;word-break:break-word}
+.notice{background:rgba(255,209,102,.16);border:1px solid rgba(255,166,0,.35);border-radius:12px;padding:12px 14px;font-size:12px;color:#7A5600;line-height:1.75;margin-bottom:14px}
+.doneW{text-align:center;padding:22px 6px}
+.dic{width:74px;height:74px;border-radius:50%;background:var(--sub);color:#fff;font-size:36px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;box-shadow:0 8px 26px rgba(43,196,168,.35);animation:pp .45s cubic-bezier(.2,1.4,.4,1)}
+@keyframes pp{0%{transform:scale(.4);opacity:0}100%{transform:scale(1);opacity:1}}
+.doneW h3{font-size:20px;font-weight:900;margin-bottom:8px}
+.doneW p{font-size:13px;color:var(--ink2);line-height:1.8}
+.dcard{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:13px 15px;margin:16px 0;text-align:left}
+.btn-w{width:100%}
+.btn-ghost{width:100%;background:transparent;color:var(--ink2);font-size:13px;padding:12px}
+.foot{text-align:center;padding:22px 16px 10px;font-size:11px;color:var(--ink3);line-height:1.9}
+.empty{text-align:center;padding:48px 20px;color:var(--ink3);font-size:13.5px;font-weight:600}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "BizMatch",
+  "alternateName": ["ビズマッチ", "びずまっち", "BizMatch（ビズマッチ）", "ビズマッチ 就活"],
+  "url": "https://bizmatch.nobia-lab.com/",
+  "inLanguage": "ja",
+  "publisher": {
+    "@type": "Organization",
+    "name": "学生アプリラボ Nobia",
+    "url": "https://nobia-lab.com/"
   }
-  </script>
-
-  <!-- 構造化データ (MobileApplication) -->
-  <script type="application/ld+json">
-  [
-    {
-      "@context": "https://schema.org",
-      "@type": "MobileApplication",
-      "name": "就トーク",
-      "description": "就活生のための本音SNS。業界・企業・選考ステージ別にリアルな情報や体験談を共有できるコミュニティアプリ。",
-      "operatingSystem": "iOS",
-      "applicationCategory": "SocialNetworkingApplication",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "JPY"
-      },
-      "url": "https://apps.apple.com/us/app/%E5%B0%B1%E3%83%88%E3%83%BC%E3%82%AF/id6776169096",
-      "publisher": {
-        "@type": "Organization",
-        "name": "学生アプリラボ Nobia",
-        "url": "https://nobia-lab.com"
-      }
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "MobileApplication",
-      "name": "シンプル就活",
-      "description": "就活の選考状況・スケジュールをシンプルに一元管理できる就活管理アプリ。複数企業の選考ステータスをカード形式で管理。",
-      "operatingSystem": "iOS",
-      "applicationCategory": "ProductivityApplication",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "JPY"
-      },
-      "url": "https://apps.apple.com/jp/app/%E3%82%B7%E3%83%B3%E3%83%97%E3%83%AB%E5%B0%B1%E6%B4%BB/id6776132527",
-      "publisher": {
-        "@type": "Organization",
-        "name": "学生アプリラボ Nobia",
-        "url": "https://nobia-lab.com"
-      }
-    }
-  ]
-  </script>
-
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    /* カスタムカラー・アニメーション */
-    :root {
-      --orange-main: #FF6B2C;
-      --orange-light: #FF8F5A;
-      --yellow-warm: #FFD166;
-      --green-soft: #06D6A0;
-      --bg-soft: #FFFAF5;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background-color: var(--bg-soft);
-      font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', sans-serif;
-    }
-
-    /* グラデーション背景 */
-    .hero-gradient {
-      background: linear-gradient(135deg, #fff7ee 0%, #ffe8d6 40%, #ffd6b3 100%);
-    }
-
-    .orange-gradient {
-      background: linear-gradient(135deg, #FF6B2C, #FF8F5A);
-    }
-
-    .green-gradient {
-      background: linear-gradient(135deg, #06D6A0, #02B589);
-    }
-
-    /* カードのホバーエフェクト */
-    .card-hover {
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-    .card-hover:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(0,0,0,0.12);
-    }
-
-    /* セクション区切りの波形 */
-    .wave-divider {
-      width: 100%;
-      overflow: hidden;
-      line-height: 0;
-    }
-    .wave-divider svg {
-      display: block;
-      width: 100%;
-    }
-
-    /* ボタンのホバー */
-    .btn-primary {
-      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-    }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(255,107,44,0.35);
-    }
-
-    /* フォーカスアウトライン除去（アクセシビリティ保持のためキーボードフォーカスのみ） */
-    a:focus-visible, button:focus-visible {
-      outline: 2px solid var(--orange-main);
-      outline-offset: 2px;
-    }
-
-    /* アニメーション */
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-    }
-    .float-anim { animation: float 3.5s ease-in-out infinite; }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .fade-in-up { animation: fadeInUp 0.7s ease both; }
-    .delay-100 { animation-delay: 0.1s; }
-    .delay-200 { animation-delay: 0.2s; }
-    .delay-300 { animation-delay: 0.3s; }
-
-    /* モバイルナビ */
-    #mobile-menu { display: none; }
-    #mobile-menu.open { display: block; }
-  </style>
+}
+</script>
 </head>
 <body>
 
-<!-- ========================================
-     HEADER
-======================================== -->
-<header class="sticky top-0 z-50 bg-white shadow-sm">
-  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-
-    <!-- ロゴ -->
-    <a href="#" class="flex items-center gap-2 group">
-      <div class="w-9 h-9 orange-gradient rounded-xl flex items-center justify-center shadow">
-        <span class="text-white font-black text-base leading-none">N</span>
-      </div>
-      <span class="text-xl font-black" style="color: #FF6B2C;">Nobia</span>
-    </a>
-
-    <!-- PC ナビ -->
-    <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-gray-600">
-      <a href="#apps" class="hover:text-orange-500 transition-colors">アプリ紹介</a>
-      <a href="#story" class="hover:text-orange-500 transition-colors">開発ストーリー</a>
-      <a href="#team" class="hover:text-orange-500 transition-colors">チーム</a>
-      <a href="business.html" class="hover:text-orange-500 transition-colors">事業内容</a>
-      <a href="press.html" class="hover:text-orange-500 transition-colors">プレスルーム</a>
-      <a href="#contact" class="hover:text-orange-500 transition-colors">お問い合わせ</a>
-    </nav>
-
-    <!-- ダウンロードCTA (PC) -->
-    <a href="#apps" class="hidden md:inline-flex items-center gap-2 btn-primary orange-gradient text-white text-sm font-bold px-5 py-2.5 rounded-full shadow">
-      アプリを入手 ↓
-    </a>
-
-    <!-- ハンバーガー (SP) -->
-    <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="メニュー">
-      <span class="block w-6 h-0.5 bg-gray-700"></span>
-      <span class="block w-6 h-0.5 bg-gray-700"></span>
-      <span class="block w-6 h-0.5 bg-gray-700"></span>
-    </button>
-  </div>
-
-  <!-- モバイルメニュー -->
-  <div id="mobile-menu" class="md:hidden bg-white border-t border-gray-100 px-4 py-4 space-y-3 text-sm font-medium text-gray-700">
-    <a href="#apps" class="block hover:text-orange-500">アプリ紹介</a>
-    <a href="#story" class="block hover:text-orange-500">開発ストーリー</a>
-    <a href="#team" class="block hover:text-orange-500">チーム</a>
-    <a href="business.html" class="block hover:text-orange-500">事業内容</a>
-    <a href="press.html" class="block hover:text-orange-500">プレスルーム</a>
-    <a href="#contact" class="block hover:text-orange-500">お問い合わせ</a>
-    <a href="#apps" class="block w-full text-center btn-primary orange-gradient text-white font-bold px-4 py-2.5 rounded-full mt-2">アプリを入手 ↓</a>
+<header class="hd">
+  <div class="hd-in">
+    <div class="logo">Biz<span>Match</span></div>
+    <div class="hd-tag">LINE連携中</div>
   </div>
 </header>
 
+<section class="hero">
+  <div class="wrap hero-in">
+    <div class="hbadge" id="hBadge">参加費すべて無料</div>
+    <h1>1日で、<em>本命が決まる</em>。<br>BizMatchの就活イベント</h1>
+    <p>合同イベントもキャリア面談も、このページから最短30秒で予約。</p>
+    <div class="stats">
+      <div class="stat"><b id="stEv">–</b><small>受付中</small></div>
+      <div class="stat"><b id="stArea">–</b><small>開催エリア</small></div>
+      <div class="stat"><b>¥0</b><small>参加費・利用料</small></div>
+    </div>
+  </div>
+</section>
+
+<div class="tabs" id="tabs"></div>
+
+<div class="filters">
+  <div class="frow"><span class="flabel">卒業予定年</span><div class="fs" id="chipsGrad"></div></div>
+  <div class="frow"><span class="flabel">開催場所</span><div class="fs" id="chipsArea"></div></div>
+  <div class="fcount"><b id="cnt">0</b> 件が見つかりました<button class="freset" id="fReset" onclick="resetFilters()">条件をクリア</button></div>
+</div>
+
+<main class="wrap">
+  <div class="list" id="list"></div>
+
+  <section class="why">
+    <h2>BizMatchが<span>選ばれる理由</span></h2>
+    <div class="wi"><div class="n">1</div><div><b>1日で複数社の人事と直接話せる</b><p>合同イベントなら説明会をハシゴする必要なし。移動時間ゼロで比較検討できます。</p></div></div>
+    <div class="wi"><div class="n">2</div><div><b>その場でスカウト・特別選考のチャンス</b><p>イベントによっては選考パスや即日面談のオファーが出ます。通常フローより早く進めます。</p></div></div>
+    <div class="wi"><div class="n">3</div><div><b>公式LINEでオンライン就活相談ができる</b><p>「どれに参加すればいい？」「就活、何から始めれば？」といった相談を無料で受け付けています。参加を迷っている段階でもお気軽にどうぞ。</p></div></div>
+  </section>
+
+  <section class="faq">
+    <details><summary>BizMatchはどんなサービスですか？</summary><p><b>BizMatch（ビズマッチ／びずまっち）</b>は、就活イベント・キャリア面談・就活サービスをまとめて探して予約できるサイトです。学生アプリラボ Nobia が運営しています。日程・開催場所・参加条件を並べて比べられるので、自分に合うものを見つけてから申し込めます。</p></details>
+    <details><summary>本当に無料ですか？</summary><p>はい。イベント参加費・面談費・サポート費用はすべて無料です。学生の方から料金をいただくことは一切ありません。</p></details>
+    <details><summary>複数のイベントに申し込めますか？</summary><p>可能です。気になるものは複数予約して構いません。日程が重なっていないかだけご確認ください。</p></details>
+    <details><summary>まだ就活を始めたばかりでも大丈夫？</summary><p>問題ありません。「軸が決まっていない」「何から始めればいいかわからない」という段階の方こそ歓迎されるものが多くあります。</p></details>
+    <details><summary>キャンセルしたいときは？</summary><p>キャンセルは<b>予約した主催企業へ直接ご連絡ください</b>（BizMatch公式LINEではキャンセルを受け付けていません）。連絡先は予約完了メールに記載されています。無断欠席は次回以降の参加をお断りされる場合があるため、必ずご連絡をお願いします。</p></details>
+    <details><summary>予約ページが別サイトに移動しますが大丈夫？</summary><p>各イベントは主催企業が運営しているため、最終的な予約は主催企業のページで行います。BizMatch経由であることを示す入力項目があるので、案内どおりに選択してください。日程のご案内・変更・キャンセルもすべて主催企業とのやりとりになります。</p></details>
+    <details><summary>公式LINEでは何ができますか？</summary><p>オンラインでの就活相談を受け付けています。イベント選びの相談や就活の進め方について、無料でご相談いただけます。なお、イベントの日程リマインドや予約のキャンセル受付は行っておりません。</p></details>
+  </section>
+
+  <section class="operator">
+    <div class="op-badge">N</div>
+    <div class="op-tx">
+      <small>運営元</small>
+      <b>学生アプリラボ Nobia</b>
+      <small style="display:block;font-size:11px;color:var(--ink3);margin-top:2px">BizMatch（ビズマッチ）運営</small>
+      <p>就活SNS「就トーク」と選考管理アプリ「シンプル就活」を開発・運営しています。約8,500人が参加する就活コミュニティの運営実績があります。</p>
+      <a href="https://nobia-lab.com/" target="_blank" rel="noopener">運営元サイトを見る →</a>
+    </div>
+  </section>
+
+  <div class="foot">
+    <a href="terms.html">利用規約</a>　<a href="privacy.html">プライバシーポリシー</a>　<a href="https://lin.ee/X9fJED2">お問い合わせ（LINE）</a><br>
+    <span style="opacity:.7">© 2026 学生アプリラボ Nobia. All rights reserved.</span>
+  </div>
+</main>
+
+<div class="sticky">
+  <div class="sticky-in">
+    <div class="stx"><b>迷ったらLINEで就活相談</b>オンラインで無料。選び方からご相談ください</div>
+    <a class="btn btn-line" id="lineBtn" href="#">LINEで相談</a>
+  </div>
+</div>
+
+<div class="ov" id="ov" onclick="closeSheet()"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true">
+  <div class="shd"><h3 id="shT">詳細</h3><button class="x" onclick="closeSheet()" aria-label="閉じる">✕</button></div>
+  <div class="sbd" id="shB"></div>
+  <div class="sft" id="shF"></div>
+</div>
+
 <script>
-  document.getElementById('hamburger').addEventListener('click', () => {
-    document.getElementById('mobile-menu').classList.toggle('open');
+/* ============================================================
+   ▼ 設定
+   ============================================================ */
+const LINE_URL = "https://lin.ee/X9fJED2";   // BizMatch 公式LINE
+const REFERRER  = "FunCareer!";              // 紹介元の選択が必要なものでのみ使用（不要なときは noReferrer:true）
+/* 申込データの送信先（Google Apps Script のウェブアプリURL）
+   ★ここに /exec で終わるURLを貼り付けると、申込がスプレッドシートに記録され
+     heyedunx10204@gmail.com へメール通知が届きます。
+     設定手順は「セットアップ手順_申込メール送信.md」を参照。
+     空のままだとデモモード（画面遷移のみ・データは送信されません）。 */
+const SUBMIT_ENDPOINT = "https://script.google.com/macros/s/AKfycbyGxAmzZXYClHnAlomtzQ6T0L31pHiVMgfiEiKopJFJ42RWkLYAtNeMEuSBlRs7WlS0/exec";
+// 「今日」は日本時間（JST）で自動判定。終了した日程・イベントは自動的に非表示になります
+const TODAY = new Date(Date.now() + 9*3600*1000).toISOString().slice(0,10);
+
+/* ============================================================
+   ▼ 掲載データ
+   ------------------------------------------------------------
+   ※ 学生に公開してよい情報のみを記載しています
+   kind    : "event" イベント / "agent" 面談・エージェント
+   options : 予約先が複数ある場合の選択肢（1つでも配列で持つ）
+             { label, date(表示), dateISO, place, url }
+   ============================================================ */
+const ITEMS = [
+
+  /* ---------- イベント ---------- */
+  {
+    id:"deiba",
+    kind:"event",
+    name:"デアイバ",
+    title:"【28卒】デアイバ｜スカウトがもらえるGD型就活イベント",
+    sub:"1日で4〜5回のグループディスカッション",
+    grads:["28卒"], format:"対面", areas:["予約ページで選択"],
+    regions:["開催地はさまざま"],
+    hot:true, isNew:false,
+    desc:"1日で15分×4〜5回のグループディスカッションを行い、自分に合った企業からスカウトを獲得できる日本最大級の就活イベントです。GDの練習を重ねながら、その場で企業からの評価を受けられます。",
+    firms:[], firmsNote:"1回のイベントに最大12社が参加します",
+    forWhom:["グループディスカッションの練習を積みたい", "短時間でたくさんの企業を見たい", "自分の強み・弱みを客観的に知りたい"],
+    conds:["2028年卒業見込みの方","会場まで来場できる方","学部・学科は問いません"],
+    ngs:[],
+    perk:"GDで高評価を得ると、最大12社からスカウトを獲得できます",
+    timetable:[],
+    flow:["予約ページで会員登録し、参加したい日程を選ぶ","当日、GDを4〜5回実施","イベント後、評価をもとにスカウトが届く"],
+    highlights:[
+      "1回ごとに異なる企業の人事担当者からフィードバックがもらえます",
+      "最後に個人の評価シートがもらえるので、自分の強みと弱みを把握できます",
+      "最大12社が参加するため、業界研究・企業研究を一度に進められます",
+      "同じグループの就活生と知り合えます"
+    ],
+    notes:[],
+    caution:"",
+    options:[
+      {label:"開催日程を選んで予約", date:"日程は予約ページで選択", dateISO:"", place:"予約ページに記載", time:"半日〜1日", url:"https://deiba.jp/s/students/pre?company_id=5408"}
+    ]
+  },
+  {
+    id:"cheerfes",
+    kind:"event",
+    name:"チアフェス",
+    title:"【28卒】チアフェス｜ベンチャー6社の内定直結イベント",
+    sub:"社長・採用責任者に直接プレゼンできる半日型",
+    grads:["28卒"], format:"対面", areas:["随時開催"],
+    regions:["開催地はさまざま"],
+    hot:true, isNew:false,
+    desc:"ベンチャー6社が集結する、国内唯一のベンチャー特化型・内定直結イベント。今もっとも勢いのある成長企業のトップ・採用責任者にまとめて会えるのが最大の魅力です。",
+    firms:["広告","IT","コンサル","サービス"], firmsNote:"各回、業界を代表する社長・人事・若手社員が参加",
+    forWhom:["ベンチャー・成長企業に興味がある", "人前で話すことに抵抗が少ない", "早い段階で選考に進みたい"],
+    conds:["2028年卒業見込みの学生","学歴・学部の条件はありません","就活の軸が決まっていなくてもOK"],
+    ngs:[],
+    perk:"スカウトされたら即日、採用責任者との面談が確定。選考パス・特別選考のチャンスも多数",
+    timetable:[["前半","企業紹介・社長トーク"],["メイン","「採用の壁」— 社長や役員へのプレゼン＆フィードバック"],["後半","スカウト発表・個別面談案内"]],
+    flow:["予約ページで開催日程を選ぶ","「イベント予約はこちら」から申込","当日プレゼンし、スカウトを獲得"],
+    highlights:[
+      "「採用の壁」では何度も繰り返しプレゼンでき、企業目線のフィードバックがもらえます",
+      "どの企業からスカウトされたいか、リクエストもできます"
+    ],
+    notes:[],
+    caution:"予約フォームの<b>Q8「イベントを何で知りましたか？」で必ず「FunCareer!」を選択</b>してください。選択がないとBizMatchのサポート対象外になります。",
+    options:[
+      {label:"開催日程を選んで予約", date:"日程は予約ページで選択", dateISO:"", place:"予約ページに記載", time:"半日開催", url:"https://cheercareer.jp/events/460?fpc=924.45.365.85090305e4846c6K.1781349333000"}
+    ]
+  },
+  {
+    id:"shachomeshi",
+    kind:"event",
+    name:"社長メシ",
+    title:"【28卒】社長メシ｜社長と食事しながら話せるイベント",
+    sub:"かしこまらない場で、経営者の本音が聞ける",
+    grads:["28卒"], format:"対面", areas:["随時開催"],
+    regions:["開催地はさまざま"],
+    hot:false, isNew:true,
+    desc:"食事を囲みながら社長と本音で話せる、一般的な説明会とはまったく違う形式のイベント。企業の「中の人」の考え方を、飾らない場で知ることができます。",
+    firms:[], firmsNote:"参加企業は開催回ごとに異なります",
+    forWhom:["かしこまった説明会が苦手", "経営者の考え方を直接聞いてみたい", "少人数でじっくり話したい"],
+    conds:["2028年卒業見込みの学生","四年制大学・大学院に在籍している方","学歴の条件はありません"],
+    ngs:["短期大学・専門学校に在籍の方","過去に同主催のイベント（社長メシ／就活メシ／就活メシMEGA／SAMURAIアワード等）に参加したことがある方"],
+    perk:"",
+    timetable:[["16:45","会場到着（受付混雑緩和のためご協力ください）"],["17:00","イベント開始"],["随時","社長との食事・トークセッション"]],
+    flow:["予約ページから申込","開始15分前（16:45）までに会場へ到着","当日、社長と直接対話"],
+    highlights:[],
+    notes:[
+      "17:00〜17:30の遅刻は「公共交通機関の遅延」のみ対応可。受付で遅延証明書のご提示が必要です",
+      "無断欠席をされた場合、次回以降のご案内をお断りすることがあります"
+    ],
+    caution:"",
+    options:[
+      {label:"開催日程を選んで予約", date:"日程は予約ページで選択", dateISO:"", place:"予約ページに記載", time:"17:00〜", url:"https://ivbot.hp.peraichi.com"}
+    ]
+  },
+  {
+    id:"meetscompany",
+    kind:"event",
+    name:"ミーツカンパニー",
+    title:"【28卒】ミーツカンパニー｜対面型 少人数 合同説明会",
+    sub:"人事と近い距離で話せる座談会形式",
+    grads:["28卒"], format:"対面", areas:["随時開催"],
+    regions:["開催地はさまざま"],
+    hot:false, isNew:false,
+    desc:"少人数の座談会形式で、企業の人事と近い距離でじっくり話せる合同説明会。大人数の説明会が苦手な人にも向いています。対面開催のみです。",
+    firms:[], firmsNote:"参加企業は開催回ごとに異なります",
+    forWhom:["大人数の説明会だと質問しづらい", "人事と近い距離で話したい", "複数社をまとめて見たい"],
+    conds:["2028年卒業見込みの学生","四年制大学に在籍している方","会場まで来場できる方"],
+    ngs:["過去にミーツカンパニーのイベントに参加したことがある方"],
+    perk:"",
+    timetable:[],
+    flow:["予約ページから開催日程を選んで申込","主催者から届く案内メールを確認","当日、座談会形式で複数社と面談"],
+    highlights:[],
+    notes:[
+      "オンライン開催はありません（対面のみ）"
+    ],
+    caution:"",
+    options:[
+      {label:"開催日程を選んで予約", date:"日程は予約ページで選択", dateISO:"", place:"予約ページに記載", time:"予約ページに記載", url:"https://column.dymscout.jp/537/"}
+    ]
+  },
+
+
+  {
+    id:"typeshukatsu-1019",
+    kind:"event",
+    name:"type就活フェア",
+    title:"【28卒/対面】京大・阪大・神大生のための＜OB・OG訪問＞type就活フェア",
+    sub:"同じ大学の先輩に、本音で質問できる1日",
+    grads:["28卒"], format:"対面", areas:["京都"],
+    regions:["京都"],
+    hot:true, isNew:true,
+    desc:"「自分だけの志望動機が書けない」「OB・OG訪問はしたいけど、アポ取りが面倒」——そんな人のためのイベントです。一流企業で活躍する京大・阪大・神大の先輩に、就活の裏側から仕事のリアルまで直接質問できます。AIで志望動機が作れる時代だからこそ、選考で差がつくのは現場の先輩から聞いた生の情報です。",
+    firms:["アクセンチュア","P&Gジャパン","日本貿易保険（NEXI）","三井住友信託銀行","EYストラテジー・アンド・コンサルティング","シンプレクス・ホールディングス","日本政策投資銀行（DBJ）"],
+    firmsNote:"全12社が参加予定。残りの企業は順次公開されます",
+    forWhom:["志望動機がうまく書けず悩んでいる", "OB・OG訪問はしたいが、アポ取りが面倒", "同じ大学の先輩がどう働いているか知りたい"],
+    prepare:["学生証（当日の在籍確認で必要です）"],
+    conds:["2028年卒業予定の方","下記の対象大学に在籍している方","19:00まで参加できる方"],
+    ngs:["対象大学以外に在籍している方","プログラム途中で退出が必要な方"],
+    unis:["京都大学・京都大学大学院","大阪大学・大阪大学大学院","神戸大学・神戸大学大学院"],
+    perk:"アンケートに回答した方全員に「選べるe-GIFT 500円分」／抽選で『type就活プレミアム・マガジン』最新号をプレゼント",
+    timetable:[
+      ["15:00","開場・受付"],
+      ["15:55","ガイダンス開始"],
+      ["16:00","企業PR（各社10分×3社）"],
+      ["16:33","休憩（座談会の希望企業を提出）"],
+      ["16:43","座談会 ①〜⑤（各17分・入れ替え制）"],
+      ["18:13","懇親会（好きな企業を選んで参加・先着制）"],
+      ["18:53","アンケート回答"],
+      ["19:00","終了"]
+    ],
+    flow:["予約ページからエントリー（先着制のため早めに）","当日15:00〜15:55に受付","企業PR後、話を聞きたい企業を提出して座談会へ"],
+    highlights:[
+      "ここでしか聞けない話が中心です。仕事のやりがいと正直きつかったこと、同じ大学の先輩の1日のスケジュールや職場の雰囲気など",
+      "現場の社員が見ている「一緒に働きたい人」の共通点や、面接官の印象に残る逆質問のネタも持ち帰れます",
+      "「御社の〇〇さんに伺ったのですが」と語れるエピソードは、他の就活生との差になります"
+    ],
+    notes:[
+      "参加する座談会は、当日提出する希望企業をもとに主催者が決定します（希望企業1社以上の座談会に参加できるよう調整されますが、確約ではありません）",
+      "この内容での開催は1日限りです。先着制のため、定員に達し次第受付が終了します"
+    ],
+    caution:"当日は在籍確認のため<b>学生証を必ずご持参ください</b>。また<b>プログラム途中での退出はできません</b>。19:00まで参加できる日にお申し込みください。",
+    options:[
+      {label:"京都会場", date:"2026年10月19日(月)", dateISO:"2026-10-19", place:"京都市勧業館「みやこめっせ」第1展示場（地下1階）", time:"15:50〜19:00（受付15:00〜）", url:"https://typeshukatsu.jp/event/9901/?routeway=0040010010710012000220052"}
+    ]
+  },
+
+
+
+  {
+    id:"stocari-gd",
+    kind:"event",
+    noReferrer:true,
+    name:"ストキャリ",
+    title:"【28卒】ストキャリ｜自己分析×GD型 就活イベント",
+    sub:"半日で自己分析・GD・業界研究をまとめて",
+    grads:["28卒"], format:"対面", areas:["東京"],
+    regions:["東京"],
+    hot:false, isNew:true,
+    desc:"世界で約3,600万人以上が受検している「ストレングス・ファインダー®」を使って、あなたの強み・資質を明確にするイベントです。自分の得意なことが言葉になるので、ESや面接の自己PRにそのまま活かせます。人事との座談会もあり、強みを評価した企業から特別オファーが届くこともあります。",
+    firms:[], firmsNote:"参加企業は予約ページに掲載されています",
+    forWhom:["自己分析が進まず止まっている", "自分の強みを言葉にできない", "グループディスカッションに不安がある"],
+    conds:["2028年卒業見込みの方","会場（神田淡路町）まで来場できる方","事前の診断受検とオンライン面談に対応できる方"],
+    ngs:[],
+    perk:"強みを評価した企業から特別オファーが届くチャンスがあります",
+    timetable:[],
+    flow:[
+      "予約ページからイベントを予約",
+      "ストレングス・ファインダー®の受検URLが届くので受検",
+      "事前のオンライン面談（または電話面談）を実施",
+      "当日イベントに参加"
+    ],
+    highlights:[
+      "自己分析・グループディスカッション・業界研究を半日で学べます",
+      "人事との座談会を通じて、面接対策や業界研究も進められます"
+    ],
+    notes:[],
+    caution:"申込後に<b>ストレングス・ファインダー®の受検</b>と<b>事前のオンライン面談</b>があります。イベント当日までに済ませる必要があるため、余裕をもってお申し込みください。",
+    options:[
+      {label:"開催日程を選んで予約", date:"日程は予約ページで選択", dateISO:"", place:"ワテラスコモンホール（神田淡路町）", time:"半日", url:"https://j.futurefinder.net/lp/career_gc/"}
+    ]
+  },
+
+  {
+    id:"minshu-kensetsu-1027",
+    kind:"event",
+    noReferrer:true,
+    name:"みん就フォーラム",
+    title:"【28卒】みん就 建設・不動産EXPO × みん就フォーラム in 東京",
+    sub:"新宿開催。1日で10社以上の話が聞けます",
+    grads:["28卒"], format:"対面", areas:["東京"],
+    regions:["東京"],
+    hot:true, isNew:true,
+    desc:"建設・不動産業界を中心に、各業界のトップ企業が集まる合同企業説明会です。1日で10社以上の話を聞けるので、業界研究・企業研究を一気に進められます。対面開催なので、採用担当者と近い距離で直接話せるのが特徴です。",
+    firms:[], firmsNote:"参加企業は予約ページに掲載されています",
+    forWhom:["建設・不動産業界に興味がある", "1日でいろいろな企業を比較したい", "大手企業の採用担当と直接話したい"],
+    conds:["2028年卒業見込みの大学3年生・大学院1年生","会場（新宿）まで来場できる方","学部・学科は問いません"],
+    ngs:[],
+    perk:"みん就限定の特別講演と、少人数制の座談会に参加できます",
+    timetable:[
+      ["11:00","開場"],
+      ["随時","企業ブースをまわる／特別講演・座談会に参加"],
+      ["17:00","来場受付の終了"],
+      ["17:30","終了"]
+    ],
+    flow:["専用予約ページから申込","主催者から届く案内を確認","当日、会場へ来場"],
+    highlights:[
+      "少人数制の座談会では、採用担当者に直接アピールできます",
+      "1日で10社以上の話を聞けるので、業界研究・企業研究を一気に進められます",
+      "開催時間が長いため、都合のよい時間に来場できます（来場受付は17:00まで）"
+    ],
+    notes:[],
+    caution:"<b>来場できるのは17:00までです。</b>予約・来場ともにイベント終了の30分前で締め切られるため、遅い時間の来場予定の方はご注意ください。",
+    options:[
+      {label:"東京会場（新宿）", date:"2026年10月27日(火)", dateISO:"2026-10-27", place:"ベルサール新宿グランド", time:"11:00〜17:30（来場は17:00まで）", url:"https://www.nikki.ne.jp/event/20261027185/"}
+    ]
+  },
+
+  {
+    id:"meets-forum-1016",
+    kind:"event",
+    noReferrer:true,
+    name:"Meets Forum",
+    title:"【28卒】Meets Forum｜大手企業も出展する秋の合同説明会",
+    sub:"気になるテーマを選んで参加。2日間開催",
+    grads:["28卒"], format:"オンライン", areas:["オンライン"],
+    regions:["オンライン"],
+    hot:true, isNew:true,
+    desc:"「成長できる会社」「安定した会社」「海外で活躍できる仕事」「働きやすい会社」など、気になるテーマを選んで参加する合同説明会です。業界や企業名から探すのではなく、自分の価値観に近いところから会社を知れるので、まだ志望業界が固まっていない人にも向いています。",
+    firms:[], firmsNote:"大手企業を含む複数社が出展します。参加企業は予約ページに掲載されています",
+    forWhom:["志望業界がまだ決まっていない", "会社名ではなく「働き方」から探したい", "自宅から参加したい"],
+    conds:["2028年卒業見込みの方","学部・学科は問いません","オンラインで参加できる通信環境がある方"],
+    ngs:[],
+    perk:"2ブロック以上参加すると特典があります",
+    timetable:[
+      ["11:00","開始"],
+      ["随時","選んだテーマのブロックに参加"],
+      ["17:00","終了"]
+    ],
+    flow:[
+      "予約ページから参加したい日程を選んで申込",
+      "興味のあるテーマを選ぶ",
+      "選んだテーマに沿って、企業の取り組みや働く環境を知る（チャットで質問できます）",
+      "イベント後、企業別のインターンや説明会に申し込める"
+    ],
+    highlights:[
+      "テーマは1つに絞らなくて構いません。複数のテーマに参加すると、業界や働き方の選択肢が広がります",
+      "チャットで気軽に質問できるので、話を聞くだけの参加でも大丈夫です"
+    ],
+    notes:[],
+    caution:"",
+    options:[
+      {label:"1日目", date:"2026年10月16日(金)", dateISO:"2026-10-16", place:"オンライン", time:"11:00〜17:00", url:"https://event.meetscompany.jp/session/28956/?id=9"},
+      {label:"2日目", date:"2026年10月17日(土)", dateISO:"2026-10-17", place:"オンライン", time:"11:00〜17:00", url:"https://event.meetscompany.jp/session/28956/?id=9"}
+    ]
+  },
+
+  /* ---------- サービス登録 ---------- */
+  {
+    id:"shutalk",
+    kind:"service",
+    noReferrer:true,
+    name:"就トーク",
+    title:"【27卒・28卒】就トーク｜匿名で本音を話せる就活相談SNS",
+    sub:"名前を出さずに、気になることを聞ける",
+    grads:["27卒","28卒"], format:"アプリ登録", areas:["どこからでも"],
+    regions:["オンライン"],
+    hot:false, isNew:true,
+    desc:"就活の悩みや情報を、匿名でやりとりできるSNSアプリです。表示されるのは大学名・学年・志望業界とニックネームだけなので、身近な人には聞きにくいことも気兼ねなく相談できます。「ガクチカが弱い気がして不安」「面接で頭が真っ白になる」——そんな投稿が集まっています。",
+    firms:[], firmsNote:"",
+    forWhom:["周りに就活の話をしづらい", "ほかの就活生の進み具合が気になる", "名前を出さずに相談したい"],
+    conds:["就職活動中の方ならどなたでも","iPhoneをお持ちの方（iOS版のみ）","利用は無料です"],
+    ngs:[],
+    highlights:[
+      "ES・面接・業界研究・OB訪問など、テーマ別の掲示板から探せます",
+      "匿名で投稿できるので、周りに知られずに相談できます",
+      "気になった投稿は「気になる」で保存できます",
+      "住んでいる場所に関係なく、ほかの就活生の動きが見えます",
+      "BizMatchと同じ 学生アプリラボ Nobia が開発・運営しています"
+    ],
+    notes:[
+      "iOS版のみの提供です"
+    ],
+    perk:"",
+    timetable:[],
+    flow:["App Storeからアプリをインストール","ニックネームを決めて登録","気になるテーマの掲示板を見る・投稿する"],
+    caution:"",
+    options:[
+      {label:"App Storeでダウンロード", date:"いつでも利用できます", dateISO:"", place:"iPhone（iOS）", time:"登録は数分", url:"https://apps.apple.com/jp/app/%E5%B0%B1%E3%83%88%E3%83%BC%E3%82%AF-%E6%83%85%E5%A0%B1%E5%8F%8E%E9%9B%86%E3%81%8C%E3%81%A7%E3%81%8D%E3%82%8B%E5%B0%B1%E6%B4%BB%E7%9B%B8%E8%AB%87sns/id6776169096"}
+    ]
+  },
+
+  {
+    id:"simple-shukatsu",
+    kind:"service",
+    noReferrer:true,
+    name:"シンプル就活",
+    title:"【27卒・28卒】シンプル就活｜就活の予定と企業をまとめて管理",
+    sub:"手帳・スプレッドシート・メモアプリをひとつに",
+    grads:["27卒","28卒"], format:"アプリ登録", areas:["どこからでも"],
+    regions:["オンライン"],
+    hot:false, isNew:true,
+    desc:"企業名は手帳、締切はスプレッドシート、面接メモはメモアプリ——就活の情報はバラバラになりがちです。このアプリは、志望企業・締切・面接日程をひとつにまとめて、「次に何をすればいいか」がすぐわかる状態にします。",
+    firms:[], firmsNote:"",
+    forWhom:["予定や締切の管理が苦手", "受ける企業が増えて把握しきれない", "やり忘れをなくしたい"],
+    conds:["就職活動中の方ならどなたでも","iPhoneをお持ちの方（iOS版のみ）","基本機能は無料です"],
+    ngs:[],
+    highlights:[
+      "【企業管理】「エントリー済み」「ES提出中」などの状況を色分けで表示。次にやることと締切までの残り日数が自動で出ます",
+      "【就活カレンダー】面接・締切・説明会をひとつのカレンダーに集約。企業情報と連動して重要な日程が自動で追加されます",
+      "【時間の重複を検出】面接や説明会の予定がぶつかっていると、AIが知らせます",
+      "【チェックリスト】エントリーから内定までの各段階で「今やること」を整理でき、やり忘れを防げます",
+      "BizMatchと同じ 学生アプリラボ Nobia が開発・運営しています"
+    ],
+    notes:[
+      "iOS版のみの提供です（Android版は今後検討予定です）"
+    ],
+    perk:"",
+    timetable:[],
+    flow:["App Storeからアプリをインストール","志望企業を登録する","カレンダーとチェックリストで予定を管理する"],
+    caution:"",
+    options:[
+      {label:"App Storeでダウンロード", date:"いつでも利用できます", dateISO:"", place:"iPhone（iOS）", time:"登録は数分", url:"https://apps.apple.com/jp/app/%E3%82%B7%E3%83%B3%E3%83%97%E3%83%AB%E5%B0%B1%E6%B4%BB-%E5%B0%B1%E6%B4%BB%E6%83%85%E5%A0%B1%E7%AE%A1%E7%90%86%E3%82%A2%E3%83%97%E3%83%AA-%E5%B0%B1%E6%B4%BB%E3%82%AB%E3%83%AC%E3%83%B3%E3%83%80%E3%83%BC/id6776132527"}
+    ]
+  },
+
+  {
+    id:"kimisuka",
+    kind:"service",
+    noReferrer:true,
+    name:"キミスカ",
+    title:"【28卒】キミスカ｜企業から届くスカウト型就活アプリ",
+    sub:"プロフィールを登録して、待つだけ",
+    grads:["28卒"], format:"アプリ登録", areas:["どこからでも"],
+    regions:["オンライン"],
+    hot:false, isNew:true,
+    desc:"自分から応募するのではなく、登録したプロフィールを見た企業からスカウトが届く就活サービスです。自己PRや適性検査の結果をもとに、思ってもいなかった業界から声がかかることもあります。エントリーシートを書く前に、自分がどう見られているかを知る材料になります。",
+    firms:[], firmsNote:"",
+    forWhom:["自分から応募するのが苦手", "思ってもいなかった業界の話も聞いてみたい", "就活の選択肢を広げたい"],
+    conds:["2028年卒業見込みの方","学部・学科は問いません","登録は無料です"],
+    ngs:[],
+    perk:"",
+    timetable:[],
+    flow:["下のボタンからアプリをインストール","プロフィール・自己PRを登録","企業からのスカウトを待つ"],
+    highlights:[
+      "登録・利用はすべて無料です",
+      "自分から応募しなくても、プロフィールを見た企業からスカウトが届きます"
+    ],
+    notes:[
+      "スカウトが届くかどうか、また届く時期は登録内容によって異なります",
+      "サービス内容をご確認のうえ、ご自身の意思でご登録ください"
+    ],
+    caution:"",
+    options:[
+      {label:"アプリをインストールして登録", date:"いつでも登録できます", dateISO:"", place:"スマートフォンアプリ", time:"登録は5分程度", url:"https://kimisuka.com/2028/app_install?af_sub1=funcareer_FC2028"}
+    ]
+  },
+
+  /* ---------- エージェント・面談 ---------- */
+  {
+    id:"career-bijin",
+    kind:"agent",
+    noReferrer:true,
+    name:"キャリア美人",
+    title:"【28卒】キャリア美人｜キャリア面談（女子学生向け）",
+    sub:"キャリア志向の女子学生のための就活支援",
+    grads:["28卒"], format:"面談", areas:["随時受付"],
+    regions:["オンライン"],
+    hot:false, isNew:true,
+    desc:"性別に関係なくチャレンジできる企業として認定された企業と、キャリア志向の女子学生をつなぐ就活支援サービスです。まずはアドバイザーとの初回面談から始まります。",
+    firms:[], firmsNote:"厳正な審査により認定された企業が対象です",
+    forWhom:["キャリアを長く続けたいと考えている", "関西で就職活動をしている", "まず相談相手がほしい"],
+    conds:["2028年卒業見込みの方","下記の対象大学に在籍している女子学生の方"],
+    ngs:[],
+    unis:["関西大学","関西学院大学","同志社大学","立命館大学"],
+    perk:"",
+    timetable:[],
+    flow:[
+      "「登録ページを開く」からキャリア美人の公式LINEを友だち追加",
+      "追加後に届くメッセージから、リッチメニューの予約システムへ進む",
+      "予約システムで面談日程を選択",
+      "当日アドバイザーと初回面談"
+    ],
+    highlights:[
+      "【キャリア美人アカデミー】女性活躍推進企業の経営者や人事責任者が登壇するセミナー・講演会に参加できます",
+      "【キャリア美人スカウト】自己診断テストの結果分析とキャリア面談を通して、強みと弱みを明確にします",
+      "【キャリア美人イベント】厳選企業と直接出会えるイベントやプレゼンコンテストがあり、参加企業から直接スカウトが届くことがあります"
+    ],
+    notes:[],
+    caution:"<b>LINEの友だち追加だけでは予約は完了しません。</b>追加後に届くメッセージから、リッチメニューの予約システムに進んで日程を選んでください。",
+    options:[
+      {label:"公式LINEを追加して予約する", date:"日程は予約システムで選択", dateISO:"", place:"オンライン", time:"約60分", url:"https://liff.line.me/2002907182-b1VzmgLY?sl=175988857168314539228813"}
+    ]
+  },
+
+  {
+    id:"cspark-career",
+    kind:"agent",
+    noReferrer:true,
+    name:"CSParkCareer",
+    title:"【27卒】CSParkCareer｜エージェント面談",
+    sub:"27卒向け。関東・関西・福岡・愛知で就職したい方へ",
+    grads:["27卒"], format:"面談", areas:["随時受付"],
+    regions:["オンライン"],
+    hot:false, isNew:true,
+    desc:"キャリアアドバイザーが1対1で、希望や状況をうかがいながら企業を紹介する無料のエージェント面談です。まだ内定がない方も、もう一度企業を見直したい方も利用できます。",
+    firms:[], firmsNote:"",
+    forWhom:["27卒でまだ納得のいく結果が出ていない", "もう一度いろいろな企業を見てみたい", "関東・関西・福岡・愛知で働きたい"],
+    conds:["2027年卒業見込みの学部生の方","希望勤務地が関東・関西・福岡・愛知のいずれかの方"],
+    ngs:["大学院に在籍している方"],
+    perk:"",
+    timetable:[],
+    flow:["予約ページから面談日程を選択","当日オンラインでアドバイザーと面談","希望に合う企業を紹介してもらう"],
+    highlights:[
+      "面談は無料です"
+    ],
+    notes:[],
+    caution:"",
+    options:[
+      {label:"面談を予約する", date:"日程は予約ページで選択", dateISO:"", place:"オンライン", time:"約60分", url:"https://cspark-career.onepartner.jp/book/fullhouse-30-27?attracting_id=69"}
+    ]
+  },
+
+  {
+    id:"irodas28",
+    kind:"agent",
+    name:"irodas",
+    title:"【28卒】irodas｜キャリアアドバイザー個別面談",
+    sub:"登録フォームひとつで、あなたに合う担当につながります",
+    grads:["28卒"], format:"面談", areas:["随時受付"],
+    regions:["オンライン"],
+    hot:false, isNew:true,
+    desc:"28卒向けの無料キャリア面談。登録フォームに学校名・学部名を入力すると、専攻に合った担当アドバイザーへ自動でご案内されます。志望職種を自分で選ぶ必要はありません。就活を早く始めたい人におすすめです。",
+    firms:[], firmsNote:"",
+    forWhom:["何から始めればいいかわからない", "自分の専攻に合った相談をしたい", "早めに動き出したい"],
+    conds:["2028年卒業見込みの方","四年制大学・大学院に在籍している方","総合職またはITエンジニア志望の方"],
+    ngs:["研究職など、理系専門職を志望している方","短期大学・専門学校に在籍の方"],
+    perk:"",
+    timetable:[],
+    flow:["登録フォームに必要事項を入力（学校名・学部名から担当が自動で決まります）","案内に沿って面談日程を調整","当日オンラインでアドバイザーと面談し、希望に合う企業を紹介してもらう"],
+    highlights:[
+      "面談は無料です"
+    ],
+    notes:[
+      "学校名・学部名の入力内容にもとづいて担当が振り分けられます。正確にご入力ください"
+    ],
+    caution:"",
+    options:[
+      {label:"登録して面談を申し込む", date:"日程は登録後に調整", dateISO:"", place:"オンライン", time:"約60分", url:"https://form.irodas.com/member/partner-call?&dai_marketing=ds&chu_marketing=tre"}
+    ]
+  },
+  {
+    id:"jokatsu28",
+    kind:"agent",
+    name:"ジョーカツ",
+    title:"【28卒】ジョーカツ｜首都圏就職サポート面談",
+    sub:"早めに動きたい28卒向け。まずは相談から",
+    grads:["28卒"], format:"面談", areas:["随時受付"],
+    regions:["オンライン"],
+    hot:false, isNew:true,
+    desc:"首都圏での就職を目指す28卒向けのキャリアサポート。早期から動き出したい人、何から始めればいいかわからない人に向いています。",
+    firms:[], firmsNote:"",
+    forWhom:["地方から首都圏での就職を考えている", "就活の軸がまだ定まっていない", "幅広く企業を見たい"],
+    conds:["2028年卒業見込みの方","首都圏での就職を希望・視野に入れている方","業界や職種を絞らず幅広く企業を見ている方","就活の軸が定まっていない方も歓迎"],
+    ngs:["首都圏での就職を考えていない方","大手企業のみを志望している方","専門学部・専攻で希望企業が明確に決まっている方","理系大学院・専門職志向の方","すでに内定を承諾している方","ジョーカツ／スタキャリを利用済みの方"],
+    perk:"",
+    timetable:[],
+    flow:["下のボタンからジョーカツ公式LINEに登録","アドバイザーとの面談を実施","希望に合う企業を紹介"],
+    highlights:[
+      "登録・面談ともに無料です"
+    ],
+    notes:[],
+    caution:"",
+    options:[
+      {label:"公式LINEに登録して申し込む", date:"日程はLINEで調整", dateISO:"", place:"オンライン", time:"—", url:"https://liff.line.me/1656090062-kJKVMPgE/landing?follow=%40564anbbu&lp=gT1LYE&liff_id=1656090062-kJKVMPgE"}
+    ]
+  }
+];
+
+/* ============================================================
+   ▼ 表示ロジック
+   ============================================================ */
+const $ = s => document.querySelector(s);
+const esc = s => String(s==null?"":s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+document.getElementById("lineBtn").href = LINE_URL;
+
+// 未来の日程だけ抽出
+function futureOpts(it){ return it.options.filter(o=>!o.dateISO || o.dateISO>=TODAY); }
+function isEnded(it){ return it.options.length>0 && futureOpts(it).length===0; }
+function nextISO(it){
+  const d = futureOpts(it).map(o=>o.dateISO).filter(Boolean).sort();
+  return d[0] || "9999-99-99";
+}
+function daysTo(iso){
+  if(!iso||iso==="9999-99-99") return null;
+  return Math.round((new Date(iso)-new Date(TODAY))/86400000);
+}
+
+const TABS = [
+  {k:"all",     l:"すべて",     s:"ぜんぶ見る"},
+  {k:"event",   l:"イベント",   s:"合同説明会など"},
+  {k:"agent",   l:"エージェント", s:"アドバイザー相談"},
+  {k:"service", l:"登録サービス", s:"スカウトを待つ"}
+];
+/* 掲載中のものから、卒業予定年と開催場所の選択肢を自動で組み立てる。
+   該当がなくなった条件は、選択肢に表示されません。 */
+function liveGrads(){
+  const set = new Set();
+  ITEMS.forEach(i => { if(!isEnded(i)) i.grads.forEach(g => set.add(g)); });
+  return [...set].sort();
+}
+const AREA_ORDER = ["オンライン","東京","京都","開催地はさまざま"];
+function liveAreas(){
+  const set = new Set();
+  ITEMS.forEach(i => { if(!isEnded(i)) (i.regions||[]).forEach(r => set.add(r)); });
+  return [...set].sort((a,b)=>{
+    const ia = AREA_ORDER.indexOf(a), ib = AREA_ORDER.indexOf(b);
+    return (ia<0?99:ia) - (ib<0?99:ib) || a.localeCompare(b,"ja");
   });
-  // メニュー項目クリックで閉じる
-  document.querySelectorAll('#mobile-menu a').forEach(a => {
-    a.addEventListener('click', () => document.getElementById('mobile-menu').classList.remove('open'));
+}
+
+let tab = "all", fGrad = "all", fArea = "all";
+
+function chipHTML(values, current, fn){
+  return [{k:"all",l:"すべて"}, ...values.map(v=>({k:v,l:v}))]
+    .map(c=>`<button class="chip" aria-pressed="${c.k===current}" onclick="${fn}('${c.k}')">${esc(c.l)}</button>`)
+    .join("");
+}
+
+function renderTabs(){
+  $("#tabs").innerHTML = TABS.map(t=>`<button class="tab" aria-pressed="${t.k===tab}" onclick="setTab('${t.k}')">${t.l}<small>${t.s}</small></button>`).join("");
+  $("#chipsGrad").innerHTML = chipHTML(liveGrads(), fGrad, "setGrad");
+  $("#chipsArea").innerHTML = chipHTML(liveAreas(), fArea, "setArea");
+  $("#fReset").classList.toggle("on", tab!=="all" || fGrad!=="all" || fArea!=="all");
+}
+
+/* タブごとにURLを分け、そのまま共有できるようにする
+   例）https://bizmatch.nobia-lab.com/#event  → イベントタブが開いた状態 */
+function tabFromHash(){
+  const h = (location.hash || "").replace("#","");
+  return TABS.some(t => t.k === h) ? h : "all";
+}
+/* 1件ごとの共有URL：…/#i/<id> */
+function itemIdFromHash(){
+  const m = (location.hash || "").match(/^#i\/(.+)$/);
+  return m ? decodeURIComponent(m[1]) : null;
+}
+function itemUrl(id){
+  return location.origin + location.pathname + "#i/" + encodeURIComponent(id);
+}
+function syncHash(push){
+  const target = (tab === "all") ? location.pathname : location.pathname + "#" + tab;
+  if(location.pathname + location.hash === target) return;
+  if(push) history.pushState({tab}, "", target);
+  else     history.replaceState({tab}, "", target);
+}
+/* 詳細を開いたらURLを切り替え、閉じたらタブのURLに戻す */
+function pushItemHash(id){
+  const t = location.pathname + "#i/" + encodeURIComponent(id);
+  if(location.pathname + location.hash !== t) history.pushState({item:id}, "", t);
+}
+
+/* 共有ボタン：対応端末では共有シート、それ以外はURLをコピー */
+async function shareItem(id){
+  const it = get(id), url = itemUrl(id);
+  try{
+    if(navigator.share){ await navigator.share({title: it.title, url}); return; }
+    await navigator.clipboard.writeText(url);
+    toast("リンクをコピーしました");
+  }catch(e){
+    if(e && e.name === "AbortError") return;
+    toast("コピーできませんでした");
+  }
+}
+function toast(msg){
+  let el = document.getElementById("toast");
+  if(!el){ el = document.createElement("div"); el.id = "toast"; el.className = "toast"; document.body.appendChild(el); }
+  el.textContent = msg; el.classList.add("on");
+  clearTimeout(window.__tt); window.__tt = setTimeout(()=>el.classList.remove("on"), 1800);
+}
+
+function setTab(k){  tab = k;   syncHash(true); renderTabs(); renderList(); }
+function setGrad(k){ fGrad = k; renderTabs(); renderList(); }
+function setArea(k){ fArea = k; renderTabs(); renderList(); }
+function resetFilters(){ tab = "all"; fGrad = "all"; fArea = "all"; syncHash(true); renderTabs(); renderList(); }
+
+/* 種別・卒業予定年・開催場所の3条件をすべて満たすものだけ表示 */
+function pass(it){
+  if(isEnded(it)) return false;                                         // 開催が終了したもの
+  if(tab   !== "all" && it.kind !== tab) return false;                  // 種別
+  if(fGrad !== "all" && !it.grads.includes(fGrad)) return false;        // 卒業予定年
+  if(fArea !== "all" && !(it.regions||[]).includes(fArea)) return false; // 開催場所
+  return true;
+}
+
+/* ヒーローの「◯卒 対象」表記を掲載状況から生成 */
+function renderHeroBadge(){
+  const g = liveGrads();
+  $("#hBadge").textContent = (g.length ? g.join("・") + " 対象／" : "") + "参加費すべて無料";
+}
+
+/* 検索エンジン向け：掲載中のイベント・面談を構造化データとして出力する */
+function injectJsonLd(){
+  const site = "https://bizmatch.nobia-lab.com";
+  const list = ITEMS.filter(i=>!isEnded(i)).map((it,idx)=>{
+    const o = futureOpts(it)[0] || it.options[0];
+    return { "@type":"ListItem", "position": idx+1, "name": it.title,
+             "description": it.desc, "url": o ? o.url : site };
   });
+  const el = document.createElement("script");
+  el.type = "application/ld+json";
+  el.textContent = JSON.stringify({
+    "@context":"https://schema.org", "@type":"ItemList",
+    "name":"掲載中の就活イベント・キャリア面談", "numberOfItems": list.length,
+    "itemListElement": list
+  });
+  document.head.appendChild(el);
+}
+
+function stateBadge(it){
+  if(isEnded(it)) return `<div class="state end">受付終了</div>`;
+  const d = daysTo(nextISO(it));
+  if(d!==null && d<=7)  return `<div class="state soon">🔥 あと${d}日</div>`;
+  if(d!==null && d<=30) return `<div class="state ok">${d}日後に開催</div>`;
+  return `<div class="state ok">${it.kind==="agent"?"随時受付中":(it.kind==="service"?"いつでも登録OK":"日程調整可")}</div>`;
+}
+
+function renderList(){
+  const arr = ITEMS.filter(pass).sort((a,b)=>{
+    const ea=isEnded(a)?1:0, eb=isEnded(b)?1:0;
+    if(ea!==eb) return ea-eb;
+    return nextISO(a).localeCompare(nextISO(b));
+  });
+  const live = ITEMS.filter(i=>!isEnded(i));
+  $("#cnt").textContent = arr.length;
+  $("#stEv").textContent = live.length;
+  $("#stArea").textContent = new Set(live.flatMap(i=>i.areas).filter(a=>!/随時/.test(a))).size;
+
+  if(!arr.length){
+    $("#list").innerHTML = `<div class="empty">この条件に合うものは、いまのところありません。<br>
+      条件を変えるか、下のボタンからすべて表示してください。
+      <button class="btn btn-p" style="max-width:240px;margin:18px auto 0" onclick="resetFilters()">条件をクリアして全件表示</button></div>`;
+    return;
+  }
+
+  $("#list").innerHTML = arr.map((it,i)=>{
+    const end = isEnded(it);
+    const fo = futureOpts(it);
+    const dchips = fo.filter(o=>o.dateISO).slice(0,4);
+    const rest = fo.filter(o=>o.dateISO).length - dchips.length;
+    const cds = it.conds.slice(0,3);
+    return `
+    <article class="card ${end?'end':''}">
+      <div class="ctop g${i%6}">
+        <div class="kv">${esc(it.name)}<small>${esc(it.sub)}</small></div>
+        <div class="rbs">
+          ${it.hot&&!end?'<span class="rb hot">人気</span>':''}
+          ${it.isNew&&!end?'<span class="rb new">NEW</span>':''}
+          <span class="rb">${esc(it.format)}</span>
+          <span class="rb yl">${it.grads.join("・")}</span>
+        </div>
+        ${stateBadge(it)}
+      </div>
+      <div class="cbody">
+        <div class="ctitle">${esc(it.title)}</div>
+        <div class="meta">
+          <div class="mrow"><span class="ic">📅</span><span class="lb">日程</span><span class="vl">
+            ${dchips.length
+              ? `<div class="dates">${dchips.map(o=>`<span class="dt">${esc(o.date.replace("2026年",""))}</span>`).join("")}${rest>0?`<span class="dt pl">ほか${rest}件</span>`:""}</div>`
+              : `<b>${it.kind==="agent"?"随時受付（日程は予約時に選択）":(it.kind==="service"?"いつでも登録できます":"予約ページで日程を選択")}</b>`}
+          </span></div>
+          <div class="mrow"><span class="ic">📍</span><span class="lb">場所</span><span class="vl">${esc(it.areas.join("・"))}</span></div>
+          <div class="mrow"><span class="ic">🎓</span><span class="lb">対象</span><span class="vl">${it.grads.join("・")}／${esc(it.format)}</span></div>
+        </div>
+        ${it.firms.length?`<div class="firms"><div class="fh">参加企業・業界</div><div class="ftags">${it.firms.slice(0,5).map(f=>`<span class="ft">${esc(f)}</span>`).join("")}${it.firms.length>5?`<span class="ft more">ほか${it.firms.length-5}</span>`:""}</div></div>`:""}
+        <div class="cond">${cds.map(c=>`<span class="cd">${esc(c)}</span>`).join("")}${it.unis&&it.unis.length?`<span class="cd uni-flag">🎓 対象大学あり（${it.unis.length}校）</span>`:""}</div>
+        ${it.perk?`<div class="perk"><span>🎁</span><span>${esc(it.perk)}</span></div>`:""}
+        <div class="cta">
+          <button class="btn btn-p" ${end?'disabled':''} onclick="openApply('${it.id}')">${end?'受付終了':(it.kind==="service"?'登録に進む':'予約に進む')}</button>
+          <button class="btn btn-g" onclick="openDetail('${it.id}')">詳細</button>
+        </div>
+      </div>
+    </article>`;
+  }).join("");
+}
+
+/* ---------- シート ---------- */
+let cur=null, step=1, form={}, pickIdx=0;
+const get = id => ITEMS.find(x=>x.id===id);
+function openSheet(){ $("#ov").classList.add("on"); $("#sheet").classList.add("on"); document.body.style.overflow="hidden"; }
+function closeSheet(){
+  $("#ov").classList.remove("on"); $("#sheet").classList.remove("on"); document.body.style.overflow="";
+  cur = null;
+  if(itemIdFromHash()) syncHash(true);   // 共有URLからタブのURLへ戻す
+}
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") closeSheet(); });
+
+function openDetail(id, skipHash){
+  const it = cur = get(id);
+  if(!it) return;
+  const fo = futureOpts(it);
+  if(!skipHash) pushItemHash(id);
+  $("#shT").textContent = it.kind==="service" ? "サービスの詳細" : "イベントの詳細";
+  $("#shB").innerHTML = `
+    <div style="font-size:18px;font-weight:900;line-height:1.5">${esc(it.title)}</div>
+    <div style="font-size:12.5px;color:var(--ink2);margin:5px 0 16px">${esc(it.desc)}</div>
+    ${it.caution?`<div class="warn"><b>⚠️ 予約時の必須ステップ</b>${it.caution}</div>`:""}
+
+    <div class="dsec"><h4>開催情報</h4>
+      ${(fo.length?fo:it.options).map(o=>`
+        <div class="tt"><span class="t">${esc(o.dateISO?o.date.replace("2026年","").replace("月","/").replace("日",""):"随時")}</span>
+        <span><b>${esc(o.label)}</b><br>${esc(o.date)}${o.time?" ｜ "+esc(o.time):""}<br><span style="color:var(--ink3)">${esc(o.place)}</span>${o.note?`<br><span style="color:var(--ink3)">${esc(o.note)}</span>`:""}</span></div>`).join("")}
+    </div>
+
+    ${it.highlights&&it.highlights.length?`<div class="dsec"><h4>${it.kind==="event"?"このイベントの特徴":"このサービスの特徴"}</h4>
+      <ul class="hl">${it.highlights.map(h=>`<li>${esc(h)}</li>`).join("")}</ul></div>`:""}
+
+    ${it.firms.length?`<div class="dsec"><h4>参加企業・業界</h4><div class="ftags">${it.firms.map(f=>`<span class="ft">${esc(f)}</span>`).join("")}</div>${it.firmsNote?`<div class="hint">${esc(it.firmsNote)}</div>`:""}</div>`:
+      (it.firmsNote?`<div class="dsec"><h4>参加企業</h4><div class="hint" style="margin:0">${esc(it.firmsNote)}</div></div>`:"")}
+
+    ${it.forWhom&&it.forWhom.length?`<div class="dsec"><h4>こんな人に向いています</h4>
+      <ul class="fw">${it.forWhom.map(f=>`<li>${esc(f)}</li>`).join("")}</ul></div>`:""}
+
+    <div class="dsec"><h4>参加できる方</h4><ul>${it.conds.map(c=>`<li>${esc(c)}</li>`).join("")}</ul></div>
+    ${it.unis&&it.unis.length?`<div class="dsec"><h4>対象大学</h4>
+      <div class="hint" style="margin:-4px 0 10px">下記に在籍している方が対象です。当日、学生証で在籍確認が行われます。</div>
+      <div class="ftags">${it.unis.map(u=>`<span class="ft uni">${esc(u)}</span>`).join("")}</div></div>`:""}
+    ${it.ngs.length?`<div class="dsec"><h4>対象外となる方</h4><ul class="ng">${it.ngs.map(c=>`<li>${esc(c)}</li>`).join("")}</ul></div>`:""}
+    ${it.prepare&&it.prepare.length?`<div class="dsec"><h4>当日の持ち物</h4>
+      <ul class="dot">${it.prepare.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`:""}
+    ${it.timetable.length?`<div class="dsec"><h4>当日の流れ</h4>${it.timetable.map(t=>`<div class="tt"><span class="t">${esc(t[0])}</span><span>${esc(t[1])}</span></div>`).join("")}</div>`:""}
+    <div class="dsec"><h4>予約から当日までの流れ</h4>${it.flow.map((f,i)=>`<div class="tt"><span class="t">STEP ${i+1}</span><span>${esc(f)}</span></div>`).join("")}</div>
+    ${it.notes.length?`<div class="dsec"><h4>注意事項</h4><ul class="dot">${it.notes.map(n=>`<li>${esc(n)}</li>`).join("")}</ul></div>`:""}
+    ${it.perk?`<div class="perk">🎁 ${esc(it.perk)}</div>`:""}
+
+    <div class="dsec more"><h4>もっと詳しく知りたい方へ</h4>
+      <p>参加企業の一覧やプログラムの詳細など、ここに載せきれない情報は
+      ${esc(it.kind==="service"?it.name+"の公式ページ":"主催企業のページ")}で公開されています。<br>
+      <b>${it.kind==="service"?"登録":"予約"}手続きと同じページで確認できる</b>ので、
+      内容を見てから${it.kind==="service"?"登録":"申し込み"}を決めていただいて大丈夫です。</p>
+      <p class="more-step">このあとの流れ：かんたんな入力 → ${esc(it.kind==="service"?it.name+"の公式ページ":"主催企業のページ")}へ（詳細の確認・${it.kind==="service"?"登録":"予約"}）</p>
+    </div>`;
+  $("#shF").innerHTML = isEnded(it)
+    ? `<button class="btn btn-p btn-w" disabled>受付終了しました</button>`
+    : `<button class="btn btn-p btn-w" onclick="openApply('${it.id}')">${it.kind==="service"?"登録ページ（サービス詳細ページ）へ進む":"予約ページ（イベント詳細ページ）へ進む"}</button>
+       <button class="btn btn-share btn-w" onclick="shareItem('${it.id}')">
+         <span class="ic-share"></span>${it.kind==="service"?"このサービス":"このイベント"}を友だちに共有する
+       </button>
+       <p class="ftnote">かんたんな入力のあと、${esc(it.kind==="service"?it.name+"の公式ページ":"主催企業のページ")}が開きます。<br>そこは${it.kind==="service"?"登録":"予約"}ページであり、<b>${it.kind==="service"?"サービス":"イベント"}の詳細ページでもあります</b></p>`;
+  $(".sbd").scrollTop=0; openSheet();
+}
+
+function openApply(id){ cur=get(id); step=1; form={}; pickIdx=0; renderStep(); openSheet(); }
+function stepsHTML(n){
+  const isSvc = cur && cur.kind==="service";
+  const L = isSvc ? ["内容を確認","情報入力","登録完了"] : ["日程を選ぶ","情報入力","予約完了"];
+  return `<div class="steps">${L.map((l,i)=>`<div class="stp ${n===i+1?'on':(n>i+1?'done':'')}"><div class="bar"></div><small>${i+1}. ${l}</small></div>`).join("")}</div>`;
+}
+
+function renderStep(){
+  const it = cur, fo = futureOpts(it);
+  const svc = it.kind==="service";
+  $("#shT").textContent = step===3 ? "お申し込み完了" : (svc ? "登録手続き" : "予約手続き");
+
+  if(step===1){
+    $("#shB").innerHTML = stepsHTML(1) + `
+      <div style="font-size:16px;font-weight:900;line-height:1.5;margin-bottom:14px">${esc(it.title)}</div>
+      ${it.caution?`<div class="warn"><b>⚠️ 予約時の必須ステップ</b>${it.caution}</div>`:""}
+      <div class="picks">
+        ${fo.map((o,i)=>`
+          <label class="pick"><input type="radio" name="pick" value="${i}" ${i===pickIdx?"checked":""} onchange="pickIdx=${i}">
+            <span class="pl"><b>${esc(o.label)}</b>
+              <span>${esc(o.date)}${o.time?" ｜ "+esc(o.time):""}<br>${esc(o.place)}${o.note?"<br>"+esc(o.note):""}</span>
+            </span></label>`).join("")}
+      </div>
+      <div class="notice" style="margin-top:16px">参加費・利用料はかかりません。<br>${svc?"このあと "+esc(it.name)+" の公式ページへ進みます。詳しい内容もそちらで確認できます。":"このあと主催企業のページへ進みます。詳しい内容の確認と日程の確定は、そちらで行えます。"}</div>`;
+    $("#shF").innerHTML = `<button class="btn btn-p btn-w" onclick="step=2;renderStep()">この内容で次へ</button>
+      <button class="btn btn-ghost" onclick="openDetail('${it.id}')">← 詳細を見る</button>`;
+  }
+
+  if(step===2){
+    const o = fo[pickIdx];
+    $("#shB").innerHTML = stepsHTML(2) + `
+      <div class="sum">
+        <div class="sr"><span class="k">申込内容</span><span class="v">${esc(it.title)}</span></div>
+        <div class="sr"><span class="k">選択</span><span class="v">${esc(o.label)}<br><span style="color:var(--ink3);font-size:12px">${esc(o.date)}${o.time?" ｜ "+esc(o.time):""}</span></span></div>
+      </div>
+      <div class="hint" style="margin:-6px 0 16px">下記はBizMatchが当日のご案内・サポートに使用します。<br>この後、主催企業の予約ページで日程確定を行います。</div>
+      <form id="f" novalidate>
+        <div class="fld" id="w-name"><label>お名前<span class="req">必須</span></label>
+          <input type="text" name="name" placeholder="山田 太郎" autocomplete="name"><div class="err">お名前を入力してください</div></div>
+        <div class="fld" id="w-kana"><label>フリガナ<span class="req">必須</span></label>
+          <input type="text" name="kana" placeholder="ヤマダ タロウ"><div class="err">フリガナを入力してください</div></div>
+        <div class="fld" id="w-grad"><label>卒業年度<span class="req">必須</span></label>
+          <div class="radios">${["27卒","28卒","29卒","その他"].map(g=>`<label><input type="radio" name="grad" value="${g}" ${it.grads.length===1&&it.grads[0]===g?"checked":""}><span>${g}</span></label>`).join("")}</div>
+          <div class="hint">対象：${it.grads.join("・")}</div>
+          <div class="err">卒業年度を選択してください</div></div>
+        <div class="fld" id="w-school"><label>大学・学部<span class="req">必須</span></label>
+          <input type="text" name="school" placeholder="〇〇大学 経済学部"><div class="err">大学・学部を入力してください</div></div>
+        <div class="fld"><label>文理<span class="opt">任意</span></label>
+          <div class="radios">${["文系","理系","その他"].map(m=>`<label><input type="radio" name="major" value="${m}"><span>${m}</span></label>`).join("")}</div></div>
+        <div class="fld" id="w-mail"><label>メールアドレス<span class="req">必須</span></label>
+          <input type="email" name="mail" placeholder="example@univ.ac.jp" autocomplete="email">
+          <div class="err">メールアドレスを正しく入力してください</div></div>
+        <div class="fld" id="w-tel"><label>電話番号<span class="opt">任意</span></label>
+          <input type="tel" name="tel" placeholder="09012345678" autocomplete="tel">
+          <div class="hint">主催企業から電話で連絡が入ることがあります。ご希望の方はご入力ください。</div>
+          <div class="err">電話番号の形式をご確認ください（ハイフンなし）</div></div>
+        <div class="fld"><label>希望勤務地<span class="opt">任意</span></label>
+          <select name="area"><option value="">選択してください</option>
+            ${["首都圏（一都三県）","大阪・関西","名古屋・東海","福岡・九州","北海道・東北","地元で就職したい","まだ決めていない"].map(a=>`<option>${a}</option>`).join("")}</select></div>
+        <div class="fld"><label>就活の進み具合<span class="opt">任意</span></label>
+          <select name="state"><option value="">選択してください</option>
+            ${["まだ何もしていない","情報収集を始めたところ","ESを書き始めている","選考を受けている","内定を持っている"].map(s=>`<option>${s}</option>`).join("")}</select></div>
+        <div class="fld"><label>ご質問・気になっていること<span class="opt">任意</span></label>
+          <textarea name="note" placeholder="例）ベンチャーと大手で迷っています"></textarea></div>
+        <div style="position:absolute;left:-9999px" aria-hidden="true">
+          <label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+        <div class="fld" id="w-agree"><label class="chk"><input type="checkbox" name="agree">
+          <span><a href="terms.html" target="_blank" rel="noopener">利用規約</a>・<a href="privacy.html" target="_blank" rel="noopener">プライバシーポリシー</a>に同意します<span class="req">必須</span></span></label>
+          <div class="hint">ご入力いただいた情報を、イベント主催企業を含む第三者に提供することはありません。</div>
+          <div class="err">同意が必要です</div></div>
+      </form>`;
+    $("#shF").innerHTML = `<button class="btn btn-p btn-w" id="sbmt" onclick="submitForm()">入力を完了して予約ページへ</button>
+      <button class="btn btn-ghost" onclick="step=1;renderStep()">← 日程を選び直す</button>`;
+  }
+
+  if(step===3){
+    const o = fo[pickIdx];
+    $("#shB").innerHTML = `
+      <div class="doneW">
+        <div class="dic">✓</div>
+        <h3>あと1ステップです！</h3>
+        <p>BizMatchへの登録が完了しました。<br>${svc?`続けて<b>${esc(it.name)}の登録</b>を<br>完了してください。`:"続けて主催企業の予約ページで<br><b>日程の確定</b>をお願いします。"}</p>
+        <div class="dcard">
+          <div class="sr" style="border:none;padding:5px 0"><span class="k">お申し込み</span><span class="v">${esc(it.title)}</span></div>
+          <div class="sr" style="border:none;padding:5px 0"><span class="k">選択</span><span class="v">${esc(o.label)}</span></div>
+          <div class="sr" style="border:none;padding:5px 0"><span class="k">${svc?"登録":"日程"}</span><span class="v">${esc(o.date)}${o.time?" "+esc(o.time):""}</span></div>
+          <div class="sr" style="border:none;padding:5px 0"><span class="k">受付番号</span><span class="v en">${esc(form.code)}</span></div>
+        </div>
+        ${it.caution?`<div class="warn" style="text-align:left"><b>⚠️ 予約ページでの必須操作</b>${it.caution}</div>`:
+          `<div class="notice" style="text-align:left">${svc?"このあと開くのは "+esc(it.name)+" の公式ページです。<b>サービスの詳しい内容もこちらで確認できます。</b>内容をご確認のうえ、ご自身の意思でご登録ください。":"このあと開くのは主催企業のページです。<b>参加企業やプログラムの詳細もこちらで確認できます。</b>内容を見てから予約を確定して構いません。"}</div>`}
+        <div class="notice" style="text-align:left">
+          <b>このあとの流れ</b><br>
+          ${svc?`・登録後、企業からのスカウトを待ちます<br>
+          ・退会や設定変更は ${esc(it.name)} 側で行えます<br>`:`・当日の詳細案内は主催企業から届きます<br>
+          ・日程変更・キャンセルは主催企業へ直接ご連絡ください<br>`}
+          ・就活の相談はBizMatch公式LINEでいつでもどうぞ
+        </div>
+      </div>`;
+    $("#shF").innerHTML = `
+      <a class="btn btn-p btn-w" href="${esc(o.url)}" target="_blank" rel="noopener" onclick="setTimeout(()=>document.getElementById('afterLine').style.display='flex',400)">${svc?"登録ページ（サービス詳細ページ）へ進む":"予約ページ（イベント詳細ページ）へ進む"}</a>
+      <a class="btn btn-line btn-w" id="afterLine" style="display:none;margin-top:8px" href="${LINE_URL}">LINEに戻って完了報告する</a>
+      <button class="btn btn-ghost" onclick="closeSheet();renderList()">ほかも見てみる</button>`;
+  }
+  $(".sbd").scrollTop=0;
+}
+
+function bad(id,on){ const el=document.getElementById(id); if(el) el.classList.toggle("bad",on); }
+
+async function submitForm(){
+  const f = document.getElementById("f");
+  const v = n => (f.elements[n]?.value||"").trim();
+  const r = n => { const el=f.querySelector(`input[name=${n}]:checked`); return el?el.value:""; };
+  const d = { name:v("name"), kana:v("kana"), grad:r("grad"), school:v("school"), major:r("major"),
+    mail:v("mail"), tel:v("tel").replace(/[-\s]/g,""), area:v("area"), state:v("state"), note:v("note"),
+    website:v("website"), agree:f.elements["agree"].checked };
+
+  const checks = [
+    ["w-name",!d.name],["w-kana",!d.kana],["w-grad",!d.grad],["w-school",!d.school],
+    ["w-mail",!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.mail)],
+    ["w-tel", d.tel !== "" && !/^0\d{9,10}$/.test(d.tel)],   // 任意項目。入力があるときだけ形式を確認
+    ["w-agree",!d.agree]
+  ];
+  checks.forEach(c=>bad(c[0],c[1]));
+  const firstBad = checks.find(c=>c[1]);
+  if(firstBad){ document.getElementById(firstBad[0]).scrollIntoView({behavior:"smooth",block:"center"}); return; }
+
+  const b = document.getElementById("sbmt");
+  b.disabled = true; b.textContent = "処理中…";
+  d.code = "BM-" + Date.now().toString(36).toUpperCase().slice(-6);
+  const o = futureOpts(cur)[pickIdx];
+  const payload = { itemId:cur.id, itemName:cur.name, itemTitle:cur.title, optionLabel:o.label,
+    optionDate:o.date, optionUrl:o.url, referrer:(cur.noReferrer ? "" : REFERRER), ...d,
+    submittedAt:new Date().toISOString(), pageUrl:location.href, ua:navigator.userAgent };
+
+  await sendLead(payload);
+  form = d; step = 3; renderStep();
+}
+
+/* 申込データを送信する。
+   - Content-Type を text/plain にすることで CORS のプリフライトを回避
+     （Apps Script 側は e.postData.contents でそのままJSONを受け取れます）
+   - 失敗しても学生の予約導線は止めず、sendBeacon で再送を試みます */
+async function sendLead(payload){
+  const body = JSON.stringify(payload);
+  if(!SUBMIT_ENDPOINT){
+    console.log("[DEMO] 送信先が未設定です。申込データ:", payload);
+    await new Promise(r=>setTimeout(r,500));
+    return;
+  }
+  try{
+    const res = await fetch(SUBMIT_ENDPOINT,{
+      method:"POST",
+      headers:{"Content-Type":"text/plain;charset=utf-8"},
+      body, redirect:"follow", keepalive:true
+    });
+    if(!res.ok) throw new Error("HTTP "+res.status);
+  }catch(err){
+    console.warn("送信に失敗したため sendBeacon で再送します:", err);
+    try{
+      navigator.sendBeacon(SUBMIT_ENDPOINT, new Blob([body],{type:"text/plain;charset=utf-8"}));
+    }catch(e2){
+      console.error("再送も失敗しました:", e2);
+    }
+  }
+}
+
+/* 共有されたURLで開かれたときの初期表示
+   #event など → そのタブ ／ #i/<id> → そのイベントの詳細を開いた状態 */
+function applyHash(initial){
+  const id = itemIdFromHash();
+  if(id && get(id) && !isEnded(get(id))){
+    tab = "all"; renderTabs(); renderList();
+    openDetail(id, true);                      // URLは書き換えずに開く
+    return;
+  }
+  tab = tabFromHash();
+  renderTabs(); renderList();
+  if(!initial) closeSheetSilently();
+}
+function closeSheetSilently(){
+  $("#ov").classList.remove("on"); $("#sheet").classList.remove("on");
+  document.body.style.overflow=""; cur = null;
+}
+window.addEventListener("popstate", () => applyHash(false));
+
+tab = tabFromHash();
+
+renderTabs(); renderList(); renderHeroBadge(); injectJsonLd();
 </script>
-
-
-<!-- ========================================
-     HERO / FIRST VIEW
-======================================== -->
-<section class="hero-gradient pt-16 pb-0 overflow-hidden">
-  <div class="max-w-6xl mx-auto px-4">
-    <div class="flex flex-col md:flex-row items-center gap-10">
-
-      <!-- テキスト -->
-      <div class="flex-1 text-center md:text-left">
-        <p class="fade-in-up inline-block text-xs font-bold tracking-widest uppercase text-orange-500 bg-orange-50 border border-orange-200 rounded-full px-3 py-1 mb-4">
-          学生アプリラボ Nobia
-        </p>
-        <h1 class="fade-in-up delay-100 text-4xl md:text-5xl font-black text-gray-900 leading-tight mb-4">
-          就活を、もっと<br class="hidden sm:block" />
-          <span style="color:#FF6B2C;">オープン</span>に。
-        </h1>
-        <p class="fade-in-up delay-200 text-gray-600 text-base md:text-lg leading-relaxed mb-8">
-          就活SNS「就トーク」と選考管理アプリ「シンプル就活」で、<br class="hidden md:block" />
-          地方の学生も、東京の学生と同じスタートラインへ。
-        </p>
-
-        <!-- アプリボタン群 -->
-        <div class="fade-in-up delay-300 flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
-          <a href="https://apps.apple.com/us/app/%E5%B0%B1%E3%83%88%E3%83%BC%E3%82%AF/id6776169096" target="_blank" rel="noopener" class="btn-primary orange-gradient text-white font-bold px-6 py-3.5 rounded-2xl text-sm shadow-lg flex items-center gap-2 justify-center">
-            <!-- アイコン: スマホ -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="7" y="2" width="10" height="20" rx="2"/><circle cx="12" cy="18" r="1"/></svg>
-            就トーク を入手
-          </a>
-          <a href="https://apps.apple.com/jp/app/%E3%82%B7%E3%83%B3%E3%83%97%E3%83%AB%E5%B0%B1%E6%B4%BB/id6776132527?itscg=30200&itsct=apps_box_link&mttnsubad=6776132527" target="_blank" rel="noopener" class="btn-primary bg-white border-2 border-teal-400 text-teal-600 font-bold px-6 py-3.5 rounded-2xl text-sm shadow flex items-center gap-2 justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
-            シンプル就活 を入手
-          </a>
-        </div>
-
-        <!-- 実績バッジ -->
-        <div class="mt-8 flex flex-wrap gap-3 justify-center md:justify-start">
-          <span class="bg-white rounded-full px-4 py-1.5 text-xs font-semibold text-gray-700 shadow-sm border border-gray-100">
-            📣 LINEコミュニティ 8,500人+
-          </span>
-          <span class="bg-white rounded-full px-4 py-1.5 text-xs font-semibold text-gray-700 shadow-sm border border-gray-100">
-            🎓 現役学生チーム開発
-          </span>
-        </div>
-      </div>
-
-      <!-- ヒーローイメージ（プレースホルダー） -->
-      <div class="flex-1 flex justify-center items-end gap-4 pb-0 float-anim">
-        <!-- 就トーク モックアップ -->
-        <div class="w-36 md:w-44 bg-white rounded-3xl shadow-2xl overflow-hidden border-4 border-orange-200" style="transform: rotate(-4deg);">
-          <div class="orange-gradient h-16 flex items-center justify-center">
-            <span class="text-white font-black text-lg">就トーク</span>
-          </div>
-          <div class="p-3 space-y-2">
-            <div class="bg-orange-50 rounded-xl p-2 text-xs text-gray-500">「〇〇社の面接通過しました！」</div>
-            <div class="bg-gray-50 rounded-xl p-2 text-xs text-gray-500">「ESのコツ教えてください…」</div>
-            <div class="bg-orange-50 rounded-xl p-2 text-xs text-gray-500">「上京してインターンきた！」</div>
-          </div>
-          <div class="h-6 bg-gradient-to-t from-white to-transparent"></div>
-        </div>
-        <!-- シンプル就活 モックアップ -->
-        <div class="w-36 md:w-44 bg-white rounded-3xl shadow-2xl overflow-hidden border-4 border-teal-200" style="transform: rotate(3deg); margin-bottom: 16px;">
-          <div class="green-gradient h-16 flex items-center justify-center">
-            <span class="text-white font-black text-base">シンプル就活</span>
-          </div>
-          <div class="p-3 space-y-2">
-            <div class="flex items-center gap-2 bg-teal-50 rounded-xl p-2">
-              <div class="w-2 h-2 rounded-full bg-teal-400 flex-shrink-0"></div>
-              <span class="text-xs text-gray-600">〇〇社 — 書類選考</span>
-            </div>
-            <div class="flex items-center gap-2 bg-teal-50 rounded-xl p-2">
-              <div class="w-2 h-2 rounded-full bg-orange-400 flex-shrink-0"></div>
-              <span class="text-xs text-gray-600">△△社 — 一次面接</span>
-            </div>
-            <div class="flex items-center gap-2 bg-gray-50 rounded-xl p-2">
-              <div class="w-2 h-2 rounded-full bg-gray-300 flex-shrink-0"></div>
-              <span class="text-xs text-gray-600">□□社 — 内定 🎉</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 波形区切り -->
-<div class="wave-divider" style="background: #ffe8d6;">
-  <svg viewBox="0 0 1440 48" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-    <path d="M0,48 C360,0 1080,0 1440,48 L1440,48 L0,48 Z" fill="#FFFAF5"/>
-  </svg>
-</div>
-
-
-<!-- ========================================
-     APPS SECTION
-======================================== -->
-<section id="apps" class="py-20 px-4">
-  <div class="max-w-6xl mx-auto">
-
-    <div class="text-center mb-14">
-      <p class="text-orange-500 text-sm font-bold tracking-widest uppercase mb-2">Our Apps</p>
-      <h2 class="text-3xl md:text-4xl font-black text-gray-900">2つのアプリで就活を変える</h2>
-      <p class="text-gray-500 mt-3 text-sm md:text-base">情報共有と選考管理。就活に必要なものをシンプルに。</p>
-    </div>
-
-    <!-- =========== 就トーク =========== -->
-    <div id="shutalk" class="mb-20 scroll-mt-20">
-      <!-- アプリ名バナー -->
-      <div class="flex items-center gap-4 mb-8">
-        <img src="shutalk-icon.png" alt="就トークアイコン" class="w-14 h-14 rounded-2xl shadow-lg flex-shrink-0 object-cover" />
-        <div>
-          <h3 class="text-2xl md:text-3xl font-black text-gray-900">就トーク</h3>
-          <p class="text-orange-500 text-sm font-semibold">就活生のための本音SNS</p>
-        </div>
-        <span class="ml-auto hidden sm:inline-block bg-orange-100 text-orange-700 text-xs font-bold px-3 py-1 rounded-full">✅ 配信中</span>
-      </div>
-
-      <!-- キャッチ -->
-      <div class="bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-100 rounded-2xl p-6 md:p-8 mb-8">
-        <p class="text-lg md:text-2xl font-bold text-gray-800 leading-relaxed">
-          「誰が今、どう動いているか」が<br class="hidden sm:block" />
-          リアルタイムでわかる就活SNS。
-        </p>
-        <p class="text-gray-500 text-sm mt-3">
-          OBの面接体験談、企業の内側の声、インターン参加者のリアルな感想——<br class="hidden md:block" />
-          東京にいる学生だけが持っていた「就活の空気感」を、どこにいる学生にも。
-        </p>
-      </div>
-
-      <!-- 3つの特徴 -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-
-        <div class="card-hover bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-          <div class="w-11 h-11 bg-orange-100 rounded-xl flex items-center justify-center mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2v-1"/>
-              <path d="M15 3H7a2 2 0 00-2 2v6a2 2 0 002 2h2l4 4V11h2a2 2 0 002-2V5a2 2 0 00-2-2z"/>
-            </svg>
-          </div>
-          <h4 class="font-bold text-gray-900 mb-2">就活に特化したSNSタイムライン</h4>
-          <p class="text-gray-500 text-sm leading-relaxed">「面接通過した」「ESが通らない」など、就活のリアルな動きが流れてくる。知らない誰かの一歩が、自分の地図になる。</p>
-        </div>
-
-        <div class="card-hover bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-          <div class="w-11 h-11 bg-amber-100 rounded-xl flex items-center justify-center mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="M12 2a14.5 14.5 0 010 20M2 12h20"/>
-            </svg>
-          </div>
-          <h4 class="font-bold text-gray-900 mb-2">業界・企業別のコミュニティ</h4>
-          <p class="text-gray-500 text-sm leading-relaxed">業界や志望企業でフィルタリング。自分に関係する情報だけを効率よくキャッチ。志望業界の先輩の声が届く。</p>
-        </div>
-
-        <div class="card-hover bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-          <div class="w-11 h-11 bg-rose-100 rounded-xl flex items-center justify-center mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
-              <circle cx="9" cy="7" r="4"/>
-              <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
-            </svg>
-          </div>
-          <h4 class="font-bold text-gray-900 mb-2">8,500人の先輩コミュニティ</h4>
-          <p class="text-gray-500 text-sm leading-relaxed">LINEオープンチャットで実証済み。8,500人以上の就活生が集まり、活発な情報交換が続いてきた実績をアプリへ。</p>
-        </div>
-      </div>
-
-      <!-- ダウンロードボタン -->
-      <div class="mt-8 flex flex-col sm:flex-row gap-3">
-        <a href="https://apps.apple.com/us/app/%E5%B0%B1%E3%83%88%E3%83%BC%E3%82%AF/id6776169096" target="_blank" rel="noopener" class="btn-primary orange-gradient text-white font-bold px-8 py-3.5 rounded-2xl text-sm shadow-lg flex items-center gap-2 justify-center w-full sm:w-auto">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-          App Store でダウンロード（無料）
-        </a>
-      </div>
-    </div>
-
-    <!-- 区切り線 -->
-    <div class="w-full border-t-2 border-dashed border-gray-100 mb-16"></div>
-
-    <!-- =========== シンプル就活 =========== -->
-    <div id="simpleshukatsu" class="scroll-mt-20">
-      <!-- アプリ名バナー -->
-      <div class="flex items-center gap-4 mb-8">
-        <img src="simpleshukatsu-icon.png" alt="シンプル就活アイコン" class="w-14 h-14 rounded-2xl shadow-lg flex-shrink-0 object-cover" />
-        <div>
-          <h3 class="text-2xl md:text-3xl font-black text-gray-900">シンプル就活</h3>
-          <p class="text-teal-500 text-sm font-semibold">就活の選考、一画面で管理</p>
-        </div>
-        <span class="ml-auto hidden sm:inline-block bg-teal-100 text-teal-700 text-xs font-bold px-3 py-1 rounded-full">✅ 配信中</span>
-      </div>
-
-      <!-- キャッチ -->
-      <div class="bg-gradient-to-r from-teal-50 to-cyan-50 border border-teal-100 rounded-2xl p-6 md:p-8 mb-8">
-        <p class="text-lg md:text-2xl font-bold text-gray-800 leading-relaxed">
-          複数企業の選考を、迷わず・もれなく・<br class="hidden sm:block" />
-          シンプルに管理。
-        </p>
-        <p class="text-gray-500 text-sm mt-3">
-          エントリー状況、面接日程、選考結果——ごちゃごちゃしがちな就活情報を、<br class="hidden md:block" />
-          スッキリ整理できるアプリ。
-        </p>
-      </div>
-
-      <!-- 3つの特徴 -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-
-        <div class="card-hover bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-          <div class="w-11 h-11 bg-teal-100 rounded-xl flex items-center justify-center mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
-              <path d="M9 12h6M9 16h4"/>
-            </svg>
-          </div>
-          <h4 class="font-bold text-gray-900 mb-2">選考ステータスをひと目で把握</h4>
-          <p class="text-gray-500 text-sm leading-relaxed">書類選考・一次面接・内定など、各企業の選考ステージをカード形式で一覧表示。受けている企業が多くなっても混乱しない。</p>
-        </div>
-
-        <div class="card-hover bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-          <div class="w-11 h-11 bg-cyan-100 rounded-xl flex items-center justify-center mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-cyan-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-              <line x1="16" y1="2" x2="16" y2="6"/>
-              <line x1="8" y1="2" x2="8" y2="6"/>
-              <line x1="3" y1="10" x2="21" y2="10"/>
-            </svg>
-          </div>
-          <h4 class="font-bold text-gray-900 mb-2">締切・面接日程のカレンダー管理</h4>
-          <p class="text-gray-500 text-sm leading-relaxed">ESの締切、面接日程をカレンダーに統合。「あの締切、いつだっけ？」をなくす。大事な予定を見逃さない。</p>
-        </div>
-
-        <div class="card-hover bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-          <div class="w-11 h-11 bg-green-100 rounded-xl flex items-center justify-center mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/>
-              <path d="M12 6v6l4 2"/>
-            </svg>
-          </div>
-          <h4 class="font-bold text-gray-900 mb-2">シンプルなUI、迷わない操作</h4>
-          <p class="text-gray-500 text-sm leading-relaxed">余計な機能を削ぎ落とし、就活生が本当に必要な管理機能だけを搭載。使い方を覚えるより、就活に集中できる。</p>
-        </div>
-      </div>
-
-      <!-- ダウンロードボタン -->
-      <div class="mt-8 flex flex-col sm:flex-row gap-3">
-        <a href="https://apps.apple.com/jp/app/%E3%82%B7%E3%83%B3%E3%83%97%E3%83%AB%E5%B0%B1%E6%B4%BB/id6776132527?itscg=30200&itsct=apps_box_link&mttnsubad=6776132527" target="_blank" rel="noopener" class="btn-primary green-gradient text-white font-bold px-8 py-3.5 rounded-2xl text-sm shadow-lg flex items-center gap-2 justify-center w-full sm:w-auto">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-          App Store でダウンロード（無料）
-        </a>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- BizMatch バナー -->
-<section class="py-10 px-4 bg-white">
-  <div class="max-w-6xl mx-auto">
-    <a href="https://bizmatch.nobia-lab.com/" target="_blank" rel="noopener"
-       class="flex flex-col sm:flex-row items-center gap-5 bg-gradient-to-r from-gray-900 to-blue-900 rounded-2xl px-7 py-6 shadow-lg group hover:opacity-95 transition-opacity">
-      <img src="bizmatch-icon.png" alt="BizMatch" class="w-14 h-14 rounded-xl flex-shrink-0 object-cover shadow" />
-      <div class="flex-1 text-center sm:text-left">
-        <p class="text-blue-300 text-xs font-bold tracking-widest uppercase mb-1">Just Launched</p>
-        <h3 class="text-white font-black text-lg mb-1">就活イベントまとめサイト「BizMatch」</h3>
-        <p class="text-gray-300 text-sm">インターン・就活イベント情報をまとめて検索。Nobiaが運営する就活生向けイベント情報サイト。</p>
-      </div>
-      <span class="flex-shrink-0 text-white text-sm font-bold bg-white/10 border border-white/20 px-5 py-2.5 rounded-xl group-hover:bg-white/20 transition-colors">
-        サイトを見る →
-      </span>
-    </a>
-  </div>
-</section>
-
-
-<!-- 波形区切り (オレンジ背景へ) -->
-<div class="wave-divider bg-white">
-  <svg viewBox="0 0 1440 56" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-    <path d="M0,0 C400,56 1040,56 1440,0 L1440,56 L0,56 Z" fill="#fff7ee"/>
-  </svg>
-</div>
-
-
-<!-- ========================================
-     DEVELOPMENT STORY
-======================================== -->
-<section id="story" class="py-20 px-4 scroll-mt-20" style="background: #fff7ee;">
-  <div class="max-w-4xl mx-auto">
-
-    <div class="text-center mb-12">
-      <p class="text-orange-500 text-sm font-bold tracking-widest uppercase mb-2">Our Story</p>
-      <h2 class="text-3xl md:text-4xl font-black text-gray-900">なぜ、このアプリを作ったのか</h2>
-    </div>
-
-    <div class="bg-white rounded-3xl shadow-sm p-8 md:p-12 border border-orange-100">
-
-      <!-- エピソード -->
-      <div class="flex gap-4 mb-6">
-        <div class="w-1 rounded-full bg-orange-300 flex-shrink-0"></div>
-        <p class="text-2xl md:text-3xl font-black text-gray-800 leading-snug">
-          「なんで、地方にいるだけで<br />不利なんだろう」
-        </p>
-      </div>
-
-      <div class="space-y-4 text-gray-600 leading-relaxed text-sm md:text-base">
-        <p>大学3年の秋、代表の河野敦希は京都で就活を始めた。大分で生まれ育ち、東京のネットワークもない。地元の先輩も、関東の企業に詳しい友人も、ほとんどいなかった。</p>
-
-        <p>あるとき、志望企業の選考で東京の学生と同じグループになった。話している内容の密度が、まるで違う。彼らはその会社の現場を、社員の言葉を、自分の目で確かめていた。こちらはWebサイトとパンフレットしか知らなかった。</p>
-
-        <p class="font-semibold text-gray-700">「情報の差じゃなくて、人とのつながりの差だ」</p>
-
-        <p>そこから考え続けた。地方にいても、お金をかけなくても、<strong>「就活中の誰かがどう動いているか」がリアルタイムで見える</strong>SNSがあれば——。OBが面接でどんな質問をされたか。先輩が内定後に感じた後悔。インターン参加者のリアルな感想。そういう「生きた声」が流れる場所があれば、地方の学生も東京の学生と同じスタートラインに立てる。</p>
-
-        <p>まずLINEオープンチャットでMVPを立ち上げると、<strong>約8,500人の就活生</strong>が集まり、情報共有が活発に続いた。「このニーズは本物だ」——その確信をもとに、就トークとシンプル就活を開発・リリースした。</p>
-      </div>
-
-      <!-- 地域バッジ -->
-      <div class="mt-8 flex flex-wrap gap-2">
-        <span class="bg-orange-50 border border-orange-200 text-orange-700 text-xs font-semibold px-3 py-1.5 rounded-full">📍 大分出身</span>
-        <span class="bg-orange-50 border border-orange-200 text-orange-700 text-xs font-semibold px-3 py-1.5 rounded-full">🎓 京都の大学で就活</span>
-        <span class="bg-orange-50 border border-orange-200 text-orange-700 text-xs font-semibold px-3 py-1.5 rounded-full">💬 LINEコミュニティ 8,500人+</span>
-        <span class="bg-orange-50 border border-orange-200 text-orange-700 text-xs font-semibold px-3 py-1.5 rounded-full">🏗️ アプリ開発中</span>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- ========================================
-     TEAM SECTION
-======================================== -->
-<section id="team" class="py-20 px-4 bg-white scroll-mt-20">
-  <div class="max-w-6xl mx-auto">
-
-    <div class="text-center mb-14">
-      <p class="text-orange-500 text-sm font-bold tracking-widest uppercase mb-2">About Us</p>
-      <h2 class="text-3xl md:text-4xl font-black text-gray-900">運営団体について</h2>
-    </div>
-
-    <!-- 団体カード -->
-    <div class="max-w-3xl mx-auto">
-      <div class="bg-gradient-to-br from-orange-50 to-amber-50 rounded-3xl p-8 md:p-10 border border-orange-100 shadow-sm mb-8">
-
-        <div class="flex items-center gap-4 mb-6">
-          <div class="w-16 h-16 orange-gradient rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0">
-            <span class="text-white font-black text-2xl">N</span>
-          </div>
-          <div>
-            <h3 class="text-xl md:text-2xl font-black text-gray-900">学生アプリラボ Nobia</h3>
-            <p class="text-orange-500 text-sm font-semibold mt-0.5">ノビア / Student App Lab</p>
-          </div>
-        </div>
-
-        <p class="text-gray-600 leading-relaxed text-sm md:text-base mb-6">
-          Nobiaは、<strong>現役学生とエンジニアによるプロジェクトチーム</strong>です。「学生の課題は、学生が一番よく知っている」という信念のもと、実際に就活を経験した学生とプロのエンジニアが協力して、就活生のリアルな悩みに応えるアプリを開発しています。
-        </p>
-
-        <!-- メンバー構成 -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div class="bg-white rounded-xl p-4 border border-orange-100">
-            <div class="flex items-center gap-3 mb-2">
-              <div class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 14c4 0 8 2 8 4v2H4v-2c0-2 4-4 8-4z"/><circle cx="12" cy="7" r="4"/></svg>
-              </div>
-              <span class="font-bold text-sm text-gray-800">学生メンバー</span>
-            </div>
-            <p class="text-xs text-gray-500 leading-relaxed">実際に就活を経験した、または現在進行形で就活中の現役大学生。ユーザーの視点でプロダクトを磨く。</p>
-          </div>
-          <div class="bg-white rounded-xl p-4 border border-orange-100">
-            <div class="flex items-center gap-3 mb-2">
-              <div class="w-8 h-8 bg-teal-100 rounded-full flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
-              </div>
-              <span class="font-bold text-sm text-gray-800">エンジニアメンバー</span>
-            </div>
-            <p class="text-xs text-gray-500 leading-relaxed">プロのモバイル・バックエンドエンジニア。品質の高いアプリ開発を技術面からサポートする。</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 実績タイムライン -->
-      <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 md:p-8">
-        <h4 class="font-bold text-gray-800 mb-5">これまでの歩み</h4>
-        <div class="space-y-4">
-          <div class="flex gap-4">
-            <div class="flex flex-col items-center">
-              <div class="w-3 h-3 rounded-full bg-orange-400 mt-1 flex-shrink-0"></div>
-              <div class="flex-1 w-0.5 bg-gray-100 my-1"></div>
-            </div>
-            <div class="pb-2">
-              <span class="text-xs font-bold text-orange-500">2023年〜</span>
-              <p class="text-sm text-gray-700 font-semibold">LINEオープンチャットでコミュニティMVP開始</p>
-              <p class="text-xs text-gray-400">就活生が自由に発言できるコミュニティを運営。約8,500人が参加。</p>
-            </div>
-          </div>
-          <div class="flex gap-4">
-            <div class="flex flex-col items-center">
-              <div class="w-3 h-3 rounded-full bg-orange-500 mt-1 flex-shrink-0 ring-4 ring-orange-100"></div>
-              <div class="flex-1 w-0.5 bg-transparent"></div>
-            </div>
-            <div class="pb-2">
-              <span class="text-xs font-bold text-orange-600">2026年7月</span>
-              <p class="text-sm text-gray-700 font-semibold">就トーク・シンプル就活 iOS版リリース</p>
-              <p class="text-xs text-gray-400">就活SNS「就トーク」と選考管理アプリ「シンプル就活」をApp Storeにてリリース。</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- ========================================
-     CONTACT SECTION
-======================================== -->
-<section id="contact" class="py-20 px-4 scroll-mt-20" style="background: #fff7ee;">
-  <div class="max-w-2xl mx-auto text-center">
-
-    <p class="text-orange-500 text-sm font-bold tracking-widest uppercase mb-2">Contact</p>
-    <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-4">お問い合わせ</h2>
-    <p class="text-gray-500 text-sm md:text-base mb-8 leading-relaxed">
-      取材・メディア掲載・パートナーシップ等のお問い合わせは、<br class="hidden sm:block" />
-      以下のメールアドレスまでご連絡ください。
-    </p>
-
-    <a href="mailto:nobia.lab.official@gmail.com" class="inline-flex items-center gap-3 bg-white border-2 border-orange-200 rounded-2xl px-8 py-4 text-orange-600 font-bold text-sm md:text-base shadow-sm hover:bg-orange-50 transition-colors group">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-      </svg>
-      nobia.lab.official@gmail.com
-    </a>
-
-
-
-  </div>
-</section>
-
-
-<!-- ========================================
-     APP STORE BADGES
-======================================== -->
-<section class="py-14 px-4 bg-white text-center">
-  <div class="max-w-2xl mx-auto">
-    <p class="text-orange-500 text-xs font-bold tracking-widest uppercase mb-2">Download</p>
-    <h2 class="text-2xl md:text-3xl font-black text-gray-900 mb-2">今すぐダウンロード</h2>
-    <p class="text-gray-500 text-sm mb-8">就トーク・シンプル就活、どちらも無料でお使いいただけます。</p>
-
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-8">
-
-      <!-- 就トーク -->
-      <div class="flex flex-col items-center gap-3">
-        <div class="flex items-center gap-2">
-          <img src="shutalk-icon.png" alt="就トーク" class="w-10 h-10 rounded-xl object-cover shadow" />
-          <span class="font-bold text-gray-800 text-sm">就トーク</span>
-        </div>
-        <a href="https://apps.apple.com/us/app/%E5%B0%B1%E3%83%88%E3%83%BC%E3%82%AF/id6776169096?itscg=30200&itsct=apps_box_badge&mttnsubad=6776169096" style="display: inline-block;">
-          <img src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/ja-jp?releaseDate=1783468800" alt="App Storeでダウンロード" style="width: 224px; height: 82px; vertical-align: middle; object-fit: contain;" />
-        </a>
-      </div>
-
-      <!-- シンプル就活 -->
-      <div class="flex flex-col items-center gap-3">
-        <div class="flex items-center gap-2">
-          <img src="simpleshukatsu-icon.png" alt="シンプル就活" class="w-10 h-10 rounded-xl object-cover shadow" />
-          <span class="font-bold text-gray-800 text-sm">シンプル就活</span>
-        </div>
-        <a href="https://apps.apple.com/us/app/%E3%82%B7%E3%83%B3%E3%83%97%E3%83%AB%E5%B0%B1%E6%B4%BB/id6776132527?itscg=30200&itsct=apps_box_badge&mttnsubad=6776132527" style="display: inline-block;">
-          <img src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/ja-jp?releaseDate=1782864000" alt="App Storeでダウンロード" style="width: 224px; height: 82px; vertical-align: middle; object-fit: contain;" />
-        </a>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- ========================================
-     FOOTER
-======================================== -->
-<footer class="bg-gray-900 text-gray-400 py-10 px-4">
-  <div class="max-w-6xl mx-auto">
-    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-
-      <!-- ロゴ -->
-      <div class="flex items-center gap-2">
-        <div class="w-8 h-8 orange-gradient rounded-xl flex items-center justify-center">
-          <span class="text-white font-black text-sm">N</span>
-        </div>
-        <span class="text-white font-black text-lg">Nobia</span>
-        <span class="text-gray-500 text-xs ml-1">学生アプリラボ</span>
-      </div>
-
-      <!-- リンク -->
-      <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs">
-        <a href="#apps" class="hover:text-white transition-colors">アプリ紹介</a>
-        <a href="#story" class="hover:text-white transition-colors">開発ストーリー</a>
-        <a href="#team" class="hover:text-white transition-colors">チーム</a>
-        <a href="#contact" class="hover:text-white transition-colors">お問い合わせ</a>
-        <a href="business.html" class="hover:text-white transition-colors">事業内容</a>
-        <a href="press.html" class="hover:text-white transition-colors">プレスルーム</a>
-<a href="privacy.html" class="hover:text-white transition-colors">プライバシーポリシー</a>
-        <a href="terms.html" class="hover:text-white transition-colors">利用規約</a>
-      </nav>
-
-      <!-- コピーライト -->
-      <p class="text-xs text-gray-500">© 2026 学生アプリラボ Nobia. All rights reserved.</p>
-    </div>
-  </div>
-</footer>
-
 </body>
 </html>
