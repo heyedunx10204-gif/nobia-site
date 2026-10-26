@@ -256,6 +256,10 @@
         <div class="flex flex-col items-center md:items-end gap-3">
           <a href="mailto:nobia.lab.official@gmail.com?subject=%E3%80%90%E5%8F%97%E8%A8%97%E3%83%BB%E4%BB%A3%E8%A1%8C%E3%81%AE%E3%81%94%E7%9B%B8%E8%AB%87%E3%80%91Nobia%E5%85%AC%E5%BC%8F%E3%82%B5%E3%82%A4%E3%83%88%E3%82%88%E3%82%8A&body=%E4%BC%9A%E7%A4%BE%E5%90%8D%EF%BC%9A%0A%E3%81%94%E6%8B%85%E5%BD%93%E8%80%85%E5%90%8D%EF%BC%9A%0A%E3%81%94%E7%9B%B8%E8%AB%87%E3%81%97%E3%81%9F%E3%81%84%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%EF%BC%88%E5%BA%83%E5%91%8A%EF%BC%8F%E5%AD%A6%E7%94%9F%E9%80%81%E5%AE%A2%EF%BC%8F%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA%EF%BC%8FHP%E3%83%BB%E6%8E%A1%E7%94%A8%E3%83%9A%E3%83%BC%E3%82%B8%EF%BC%8FSNS%E9%81%8B%E7%94%A8%EF%BC%8F%E3%82%B7%E3%83%A7%E3%83%BC%E3%83%88%E5%8B%95%E7%94%BB%EF%BC%89%EF%BC%9A%0A%0A%E3%81%94%E7%9B%B8%E8%AB%87%E5%86%85%E5%AE%B9%EF%BC%9A%0A" class="btn-primary inline-flex items-center justify-center gap-2 bg-white text-orange-600 font-bold px-7 py-4 rounded-full shadow-lg text-sm md:text-base">
             <i data-lucide="mail" class="w-5 h-5"></i>メールで問い合わせる</a>
+          <div class="flex items-center gap-4 text-xs text-white/90">
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=nobia.lab.official@gmail.com&su=%E3%80%90%E5%8F%97%E8%A8%97%E3%83%BB%E4%BB%A3%E8%A1%8C%E3%81%AE%E3%81%94%E7%9B%B8%E8%AB%87%E3%80%91Nobia%E5%85%AC%E5%BC%8F%E3%82%B5%E3%82%A4%E3%83%88%E3%82%88%E3%82%8A&body=%E4%BC%9A%E7%A4%BE%E5%90%8D%EF%BC%9A%0A%E3%81%94%E6%8B%85%E5%BD%93%E8%80%85%E5%90%8D%EF%BC%9A%0A%E3%81%94%E7%9B%B8%E8%AB%87%E3%81%97%E3%81%9F%E3%81%84%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%EF%BC%88%E5%BA%83%E5%91%8A%EF%BC%8F%E5%AD%A6%E7%94%9F%E9%80%81%E5%AE%A2%EF%BC%8F%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA%EF%BC%8FHP%E3%83%BB%E6%8E%A1%E7%94%A8%E3%83%9A%E3%83%BC%E3%82%B8%EF%BC%8FSNS%E9%81%8B%E7%94%A8%EF%BC%8F%E3%82%B7%E3%83%A7%E3%83%BC%E3%83%88%E5%8B%95%E7%94%BB%EF%BC%89%EF%BC%9A%0A%0A%E3%81%94%E7%9B%B8%E8%AB%87%E5%86%85%E5%AE%B9%EF%BC%9A%0A" target="_blank" rel="noopener" class="inline-flex items-center gap-1 hover:text-white underline-offset-4 hover:underline"><i data-lucide="external-link" class="w-3.5 h-3.5"></i>Gmailで作成</a>
+            <button type="button" id="copyMail" class="inline-flex items-center gap-1 hover:text-white underline-offset-4 hover:underline"><i data-lucide="copy" class="w-3.5 h-3.5"></i><span>アドレスをコピー</span></button>
+          </div>
           <p class="text-xs text-white/80">nobia.lab.official@gmail.com</p>
           
         </div>
@@ -321,6 +325,14 @@
   </div>
 </footer>
 
-<script>lucide.createIcons();</script>
+<script>
+  lucide.createIcons();
+  document.getElementById('copyMail')?.addEventListener('click', async (e) => {
+    const label = e.currentTarget.querySelector('span');
+    try { await navigator.clipboard.writeText('nobia.lab.official@gmail.com'); label.textContent = 'コピーしました'; }
+    catch { label.textContent = 'nobia.lab.official@gmail.com'; }
+    setTimeout(() => { label.textContent = 'アドレスをコピー'; }, 2000);
+  });
+</script>
 </body>
 </html>

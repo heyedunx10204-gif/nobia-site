@@ -263,6 +263,10 @@
         <div class="flex flex-col items-center md:items-end gap-3">
           <a href="mailto:nobia.lab.official@gmail.com?subject=%E3%80%90BizMatch%20%E6%8E%B2%E8%BC%89%E3%83%BB%E6%8F%90%E6%90%BA%E3%81%AE%E3%81%94%E7%9B%B8%E8%AB%87%E3%80%91&body=%E4%BC%9A%E7%A4%BE%E5%90%8D%EF%BC%9A%0A%E3%81%94%E6%8B%85%E5%BD%93%E8%80%85%E5%90%8D%EF%BC%9A%0A%E3%81%94%E7%9B%B8%E8%AB%87%E5%86%85%E5%AE%B9%EF%BC%88%E6%8E%B2%E8%BC%89%E3%81%97%E3%81%9F%E3%81%84%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%83%BB%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%AA%E3%81%A9%EF%BC%89%EF%BC%9A%0A" class="btn-primary inline-flex items-center justify-center gap-2 bg-white text-orange-600 font-bold px-7 py-4 rounded-full shadow-lg text-sm md:text-base">
             <i data-lucide="mail" class="w-5 h-5"></i>メールで問い合わせる</a>
+          <div class="flex items-center gap-4 text-xs text-white/90">
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=nobia.lab.official@gmail.com&su=%E3%80%90BizMatch%20%E6%8E%B2%E8%BC%89%E3%83%BB%E6%8F%90%E6%90%BA%E3%81%AE%E3%81%94%E7%9B%B8%E8%AB%87%E3%80%91&body=%E4%BC%9A%E7%A4%BE%E5%90%8D%EF%BC%9A%0A%E3%81%94%E6%8B%85%E5%BD%93%E8%80%85%E5%90%8D%EF%BC%9A%0A%E3%81%94%E7%9B%B8%E8%AB%87%E5%86%85%E5%AE%B9%EF%BC%88%E6%8E%B2%E8%BC%89%E3%81%97%E3%81%9F%E3%81%84%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%83%BB%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%AA%E3%81%A9%EF%BC%89%EF%BC%9A%0A" target="_blank" rel="noopener" class="inline-flex items-center gap-1 hover:text-white underline-offset-4 hover:underline"><i data-lucide="external-link" class="w-3.5 h-3.5"></i>Gmailで作成</a>
+            <button type="button" id="copyMail" class="inline-flex items-center gap-1 hover:text-white underline-offset-4 hover:underline"><i data-lucide="copy" class="w-3.5 h-3.5"></i><span>アドレスをコピー</span></button>
+          </div>
           <p class="text-xs text-white/80">nobia.lab.official@gmail.com</p>
           <a href="/service" class="text-xs text-white/90 hover:text-white underline underline-offset-4">受託・代行事業も見る</a>
         </div>
@@ -328,6 +332,14 @@
   </div>
 </footer>
 
-<script>lucide.createIcons();</script>
+<script>
+  lucide.createIcons();
+  document.getElementById('copyMail')?.addEventListener('click', async (e) => {
+    const label = e.currentTarget.querySelector('span');
+    try { await navigator.clipboard.writeText('nobia.lab.official@gmail.com'); label.textContent = 'コピーしました'; }
+    catch { label.textContent = 'nobia.lab.official@gmail.com'; }
+    setTimeout(() => { label.textContent = 'アドレスをコピー'; }, 2000);
+  });
+</script>
 </body>
 </html>
