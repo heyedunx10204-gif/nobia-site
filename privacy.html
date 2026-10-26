@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>プライバシーポリシー | 学生アプリラボ Nobia</title>
   <meta name="description" content="学生アプリラボNobiaのプライバシーポリシー。就活SNS「就トーク」・選考管理アプリ「シンプル就活」における個人情報の取り扱いについて定めています。" />
-  <link rel="canonical" href="https://nobia-lab.com/privacy.html" />
+  <link rel="canonical" href="https://nobia-lab.com/privacy" />
 
   <!-- OGP -->
   <meta property="og:title" content="プライバシーポリシー | Nobia" />
   <meta property="og:description" content="学生アプリラボNobiaのプライバシーポリシーです。" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://nobia-lab.com/privacy.html" />
+  <meta property="og:url" content="https://nobia-lab.com/privacy" />
   <meta property="og:site_name" content="学生アプリラボ Nobia" />
   <meta property="og:locale" content="ja_JP" />
 
@@ -21,6 +21,7 @@
   <meta name="twitter:description" content="学生アプリラボNobiaのプライバシーポリシーです。" />
 
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <style>
     body {
       background-color: #FFFAF5;
@@ -39,7 +40,7 @@
 <!-- ヘッダー -->
 <header class="bg-white shadow-sm sticky top-0 z-50">
   <div class="max-w-3xl mx-auto px-4 py-3 flex items-center gap-3">
-    <a href="index.html" class="flex items-center gap-2">
+    <a href="/" class="flex items-center gap-2">
       <div class="w-8 h-8 orange-gradient rounded-xl flex items-center justify-center shadow">
         <span class="text-white font-black text-sm">N</span>
       </div>
@@ -132,12 +133,10 @@
     </div>
 
     <div class="mt-10 pt-6 border-t border-gray-100 flex justify-between items-center">
-      <a href="index.html" class="text-sm text-orange-500 hover:underline flex items-center gap-1">
-        ← トップページへ戻る
+      <a href="/" class="text-sm text-orange-500 hover:underline flex items-center gap-1"><i data-lucide="arrow-left" class="w-4 h-4"></i> トップページへ戻る
       </a>
-      <a href="terms.html" class="text-sm text-gray-500 hover:text-orange-500 hover:underline">
-        利用規約を読む →
-      </a>
+      <a href="/terms" class="text-sm text-gray-500 hover:text-orange-500 hover:underline inline-flex items-center gap-1">
+        利用規約を読む <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
     </div>
 
   </div>
@@ -148,5 +147,6 @@
   © 2026 学生アプリラボ Nobia. All rights reserved.
 </footer>
 
+<script>lucide.createIcons();</script>
 </body>
 </html>
