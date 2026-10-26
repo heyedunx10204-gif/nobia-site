@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BizMatch（ビズマッチ）｜就活イベント・エージェント検索ナビ | 学生アプリラボ Nobia</title>
+  <meta name="description" content="就活イベント・キャリア面談・就活サービスを、日程・場所・参加条件で比べて選べる大学生向けの予約サイト「BizMatch（ビズマッチ）」。学生アプリラボNobiaが運営しています。学生は無料。" />
+  <link rel="canonical" href="https://nobia-lab.com/bizmatch" />
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <!-- OGP -->
+  <meta property="og:title" content="BizMatch（ビズマッチ）｜就活イベント・エージェント検索ナビ" />
+  <meta property="og:description" content="就活イベント・キャリア面談・就活サービスを、日程・場所・参加条件で比べて選べる大学生向けの予約サイト「BizMatch（ビズマッチ）」。学生アプリラボNobiaが運営しています。学生は無料。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://nobia-lab.com/bizmatch" />
+  <meta property="og:site_name" content="学生アプリラボ Nobia" />
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:image" content="https://nobia-lab.com/ogp.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="BizMatch（ビズマッチ）｜就活イベント・エージェント検索ナビ" />
+  <meta name="twitter:description" content="就活イベント・キャリア面談・就活サービスを、日程・場所・参加条件で比べて選べる大学生向けの予約サイト「BizMatch（ビズマッチ）」。学生アプリラボNobiaが運営しています。学生は無料。" />
+  <meta name="twitter:image" content="https://nobia-lab.com/ogp.png" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+    {"@type":"ListItem","position":1,"name":"Nobia","item":"https://nobia-lab.com/"},
+    {"@type":"ListItem","position":2,"name":"BizMatch","item":"https://nobia-lab.com/bizmatch"}]}
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style>
+    [data-lucide] { display: inline-block; vertical-align: middle; }
+    html { scroll-behavior: smooth; }
+    body { background-color: #FFFAF5; font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', sans-serif; color: #1f2937; }
+    .orange-gradient { background: linear-gradient(135deg, #FF6B2C, #FF8F5A); }
+    .pink-gradient { background: linear-gradient(135deg, #E1306C, #F77737); }
+    .bm-gradient { background: linear-gradient(135deg, #0a0b29, #3633CC); }
+    .btn-primary { transition: transform 0.15s, box-shadow 0.2s; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,107,44,0.35); }
+    .card-hover { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(17,24,39,0.10); }
+    a:focus-visible, button:focus-visible { outline: 2px solid #FF6B2C; outline-offset: 2px; }
+    #mobile-menu { display: none; }
+    #mobile-menu.open { display: block; }
+    .en-label { font-family: 'Helvetica Neue', Arial, sans-serif; font-weight: 800; font-size: 0.95rem; letter-spacing: 0.04em; color: #FF6B2C; }
+    .num { font-family: 'Helvetica Neue', Arial, sans-serif; font-weight: 900; letter-spacing: -0.04em; line-height: 1; }
+    .page-hero { position: relative; overflow: hidden; background: #FFF7EE; }
+    .page-hero::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(rgba(255,107,44,0.16) 1px, transparent 1px); background-size: 22px 22px; -webkit-mask-image: linear-gradient(180deg,#000,transparent 90%); mask-image: linear-gradient(180deg,#000,transparent 90%); }
+    .blob { position: absolute; border-radius: 9999px; filter: blur(60px); opacity: .5; pointer-events: none; }
+    .prose-pr h2 { font-size: 1.15rem; font-weight: 900; color: #111827; margin: 2.5rem 0 0.9rem; }
+    .prose-pr p { color: #4b5563; line-height: 2; margin: 0 0 1rem; font-size: 0.95rem; }
+    .prose-pr ol, .prose-pr ul { margin: 0 0 1rem; }
+  </style>
+</head>
+<body>
+
+<header class="sticky top-0 z-50 bg-white shadow-sm">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-2 group">
+      <div class="w-9 h-9 orange-gradient rounded-xl flex items-center justify-center shadow">
+        <span class="text-white font-black text-base leading-none">N</span>
+      </div>
+      <span class="text-xl font-black" style="color: #FF6B2C;">Nobia</span>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
+      <a href="/#business" class="hover:text-orange-500 transition-colors">事業内容</a>
+      <a href="/apps" class="hover:text-orange-500 transition-colors">アプリ紹介</a>
+      <a href="/press" class="hover:text-orange-500 transition-colors">プレスルーム</a>
+      <a href="/#contact" class="hover:text-orange-500 transition-colors">お問い合わせ</a>
+    </nav>
+
+    <a href="/apps#download" class="hidden md:inline-flex items-center gap-2 btn-primary orange-gradient text-white text-sm font-bold px-5 py-2.5 rounded-full shadow">
+      アプリを入手 <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+
+    <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="メニュー">
+      <span class="block w-6 h-0.5 bg-gray-700"></span>
+      <span class="block w-6 h-0.5 bg-gray-700"></span>
+      <span class="block w-6 h-0.5 bg-gray-700"></span>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="md:hidden bg-white border-t border-gray-100 px-4 py-4 space-y-3 text-sm font-medium text-gray-700">
+    <a href="/#business" class="block hover:text-orange-500">事業内容</a>
+    <a href="/apps" class="block hover:text-orange-500">アプリ紹介</a>
+    <a href="/press" class="block hover:text-orange-500">プレスルーム</a>
+    <a href="/#contact" class="block hover:text-orange-500">お問い合わせ</a>
+    <a href="/apps#download" class="flex w-full btn-primary orange-gradient text-white font-bold px-4 py-2.5 rounded-full mt-2 items-center justify-center gap-1.5">アプリを入手 <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+  </div>
+</header>
+
+<script>
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  });
+  document.querySelectorAll('#mobile-menu a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('mobile-menu').classList.remove('open'));
+  });
+</script>
+
+<main>
+
+<section class="page-hero px-4 pt-12 pb-16 md:pt-16 md:pb-24">
+  <div class="blob" style="width:380px;height:380px;background:#8B87FF;top:-140px;right:-80px;opacity:.35;"></div>
+  <div class="relative max-w-6xl mx-auto">
+    <nav class="text-xs text-gray-400 mb-6 flex flex-wrap items-center gap-1.5" aria-label="パンくず"><a href="/" class="hover:text-orange-500">Nobia</a><i data-lucide="chevron-right" class="w-3 h-3"></i><a href="/#business" class="hover:text-orange-500">事業内容</a><i data-lucide="chevron-right" class="w-3 h-3"></i><span class="text-gray-600">BizMatch</span></nav>
+    <div class="grid md:grid-cols-[1.2fr_1fr] gap-10 items-center">
+      <div>
+        <p class="en-label">bizmatch</p>
+        <h1 class="text-3xl md:text-[2.6rem] font-black text-gray-900 leading-tight mt-2 mb-5"><span class="inline-block">就活イベント・</span><span class="inline-block">エージェント検索ナビ</span><br><span class="inline-block">「BizMatch」</span></h1>
+        <p class="text-gray-600 text-sm md:text-base leading-loose mb-8">BizMatch（ビズマッチ）は、就活イベント・キャリア面談・就活サービスを、日程・場所・参加条件で比べて選べる大学生向けの予約サイトです。学生は無料で利用できます。</p>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href="https://bizmatch.nobia-lab.com/" target="_blank" rel="noopener" class="btn-primary bm-gradient text-white font-bold px-7 py-3.5 rounded-full shadow-lg inline-flex items-center justify-center gap-2">BizMatchを見る <i data-lucide="arrow-up-right" class="w-4 h-4"></i></a>
+          <a href="#company" class="bg-white text-gray-800 font-bold px-7 py-3.5 rounded-full border border-gray-200 hover:border-orange-300 transition-colors inline-flex items-center justify-center gap-2">掲載・提携のご相談</a>
+        </div>
+      </div>
+      <div class="relative overflow-hidden rounded-[2rem] bm-gradient p-8 text-white shadow-2xl">
+        <div class="blob" style="width:220px;height:220px;background:#C13BD6;bottom:-90px;right:-40px;opacity:.5;"></div>
+        <div class="blob" style="width:180px;height:180px;background:#5CE1E6;top:-80px;left:-40px;opacity:.3;"></div>
+        <div class="relative">
+          <div class="flex items-center gap-3 mb-6">
+            <img src="/bizmatch-icon.png" alt="BizMatchアイコン" class="w-14 h-14 rounded-xl object-cover ring-1 ring-white/20" />
+            <div><p class="font-black text-2xl">BizMatch</p><p class="text-xs text-white/70">bizmatch.nobia-lab.com</p></div>
+          </div>
+          <div class="flex flex-wrap gap-2 mb-6">
+            <span class="text-xs font-bold bg-white/10 border border-white/15 rounded-full px-3 py-1.5">就活イベント</span>
+            <span class="text-xs font-bold bg-white/10 border border-white/15 rounded-full px-3 py-1.5">キャリア面談</span>
+            <span class="text-xs font-bold bg-white/10 border border-white/15 rounded-full px-3 py-1.5">就活サービス</span>
+          </div>
+          <p class="text-sm text-white/85 leading-relaxed">参加費・利用料は無料。<br>日程・開催場所・参加条件を見比べてから予約できます。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="px-4 py-20">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+      <div><p class="en-label">reason</p><h2 class="text-2xl md:text-3xl font-black text-gray-900 mt-1">BizMatchが選ばれる理由</h2></div>
+      
+    </div>
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="bg-white rounded-3xl border border-gray-100 shadow-sm p-7">
+        <p class="num text-4xl text-orange-200 mb-4">01</p>
+        <div class="flex items-center gap-2 mb-3"><i data-lucide="layout-list" class="w-5 h-5 text-orange-500"></i><h3 class="font-black text-gray-900 text-lg">就活サービスを並べて比較できる</h3></div>
+        <p class="text-gray-500 text-sm leading-relaxed">就活イベント・キャリア面談・就活サービスを、日程・開催場所・参加条件で見比べて選べます。</p>
+      </div>
+      <div class="bg-white rounded-3xl border border-gray-100 shadow-sm p-7">
+        <p class="num text-4xl text-orange-200 mb-4">02</p>
+        <div class="flex items-center gap-2 mb-3"><i data-lucide="users" class="w-5 h-5 text-orange-500"></i><h3 class="font-black text-gray-900 text-lg">1日で複数社と話せる</h3></div>
+        <p class="text-gray-500 text-sm leading-relaxed">合同説明会などのイベントで、1日に複数の企業と話せます。スカウト・特別選考につながるチャンスも。</p>
+      </div>
+      <div class="bg-white rounded-3xl border border-gray-100 shadow-sm p-7">
+        <p class="num text-4xl text-orange-200 mb-4">03</p>
+        <div class="flex items-center gap-2 mb-3"><i data-lucide="message-circle" class="w-5 h-5 text-orange-500"></i><h3 class="font-black text-gray-900 text-lg">公式LINEで就活相談</h3></div>
+        <p class="text-gray-500 text-sm leading-relaxed">迷ったときは、公式LINEからオンラインで就活の相談ができます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="px-4 pb-20">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+      <div><p class="en-label">feature</p><h2 class="text-2xl md:text-3xl font-black text-gray-900 mt-1">主な機能</h2></div>
+      
+    </div>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="flex gap-4 bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+        <span class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center flex-shrink-0"><i data-lucide="sliders-horizontal" class="w-5 h-5 text-indigo-600"></i></span>
+        <div><h3 class="font-bold text-gray-900 mb-1">条件・職種から探せる</h3><p class="text-gray-500 text-sm leading-relaxed">「GD練習」「人事と話せる」「オンライン」などの人気の条件や、希望職種から絞り込めます。</p></div>
+      </div>
+      <div class="flex gap-4 bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+        <span class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center flex-shrink-0"><i data-lucide="user-plus" class="w-5 h-5 text-indigo-600"></i></span>
+        <div><h3 class="font-bold text-gray-900 mb-1">LINEでかんたん会員登録</h3><p class="text-gray-500 text-sm leading-relaxed">メールのほか、LINEでも登録できます。一覧・詳細・お気に入りは登録なしで使えます。</p></div>
+      </div>
+      <div class="flex gap-4 bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+        <span class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center flex-shrink-0"><i data-lucide="heart" class="w-5 h-5 text-indigo-600"></i></span>
+        <div><h3 class="font-bold text-gray-900 mb-1">お気に入り・申込履歴</h3><p class="text-gray-500 text-sm leading-relaxed">気になるものを保存でき、マイページで申し込んだ内容を確認できます。</p></div>
+      </div>
+      <div class="flex gap-4 bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+        <span class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center flex-shrink-0"><i data-lucide="calendar-check" class="w-5 h-5 text-indigo-600"></i></span>
+        <div><h3 class="font-bold text-gray-900 mb-1">受付中のものだけ表示</h3><p class="text-gray-500 text-sm leading-relaxed">開催日を過ぎたものは自動で一覧から外れるので、申し込めるものだけを探せます。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="px-4 pb-20">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+      <div><p class="en-label">flow</p><h2 class="text-2xl md:text-3xl font-black text-gray-900 mt-1">予約の流れ</h2></div>
+      <p class="text-gray-500 text-sm leading-relaxed md:max-w-md">BizMatchでの申し込みだけでは予約は完了しません。最後に主催企業のページで予約を確定してください。</p>
+    </div>
+    <ol class="grid md:grid-cols-3 gap-5 pt-3">
+      <li class="relative bg-white rounded-3xl border border-gray-100 shadow-sm p-6">
+        <span class="absolute -top-3 left-6 orange-gradient text-white text-xs font-black rounded-full px-3 py-1">STEP 1</span>
+        <i data-lucide="search" class="w-6 h-6 text-orange-500 mb-3 mt-2"></i>
+        <h3 class="font-black text-gray-900 mb-2">BizMatchで探す</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">条件や職種で絞り込んで、参加したいイベント・面談を見つけます。</p>
+      </li>
+      <li class="relative bg-white rounded-3xl border border-gray-100 shadow-sm p-6">
+        <span class="absolute -top-3 left-6 orange-gradient text-white text-xs font-black rounded-full px-3 py-1">STEP 2</span>
+        <i data-lucide="pencil-line" class="w-6 h-6 text-orange-500 mb-3 mt-2"></i>
+        <h3 class="font-black text-gray-900 mb-2">BizMatchで申し込む</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">会員登録（メールまたはLINE）をして、申し込みに進みます。</p>
+      </li>
+      <li class="relative bg-white rounded-3xl border border-gray-100 shadow-sm p-6">
+        <span class="absolute -top-3 left-6 orange-gradient text-white text-xs font-black rounded-full px-3 py-1">STEP 3</span>
+        <i data-lucide="circle-check" class="w-6 h-6 text-orange-500 mb-3 mt-2"></i>
+        <h3 class="font-black text-gray-900 mb-2">主催企業のページで予約を完了</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">案内に沿って主催企業のページに進み、予約を確定します。ここで予約完了です。</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="px-4 pb-20">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+      <div><p class="en-label">sns</p><h2 class="text-2xl md:text-3xl font-black text-gray-900 mt-1">公式SNS</h2></div>
+      <p class="text-gray-500 text-sm leading-relaxed md:max-w-md">全国版と京都・東京・関西のInstagramアカウントで、就活イベントや就活のコツを発信しています。</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
+        <a href="https://www.instagram.com/bizmatch_lab/" target="_blank" rel="noopener" class="card-hover flex items-center gap-3 bg-white border border-gray-100 shadow-sm rounded-2xl p-4">
+          <span class="w-10 h-10 pink-gradient rounded-full flex items-center justify-center flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></span>
+          <span class="min-w-0"><span class="block text-sm font-bold text-gray-900">BizMatch 全国</span><span class="block text-xs text-gray-400 truncate">@bizmatch_lab</span></span>
+        </a>
+        <a href="https://www.instagram.com/bizmatch_kyoto/" target="_blank" rel="noopener" class="card-hover flex items-center gap-3 bg-white border border-gray-100 shadow-sm rounded-2xl p-4">
+          <span class="w-10 h-10 pink-gradient rounded-full flex items-center justify-center flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></span>
+          <span class="min-w-0"><span class="block text-sm font-bold text-gray-900">BizMatch 京都</span><span class="block text-xs text-gray-400 truncate">@bizmatch_kyoto</span></span>
+        </a>
+        <a href="https://www.instagram.com/bizmatch_tokyo_shukatsu/" target="_blank" rel="noopener" class="card-hover flex items-center gap-3 bg-white border border-gray-100 shadow-sm rounded-2xl p-4">
+          <span class="w-10 h-10 pink-gradient rounded-full flex items-center justify-center flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></span>
+          <span class="min-w-0"><span class="block text-sm font-bold text-gray-900">BizMatch 東京</span><span class="block text-xs text-gray-400 truncate">@bizmatch_tokyo_shukatsu</span></span>
+        </a>
+        <a href="https://www.instagram.com/bizmatch_kansai_shukatsu/" target="_blank" rel="noopener" class="card-hover flex items-center gap-3 bg-white border border-gray-100 shadow-sm rounded-2xl p-4">
+          <span class="w-10 h-10 pink-gradient rounded-full flex items-center justify-center flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></span>
+          <span class="min-w-0"><span class="block text-sm font-bold text-gray-900">BizMatch 関西</span><span class="block text-xs text-gray-400 truncate">@bizmatch_kansai_shukatsu</span></span>
+        </a>
+    </div>
+    <div class="flex flex-wrap gap-3"><a href="https://x.com/bizmatch_lab" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 bg-white border border-gray-200 rounded-full px-4 py-2 text-sm font-bold text-gray-700 hover:border-orange-300 hover:text-orange-500 transition-colors">X<i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i></a><a href="https://www.youtube.com/@BizMatch%E3%83%93%E3%82%BA%E3%83%9E%E3%83%83%E3%83%81" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 bg-white border border-gray-200 rounded-full px-4 py-2 text-sm font-bold text-gray-700 hover:border-orange-300 hover:text-orange-500 transition-colors">YouTube<i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i></a><a href="https://www.threads.com/@bizmatch_lab" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 bg-white border border-gray-200 rounded-full px-4 py-2 text-sm font-bold text-gray-700 hover:border-orange-300 hover:text-orange-500 transition-colors">Threads<i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i></a><a href="https://www.tiktok.com/@bizmatch_lab" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 bg-white border border-gray-200 rounded-full px-4 py-2 text-sm font-bold text-gray-700 hover:border-orange-300 hover:text-orange-500 transition-colors">TikTok<i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i></a></div>
+  </div>
+</section>
+
+<div id="company" class="scroll-mt-20"></div>
+<section class="px-4 pb-24">
+  <div class="max-w-6xl mx-auto">
+    <div class="relative overflow-hidden orange-gradient rounded-[2rem] px-6 py-12 md:px-16 md:py-14 text-white">
+      <div class="blob" style="width:300px;height:300px;background:#FFD166;top:-120px;right:-60px;"></div>
+      <div class="relative flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+        <div>
+          <p class="en-label !text-white/80">contact</p>
+          <h2 class="text-2xl md:text-3xl font-black mb-3 mt-1">掲載・提携のご相談</h2>
+          <p class="text-white/90 text-sm leading-relaxed">就活イベント・キャリア面談・就活サービスの掲載や、<br class="hidden sm:block">学生への告知・集客のご相談はこちらからお寄せください。</p>
+        </div>
+        <div class="flex flex-col items-center md:items-end gap-3">
+          <a href="mailto:nobia.lab.official@gmail.com?subject=%E3%80%90BizMatch%20%E6%8E%B2%E8%BC%89%E3%83%BB%E6%8F%90%E6%90%BA%E3%81%AE%E3%81%94%E7%9B%B8%E8%AB%87%E3%80%91&body=%E4%BC%9A%E7%A4%BE%E5%90%8D%EF%BC%9A%0A%E3%81%94%E6%8B%85%E5%BD%93%E8%80%85%E5%90%8D%EF%BC%9A%0A%E3%81%94%E7%9B%B8%E8%AB%87%E5%86%85%E5%AE%B9%EF%BC%88%E6%8E%B2%E8%BC%89%E3%81%97%E3%81%9F%E3%81%84%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%83%BB%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%AA%E3%81%A9%EF%BC%89%EF%BC%9A%0A" class="btn-primary inline-flex items-center justify-center gap-2 bg-white text-orange-600 font-bold px-7 py-4 rounded-full shadow-lg text-sm md:text-base">
+            <i data-lucide="mail" class="w-5 h-5"></i>メールで問い合わせる</a>
+          <p class="text-xs text-white/80">nobia.lab.official@gmail.com</p>
+          <a href="/service" class="text-xs text-white/90 hover:text-white underline underline-offset-4">受託・代行事業も見る</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="bg-gray-900 text-gray-400 px-4 pt-14 pb-8">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex flex-col lg:flex-row gap-10 lg:gap-16 pb-10 border-b border-white/10">
+      <div class="lg:w-64 flex-shrink-0">
+        <a href="/" class="flex items-center gap-2 mb-4">
+          <div class="w-8 h-8 orange-gradient rounded-xl flex items-center justify-center">
+            <span class="text-white font-black text-sm">N</span>
+          </div>
+          <span class="text-white font-black text-lg">Nobia</span>
+          <span class="text-gray-500 text-xs ml-1 whitespace-nowrap">学生アプリラボ</span>
+        </a>
+        <p class="text-xs leading-relaxed text-gray-500">すべての就活生を、同じスタートラインへ。</p>
+      </div>
+      <nav class="flex-1 grid grid-cols-2 md:grid-cols-4 gap-8 text-sm">
+        <div>
+          <a href="/#business" class="block text-white font-bold mb-3 hover:text-orange-400 transition-colors">事業内容</a>
+          <ul class="space-y-2 text-xs">
+            <li><a href="/#app" class="hover:text-white transition-colors">アプリ事業</a></li>
+            <li><a href="/bizmatch" class="hover:text-white transition-colors">BizMatch</a></li>
+            <li><a href="/service" class="hover:text-white transition-colors">受託・代行事業</a></li>
+          </ul>
+        </div>
+        <div>
+          <a href="/apps" class="block text-white font-bold mb-3 hover:text-orange-400 transition-colors">アプリ紹介</a>
+          <ul class="space-y-2 text-xs">
+            <li><a href="/apps#apps" class="hover:text-white transition-colors">就トーク・シンプル就活</a></li>
+            <li><a href="/apps#story" class="hover:text-white transition-colors">開発ストーリー</a></li>
+            <li><a href="/apps#team" class="hover:text-white transition-colors">チーム</a></li>
+          </ul>
+        </div>
+        <div>
+          <a href="/press" class="block text-white font-bold mb-3 hover:text-orange-400 transition-colors">プレスルーム</a>
+          <ul class="space-y-2 text-xs">
+            <li><a href="/press" class="hover:text-white transition-colors">プレスリリース・お知らせ</a></li>
+          </ul>
+        </div>
+        <div>
+          <a href="/#contact" class="block text-white font-bold mb-3 hover:text-orange-400 transition-colors">お問い合わせ</a>
+          <ul class="space-y-2 text-xs">
+            <li><a href="mailto:nobia.lab.official@gmail.com" class="hover:text-white transition-colors break-all">nobia.lab.official@gmail.com</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4 pt-6 text-xs">
+      <div class="flex gap-6">
+        <a href="/privacy" class="hover:text-white transition-colors">プライバシーポリシー</a>
+        <a href="/terms" class="hover:text-white transition-colors">利用規約</a>
+      </div>
+      <p class="text-gray-500">© 2026 学生アプリラボ Nobia.</p>
+      <a href="#" class="inline-flex items-center gap-1 hover:text-white transition-colors"><i data-lucide="arrow-up" class="w-3.5 h-3.5"></i>Pagetop</a>
+    </div>
+  </div>
+</footer>
+
+<script>lucide.createIcons();</script>
+</body>
+</html>
