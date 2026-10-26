@@ -33,26 +33,58 @@
     .orange-gradient { background: linear-gradient(135deg, #FF6B2C, #FF8F5A); }
     .card-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
     .card-hover:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,0.09); }
+      #mobile-menu { display: none; }
+    #mobile-menu.open { display: block; }
+    .btn-primary { transition: transform 0.15s, box-shadow 0.2s; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,107,44,0.35); }
   </style>
 </head>
 <body>
 
 <!-- ヘッダー -->
-<header class="bg-white shadow-sm sticky top-0 z-50">
-  <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
-    <div class="flex items-center gap-3">
-      <a href="/" class="flex items-center gap-2">
-        <div class="w-8 h-8 orange-gradient rounded-xl flex items-center justify-center shadow">
-          <span class="text-white font-black text-sm">N</span>
-        </div>
-        <span class="text-lg font-black" style="color: #FF6B2C;">Nobia</span>
-      </a>
-      <span class="text-gray-300">/</span>
-      <span class="text-sm text-gray-500 font-medium">プレスルーム</span>
-    </div>
-    <a href="/" class="text-xs text-gray-400 hover:text-orange-500 transition-colors inline-flex items-center gap-1"><i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> トップへ</a>
+<header class="sticky top-0 z-50 bg-white shadow-sm">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-2 group">
+      <div class="w-9 h-9 orange-gradient rounded-xl flex items-center justify-center shadow">
+        <span class="text-white font-black text-base leading-none">N</span>
+      </div>
+      <span class="text-xl font-black" style="color: #FF6B2C;">Nobia</span>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
+      <a href="/#business" class="hover:text-orange-500 transition-colors">事業内容</a>
+      <a href="/apps" class="hover:text-orange-500 transition-colors">アプリ紹介</a>
+      <a href="/press" class="hover:text-orange-500 transition-colors">プレスルーム</a>
+      <a href="/#contact" class="hover:text-orange-500 transition-colors">お問い合わせ</a>
+    </nav>
+
+    <a href="/apps#download" class="hidden md:inline-flex items-center gap-2 btn-primary orange-gradient text-white text-sm font-bold px-5 py-2.5 rounded-full shadow">
+      アプリを入手 <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+
+    <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="メニュー">
+      <span class="block w-6 h-0.5 bg-gray-700"></span>
+      <span class="block w-6 h-0.5 bg-gray-700"></span>
+      <span class="block w-6 h-0.5 bg-gray-700"></span>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="md:hidden bg-white border-t border-gray-100 px-4 py-4 space-y-3 text-sm font-medium text-gray-700">
+    <a href="/#business" class="block hover:text-orange-500">事業内容</a>
+    <a href="/apps" class="block hover:text-orange-500">アプリ紹介</a>
+    <a href="/press" class="block hover:text-orange-500">プレスルーム</a>
+    <a href="/#contact" class="block hover:text-orange-500">お問い合わせ</a>
+    <a href="/apps#download" class="flex w-full btn-primary orange-gradient text-white font-bold px-4 py-2.5 rounded-full mt-2 items-center justify-center gap-1.5">アプリを入手 <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
   </div>
 </header>
+
+<script>
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  });
+  document.querySelectorAll('#mobile-menu a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('mobile-menu').classList.remove('open'));
+  });
+</script>
 
 
 <!-- メインコンテンツ -->
@@ -221,23 +253,58 @@
 
 
 <!-- フッター -->
-<footer class="bg-gray-900 text-gray-500 text-xs py-8 px-4 mt-16">
-  <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-    <div class="flex items-center gap-2">
-      <div class="w-7 h-7 orange-gradient rounded-lg flex items-center justify-center">
-        <span class="text-white font-black text-xs">N</span>
+<footer class="bg-gray-900 text-gray-400 px-4 pt-14 pb-8">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex flex-col lg:flex-row gap-10 lg:gap-16 pb-10 border-b border-white/10">
+      <div class="lg:w-64 flex-shrink-0">
+        <a href="/" class="flex items-center gap-2 mb-4">
+          <div class="w-8 h-8 orange-gradient rounded-xl flex items-center justify-center">
+            <span class="text-white font-black text-sm">N</span>
+          </div>
+          <span class="text-white font-black text-lg">Nobia</span>
+          <span class="text-gray-500 text-xs ml-1 whitespace-nowrap">学生アプリラボ</span>
+        </a>
+        <p class="text-xs leading-relaxed text-gray-500">すべての就活生を、同じスタートラインへ。</p>
       </div>
-      <span class="text-gray-300 font-bold">Nobia</span>
-      <span class="text-gray-600">学生アプリラボ</span>
+      <nav class="flex-1 grid grid-cols-2 md:grid-cols-4 gap-8 text-sm">
+        <div>
+          <a href="/#business" class="block text-white font-bold mb-3 hover:text-orange-400 transition-colors">事業内容</a>
+          <ul class="space-y-2 text-xs">
+            <li><a href="/#app" class="hover:text-white transition-colors">アプリ事業</a></li>
+            <li><a href="/#bizmatch" class="hover:text-white transition-colors">BizMatch</a></li>
+            <li><a href="/#service" class="hover:text-white transition-colors">受託・代行事業</a></li>
+          </ul>
+        </div>
+        <div>
+          <a href="/apps" class="block text-white font-bold mb-3 hover:text-orange-400 transition-colors">アプリ紹介</a>
+          <ul class="space-y-2 text-xs">
+            <li><a href="/apps#apps" class="hover:text-white transition-colors">就トーク・シンプル就活</a></li>
+            <li><a href="/apps#story" class="hover:text-white transition-colors">開発ストーリー</a></li>
+            <li><a href="/apps#team" class="hover:text-white transition-colors">チーム</a></li>
+          </ul>
+        </div>
+        <div>
+          <a href="/press" class="block text-white font-bold mb-3 hover:text-orange-400 transition-colors">プレスルーム</a>
+          <ul class="space-y-2 text-xs">
+            <li><a href="/press" class="hover:text-white transition-colors">プレスリリース・お知らせ</a></li>
+          </ul>
+        </div>
+        <div>
+          <a href="/#contact" class="block text-white font-bold mb-3 hover:text-orange-400 transition-colors">お問い合わせ</a>
+          <ul class="space-y-2 text-xs">
+            <li><a href="mailto:nobia.lab.official@gmail.com" class="hover:text-white transition-colors break-all">nobia.lab.official@gmail.com</a></li>
+          </ul>
+        </div>
+      </nav>
     </div>
-    <nav class="flex flex-wrap justify-center gap-x-5 gap-y-2">
-      <a href="/" class="hover:text-white transition-colors">トップページ</a>
-      <a href="/apps" class="hover:text-white transition-colors">アプリ紹介</a>
-      <a href="/privacy" class="hover:text-white transition-colors">プライバシーポリシー</a>
-      <a href="/terms" class="hover:text-white transition-colors">利用規約</a>
-      <a href="mailto:nobia.lab.official@gmail.com" class="hover:text-white transition-colors">お問い合わせ</a>
-    </nav>
-    <p>© 2026 学生アプリラボ Nobia.</p>
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4 pt-6 text-xs">
+      <div class="flex gap-6">
+        <a href="/privacy" class="hover:text-white transition-colors">プライバシーポリシー</a>
+        <a href="/terms" class="hover:text-white transition-colors">利用規約</a>
+      </div>
+      <p class="text-gray-500">© 2026 学生アプリラボ Nobia.</p>
+      <a href="#" class="inline-flex items-center gap-1 hover:text-white transition-colors"><i data-lucide="arrow-up" class="w-3.5 h-3.5"></i>Pagetop</a>
+    </div>
   </div>
 </footer>
 
