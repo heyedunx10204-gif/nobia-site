@@ -63,43 +63,89 @@
     body {
       background-color: #FFFAF5;
       font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', sans-serif;
+      color: #1f2937;
     }
-    .hero-gradient { background: linear-gradient(135deg, #fff7ee 0%, #ffe8d6 40%, #ffd6b3 100%); }
     .orange-gradient { background: linear-gradient(135deg, #FF6B2C, #FF8F5A); }
-    .card-hover { transition: transform 0.25s ease, box-shadow 0.25s ease; }
-    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.10); }
+    .green-gradient  { background: linear-gradient(135deg, #06D6A0, #02B589); }
+    .pink-gradient   { background: linear-gradient(135deg, #E1306C, #F77737); }
+    .text-gradient {
+      background: linear-gradient(120deg, #FF6B2C 10%, #FF9A3C 90%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
     .btn-primary { transition: transform 0.15s, box-shadow 0.2s; }
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,107,44,0.35); }
+    .card-hover { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(17,24,39,0.10); }
     a:focus-visible, button:focus-visible { outline: 2px solid #FF6B2C; outline-offset: 2px; }
     #mobile-menu { display: none; }
     #mobile-menu.open { display: block; }
+
+    /* HERO */
+    .hero { position: relative; overflow: hidden; background: #FFF7EE; }
+    .hero::before {               /* 細かいドットの地模様 */
+      content: ""; position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(255,107,44,0.18) 1px, transparent 1px);
+      background-size: 22px 22px;
+      -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 85%);
+              mask-image: linear-gradient(180deg, #000 0%, transparent 85%);
+    }
+    .blob { position: absolute; border-radius: 9999px; filter: blur(60px); opacity: .55; pointer-events: none; }
+    .tile {
+      background: rgba(255,255,255,0.85); backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.9);
+      box-shadow: 0 20px 40px rgba(255,107,44,0.12), 0 2px 6px rgba(17,24,39,0.06);
+    }
+    @keyframes float { 0%,100% { transform: translateY(0) rotate(var(--r,0deg)); } 50% { transform: translateY(-10px) rotate(var(--r,0deg)); } }
+    .float { animation: float 5s ease-in-out infinite; }
+    .float.d2 { animation-delay: -1.6s; }
+    .float.d3 { animation-delay: -3.2s; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+    .fade-up { animation: fadeUp .8s ease both; }
+    .fade-up.d1 { animation-delay: .1s; } .fade-up.d2 { animation-delay: .2s; } .fade-up.d3 { animation-delay: .3s; }
+
+    /* キーワードの流れる帯 */
+    .marquee { overflow: hidden; white-space: nowrap; }
+    .marquee-track { display: inline-flex; gap: 3rem; padding-right: 3rem; animation: marquee 32s linear infinite; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* 番号見出し */
+    .num { font-family: 'Helvetica Neue', Arial, sans-serif; font-weight: 900; letter-spacing: -0.04em; line-height: 1; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .float, .fade-up, .marquee-track { animation: none; }
+    }
   </style>
 </head>
 <body>
-
 <!-- ========================================
      HEADER
 ======================================== -->
 <header class="sticky top-0 z-50 bg-white shadow-sm">
   <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-    <a href="/" class="flex items-center gap-2">
+
+    <!-- ロゴ -->
+    <a href="/" class="flex items-center gap-2 group">
       <div class="w-9 h-9 orange-gradient rounded-xl flex items-center justify-center shadow">
         <span class="text-white font-black text-base leading-none">N</span>
       </div>
       <span class="text-xl font-black" style="color: #FF6B2C;">Nobia</span>
     </a>
 
+    <!-- PC ナビ -->
     <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-gray-600">
-      <a href="#business" class="hover:text-orange-500 transition-colors">事業紹介</a>
-      <a href="/apps" class="hover:text-orange-500 transition-colors">アプリ</a>
-      <a href="https://bizmatch.nobia-lab.com/" target="_blank" rel="noopener" class="hover:text-orange-500 transition-colors">BizMatch</a>
-      <a href="/business" class="hover:text-orange-500 transition-colors">事業内容</a>
+      <a href="/apps#apps" class="hover:text-orange-500 transition-colors">アプリ紹介</a>
+      <a href="/apps#story" class="hover:text-orange-500 transition-colors">開発ストーリー</a>
+      <a href="/apps#team" class="hover:text-orange-500 transition-colors">チーム</a>
+      <a href="#business" class="hover:text-orange-500 transition-colors">事業内容</a>
       <a href="/press" class="hover:text-orange-500 transition-colors">プレスルーム</a>
+      <a href="#contact" class="hover:text-orange-500 transition-colors">お問い合わせ</a>
     </nav>
 
-    <a href="mailto:nobia.lab.official@gmail.com" class="hidden md:inline-flex items-center gap-2 btn-primary orange-gradient text-white text-sm font-bold px-5 py-2.5 rounded-full shadow">
-      <i data-lucide="mail" class="w-4 h-4"></i>お問い合わせ</a>
+    <!-- ダウンロードCTA (PC) -->
+    <a href="/apps#apps" class="hidden md:inline-flex items-center gap-2 btn-primary orange-gradient text-white text-sm font-bold px-5 py-2.5 rounded-full shadow">
+      アプリを入手 <i data-lucide="arrow-down" class="w-4 h-4"></i></a>
 
+    <!-- ハンバーガー (SP) -->
     <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="メニュー">
       <span class="block w-6 h-0.5 bg-gray-700"></span>
       <span class="block w-6 h-0.5 bg-gray-700"></span>
@@ -107,13 +153,15 @@
     </button>
   </div>
 
+  <!-- モバイルメニュー -->
   <div id="mobile-menu" class="md:hidden bg-white border-t border-gray-100 px-4 py-4 space-y-3 text-sm font-medium text-gray-700">
-    <a href="#business" class="block hover:text-orange-500">事業紹介</a>
-    <a href="/apps" class="block hover:text-orange-500">アプリ</a>
-    <a href="https://bizmatch.nobia-lab.com/" target="_blank" rel="noopener" class="block hover:text-orange-500">BizMatch</a>
-    <a href="/business" class="block hover:text-orange-500">事業内容</a>
+    <a href="/apps#apps" class="block hover:text-orange-500">アプリ紹介</a>
+    <a href="/apps#story" class="block hover:text-orange-500">開発ストーリー</a>
+    <a href="/apps#team" class="block hover:text-orange-500">チーム</a>
+    <a href="#business" class="block hover:text-orange-500">事業内容</a>
     <a href="/press" class="block hover:text-orange-500">プレスルーム</a>
-    <a href="mailto:nobia.lab.official@gmail.com" class="flex w-full btn-primary orange-gradient text-white font-bold px-4 py-2.5 rounded-full mt-2 items-center justify-center gap-1.5"><i data-lucide="mail" class="w-4 h-4"></i>お問い合わせ</a>
+    <a href="#contact" class="block hover:text-orange-500">お問い合わせ</a>
+    <a href="/apps#apps" class="flex w-full text-center btn-primary orange-gradient text-white font-bold px-4 py-2.5 rounded-full mt-2 items-center justify-center gap-1.5">アプリを入手 <i data-lucide="arrow-down" class="w-4 h-4"></i></a>
   </div>
 </header>
 
@@ -121,125 +169,252 @@
   document.getElementById('hamburger').addEventListener('click', () => {
     document.getElementById('mobile-menu').classList.toggle('open');
   });
+  // メニュー項目クリックで閉じる
   document.querySelectorAll('#mobile-menu a').forEach(a => {
     a.addEventListener('click', () => document.getElementById('mobile-menu').classList.remove('open'));
   });
 </script>
 
-
 <!-- ========================================
      HERO
 ======================================== -->
-<section class="hero-gradient px-4 pt-20 pb-24">
-  <div class="max-w-4xl mx-auto text-center">
-    <p class="inline-flex items-center gap-1.5 bg-white/70 text-orange-600 text-xs font-bold px-4 py-1.5 rounded-full mb-6">
-      <i data-lucide="flask-conical" class="w-3.5 h-3.5"></i>学生アプリラボ Nobia（ノビア）
-    </p>
-    <h1 class="text-3xl md:text-5xl font-black text-gray-900 leading-tight mb-6">
-      <span class="inline-block">すべての就活生を、</span><span class="inline-block">同じスタートラインへ。</span>
-    </h1>
-    <p class="text-gray-600 text-sm md:text-base leading-relaxed mb-10">
-      Nobiaは、就活アプリの開発・運営から、就活イベント・エージェント検索ナビ、<br class="hidden md:block">
-      広告・SNS運用代行・ショート動画作成まで、学生と企業をつなぐサービスを展開しています。
-    </p>
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
-      <a href="#business" class="inline-flex items-center gap-2 btn-primary orange-gradient text-white font-bold px-7 py-3 rounded-full shadow">
-        事業紹介を見る <i data-lucide="arrow-down" class="w-4 h-4"></i></a>
-      <a href="mailto:nobia.lab.official@gmail.com" class="inline-flex items-center gap-2 bg-white text-gray-700 font-bold px-7 py-3 rounded-full border border-gray-200 hover:border-orange-300 transition-colors">
-        <i data-lucide="mail" class="w-4 h-4 text-orange-500"></i>お問い合わせ</a>
+<section class="hero px-4 pt-16 pb-20 md:pt-24 md:pb-28">
+  <div class="blob" style="width:420px;height:420px;background:#FFB27A;top:-120px;right:-80px;"></div>
+  <div class="blob" style="width:340px;height:340px;background:#FFD8A8;bottom:-140px;left:-100px;"></div>
+
+  <div class="relative max-w-6xl mx-auto grid md:grid-cols-[1.15fr_1fr] gap-14 items-center">
+    <div class="text-center md:text-left">
+      <p class="fade-up inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-orange-600 bg-white/80 border border-orange-100 rounded-full px-4 py-1.5 mb-6 shadow-sm">
+        <span class="w-1.5 h-1.5 rounded-full bg-orange-500"></span>Student App Lab Nobia
+      </p>
+      <h1 class="fade-up d1 text-[2rem] sm:text-5xl font-black text-gray-900 leading-[1.15] tracking-tight mb-6">
+        <span class="inline-block">すべての就活生を、</span><br>
+        <span class="inline-block"><span class="text-gradient">同じスタートライン</span>へ。</span>
+      </h1>
+      <p class="fade-up d2 text-gray-600 text-sm md:text-base leading-loose mb-9">
+        学生アプリラボ Nobia（ノビア）は、就活アプリの開発・運営から<br class="hidden lg:block">
+        就活イベント・エージェント検索ナビ、企業の採用・発信支援まで、<br class="hidden lg:block">
+        学生と企業をつなぐサービスを展開しています。
+      </p>
+      <div class="fade-up d3 flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
+        <a href="#business" class="btn-primary orange-gradient text-white font-bold px-7 py-3.5 rounded-full shadow-lg inline-flex items-center justify-center gap-2">
+          事業内容を見る <i data-lucide="arrow-down" class="w-4 h-4"></i></a>
+        <a href="#contact" class="bg-white text-gray-800 font-bold px-7 py-3.5 rounded-full border border-gray-200 hover:border-orange-300 transition-colors inline-flex items-center justify-center gap-2">
+          <i data-lucide="mail" class="w-4 h-4 text-orange-500"></i>お問い合わせ</a>
+      </div>
     </div>
+
+    <!-- サービスのタイル -->
+    <div class="relative h-80 sm:h-96 hidden sm:block" aria-hidden="true">
+      <div class="tile float absolute rounded-3xl p-5 w-60 left-[4%] top-[2%]" style="--r:-4deg;">
+        <div class="flex items-center gap-3 mb-3">
+          <img src="shutalk-icon.png" alt="" class="w-11 h-11 rounded-xl object-cover shadow" />
+          <div><p class="font-black text-gray-900 text-sm">就トーク</p><p class="text-[11px] text-orange-500 font-bold">就活生のための本音SNS</p></div>
+        </div>
+        <div class="space-y-1.5">
+          <div class="bg-orange-50 rounded-lg px-2.5 py-1.5 text-[11px] text-gray-500">「〇〇社の面接通過しました！」</div>
+          <div class="bg-gray-50 rounded-lg px-2.5 py-1.5 text-[11px] text-gray-500">「ESのコツ教えてください…」</div>
+        </div>
+      </div>
+      <div class="tile float d2 absolute rounded-3xl p-5 w-56 right-[2%] top-[18%]" style="--r:3deg;">
+        <div class="flex items-center gap-3 mb-3">
+          <img src="simpleshukatsu-icon.png" alt="" class="w-11 h-11 rounded-xl object-cover shadow" />
+          <div><p class="font-black text-gray-900 text-sm">シンプル就活</p><p class="text-[11px] text-teal-500 font-bold">選考を一画面で管理</p></div>
+        </div>
+        <div class="space-y-1.5 text-[11px] text-gray-600">
+          <div class="flex items-center gap-2 bg-teal-50 rounded-lg px-2.5 py-1.5"><span class="w-1.5 h-1.5 rounded-full bg-teal-400"></span>〇〇社 — 書類選考</div>
+          <div class="flex items-center gap-2 bg-teal-50 rounded-lg px-2.5 py-1.5"><span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>△△社 — 一次面接</div>
+        </div>
+      </div>
+      <div class="tile float d3 absolute rounded-3xl p-5 w-60 left-[16%] bottom-[0%]" style="--r:-1deg;">
+        <div class="flex items-center gap-3 mb-3">
+          <img src="bizmatch-icon.png" alt="" class="w-11 h-11 rounded-xl object-cover shadow" />
+          <div><p class="font-black text-gray-900 text-sm">BizMatch</p><p class="text-[11px] text-pink-500 font-bold"><span class="inline-block">就活イベント・</span><span class="inline-block">エージェント検索ナビ</span></p></div>
+        </div>
+        <div class="flex flex-wrap gap-1.5">
+          <span class="text-[11px] bg-pink-50 text-pink-600 font-bold rounded-full px-2.5 py-1">GD練習</span>
+          <span class="text-[11px] bg-pink-50 text-pink-600 font-bold rounded-full px-2.5 py-1">人事と話せる</span>
+          <span class="text-[11px] bg-pink-50 text-pink-600 font-bold rounded-full px-2.5 py-1">オンライン</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 数字 -->
+  <div class="relative max-w-6xl mx-auto mt-16 md:mt-20">
+    <div class="grid grid-cols-2 md:grid-cols-4 bg-white/80 backdrop-blur rounded-3xl shadow-sm border border-white divide-x divide-y md:divide-y-0 divide-orange-100/70 overflow-hidden">
+      <div class="p-5 md:p-6 text-center"><p class="num text-3xl md:text-4xl text-gray-900">2</p><p class="text-xs text-gray-500 mt-2">配信中のアプリ</p></div>
+      <div class="p-5 md:p-6 text-center"><p class="num text-3xl md:text-4xl text-gray-900">8,500<span class="text-orange-500">+</span></p><p class="text-xs text-gray-500 mt-2">LINEコミュニティ</p></div>
+      <div class="p-5 md:p-6 text-center"><p class="num text-3xl md:text-4xl text-gray-900">3</p><p class="text-xs text-gray-500 mt-2">就活Instagram</p></div>
+      <div class="p-5 md:p-6 text-center"><p class="num text-3xl md:text-4xl text-gray-900">6</p><p class="text-xs text-gray-500 mt-2">受託・代行サービス</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- キーワードの帯 -->
+<div class="bg-gray-900 text-white py-4 marquee" aria-hidden="true">
+  <div class="marquee-track text-sm font-bold tracking-wider">
+    <span>就活SNS</span><span class="text-orange-400">/</span><span>選考管理アプリ</span><span class="text-orange-400">/</span><span>就活イベント検索</span><span class="text-orange-400">/</span><span>学生送客</span><span class="text-orange-400">/</span><span>求人広告</span><span class="text-orange-400">/</span><span>アプリ開発</span><span class="text-orange-400">/</span><span>HP・採用ページ作成</span><span class="text-orange-400">/</span><span>SNS運用代行</span><span class="text-orange-400">/</span><span>ショート動画作成</span><span class="text-orange-400">/</span>
+    <span>就活SNS</span><span class="text-orange-400">/</span><span>選考管理アプリ</span><span class="text-orange-400">/</span><span>就活イベント検索</span><span class="text-orange-400">/</span><span>学生送客</span><span class="text-orange-400">/</span><span>求人広告</span><span class="text-orange-400">/</span><span>アプリ開発</span><span class="text-orange-400">/</span><span>HP・採用ページ作成</span><span class="text-orange-400">/</span><span>SNS運用代行</span><span class="text-orange-400">/</span><span>ショート動画作成</span><span class="text-orange-400">/</span>
+  </div>
+</div>
+
+
+<!-- ========================================
+     事業内容
+======================================== -->
+<section id="business" class="px-4 py-20 md:py-28 scroll-mt-16">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-14">
+      <div>
+        <p class="text-orange-500 text-xs font-bold tracking-widest uppercase mb-2">Business</p>
+        <h2 class="text-3xl md:text-4xl font-black text-gray-900">事業内容</h2>
+      </div>
+      <p class="text-gray-500 text-sm leading-relaxed md:max-w-md">
+        就活アプリの開発・運営から広告・SNS運用代行・ショート動画制作まで、学生と企業をつなぐ多様なサービスを展開しています。
+      </p>
+    </div>
+
+    <!-- 01 アプリ事業 -->
+    <div class="grid md:grid-cols-12 gap-6 md:gap-10 mb-20">
+      <div class="md:col-span-4">
+        <p class="num text-6xl text-orange-200 mb-3">01</p>
+        <h3 class="text-2xl font-black text-gray-900 mb-3 flex items-center gap-2"><i data-lucide="smartphone" class="w-6 h-6 text-orange-500"></i>アプリ事業</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-5">地方と都市の就活情報の格差をなくすために、現役学生チームで就活アプリを開発・運営しています。</p>
+        <a href="/apps" class="inline-flex items-center gap-1 text-orange-500 text-sm font-bold hover:gap-2 transition-all">アプリ紹介を見る <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </div>
+      <div class="md:col-span-8 grid sm:grid-cols-2 gap-5">
+        <div class="card-hover bg-white rounded-3xl border border-gray-100 shadow-sm p-6 flex flex-col">
+          <div class="flex items-center gap-3 mb-4">
+            <img src="shutalk-icon.png" alt="就トークアイコン" class="w-12 h-12 rounded-xl shadow object-cover" />
+            <div>
+              <h4 class="font-black text-gray-900 text-lg">就トーク</h4>
+              <p class="text-orange-500 text-xs font-semibold">就活生のための本音SNS</p>
+            </div>
+            <span class="ml-auto text-xs font-bold bg-orange-100 text-orange-700 px-2.5 py-1 rounded-full inline-flex items-center gap-1"><i data-lucide="circle-check" class="w-3.5 h-3.5"></i>配信中</span>
+          </div>
+          <p class="text-gray-500 text-sm leading-relaxed mb-5">就活生が業界・企業・選考ステージ別にリアルな情報や体験談を共有できる就活特化型SNS。地方と都市の情報格差をなくし、すべての就活生が同じスタートラインに立てる場を提供します。</p>
+          <a href="https://apps.apple.com/us/app/%E5%B0%B1%E3%83%88%E3%83%BC%E3%82%AF/id6776169096" target="_blank" rel="noopener" class="mt-auto text-orange-500 text-sm font-semibold hover:underline inline-flex items-center gap-1">App Store で見る <i data-lucide="arrow-up-right" class="w-4 h-4"></i></a>
+        </div>
+        <div class="card-hover bg-white rounded-3xl border border-gray-100 shadow-sm p-6 flex flex-col">
+          <div class="flex items-center gap-3 mb-4">
+            <img src="simpleshukatsu-icon.png" alt="シンプル就活アイコン" class="w-12 h-12 rounded-xl shadow object-cover" />
+            <div>
+              <h4 class="font-black text-gray-900 text-lg">シンプル就活</h4>
+              <p class="text-teal-500 text-xs font-semibold">就活の選考、一画面で管理</p>
+            </div>
+            <span class="ml-auto text-xs font-bold bg-teal-100 text-teal-700 px-2.5 py-1 rounded-full inline-flex items-center gap-1"><i data-lucide="circle-check" class="w-3.5 h-3.5"></i>配信中</span>
+          </div>
+          <p class="text-gray-500 text-sm leading-relaxed mb-5">複数企業の選考ステータス・スケジュールをシンプルに一元管理できる就活管理アプリ。余計な機能を排除し、就活生が本当に必要な管理機能だけを搭載。無料で提供しています。</p>
+          <a href="https://apps.apple.com/jp/app/%E3%82%B7%E3%83%B3%E3%83%97%E3%83%AB%E5%B0%B1%E6%B4%BB/id6776132527?itscg=30200&itsct=apps_box_link&mttnsubad=6776132527" target="_blank" rel="noopener" class="mt-auto text-teal-500 text-sm font-semibold hover:underline inline-flex items-center gap-1">App Store で見る <i data-lucide="arrow-up-right" class="w-4 h-4"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 BizMatch -->
+    <div class="grid md:grid-cols-12 gap-6 md:gap-10 mb-20">
+      <div class="md:col-span-4">
+        <p class="num text-6xl text-orange-200 mb-3">02</p>
+        <h3 class="text-2xl font-black text-gray-900 mb-3 flex items-center gap-2"><i data-lucide="search" class="w-6 h-6 text-pink-500"></i>BizMatch</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">就活イベント・就活エージェント・就活サービスをまとめて探せるサイト「BizMatch」を運営。あわせて、京都・東京・関西の就活生向けInstagramアカウントでも情報を発信しています。</p>
+      </div>
+      <div class="md:col-span-8">
+        <div class="relative overflow-hidden rounded-3xl bg-gray-900 p-7 md:p-9 text-white">
+          <div class="blob" style="width:260px;height:260px;background:#3633CC;top:-90px;right:-60px;opacity:.6;"></div>
+          <div class="blob" style="width:200px;height:200px;background:#C13BD6;bottom:-100px;left:30%;opacity:.35;"></div>
+          <div class="relative">
+            <div class="flex items-center gap-3 mb-5">
+              <img src="bizmatch-icon.png" alt="BizMatchアイコン" class="w-12 h-12 rounded-xl object-cover ring-1 ring-white/20" />
+              <div>
+                <h4 class="font-black text-xl">BizMatch</h4>
+                <p class="text-pink-300 text-xs font-semibold"><span class="inline-block">就活イベント・</span><span class="inline-block">エージェント検索ナビ</span></p>
+              </div>
+            </div>
+            <a href="https://bizmatch.nobia-lab.com/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-white text-gray-900 text-sm font-bold px-5 py-2.5 rounded-full hover:bg-pink-50 transition-colors mb-7">
+              bizmatch.nobia-lab.com を見る <i data-lucide="arrow-up-right" class="w-4 h-4"></i></a>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <a href="https://www.instagram.com/bizmatch_kyoto/" target="_blank" rel="noopener" class="flex items-center gap-3 bg-white/10 hover:bg-white/15 border border-white/10 rounded-2xl p-3.5 transition-colors">
+                <span class="w-9 h-9 pink-gradient rounded-full flex items-center justify-center flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></span>
+                <span><span class="block text-xs font-bold">BizMatch 京都</span><span class="block text-[11px] text-gray-400">@bizmatch_kyoto</span></span>
+              </a>
+              <a href="https://www.instagram.com/bizmatch_tokyo_shukatsu/" target="_blank" rel="noopener" class="flex items-center gap-3 bg-white/10 hover:bg-white/15 border border-white/10 rounded-2xl p-3.5 transition-colors">
+                <span class="w-9 h-9 pink-gradient rounded-full flex items-center justify-center flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></span>
+                <span><span class="block text-xs font-bold">BizMatch 東京</span><span class="block text-[11px] text-gray-400">@bizmatch_tokyo_shukatsu</span></span>
+              </a>
+              <a href="https://www.instagram.com/bizmatch_kansai_shukatsu/" target="_blank" rel="noopener" class="flex items-center gap-3 bg-white/10 hover:bg-white/15 border border-white/10 rounded-2xl p-3.5 transition-colors">
+                <span class="w-9 h-9 pink-gradient rounded-full flex items-center justify-center flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></span>
+                <span><span class="block text-xs font-bold">BizMatch 関西</span><span class="block text-[11px] text-gray-400">@bizmatch_kansai_shukatsu</span></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 受託・代行事業 -->
+    <div class="grid md:grid-cols-12 gap-6 md:gap-10">
+      <div class="md:col-span-4">
+        <p class="num text-6xl text-orange-200 mb-3">03</p>
+        <h3 class="text-2xl font-black text-gray-900 mb-3 flex items-center gap-2"><i data-lucide="briefcase" class="w-6 h-6 text-blue-500"></i>受託・代行事業</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">学生目線と自社サービスの運営ノウハウを活かして、企業の採用・集客・発信を支援します。</p>
+      </div>
+      <div class="md:col-span-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="card-hover bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+          <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center mb-4"><i data-lucide="megaphone" class="w-5 h-5 text-blue-500"></i></div>
+          <h4 class="font-bold text-gray-900 mb-2">広告・求人広告</h4>
+          <p class="text-gray-500 text-sm leading-relaxed">学生向け媒体を活用した採用広告・求人広告の企画・掲載を支援します。</p>
+        </div>
+        <div class="card-hover bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+          <div class="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center mb-4"><i data-lucide="users" class="w-5 h-5 text-orange-500"></i></div>
+          <h4 class="font-bold text-gray-900 mb-2">学生送客</h4>
+          <p class="text-gray-500 text-sm leading-relaxed">就活SNSやInstagramアカウントを通じて、採用説明会・インターン・イベントへの学生集客を行います。</p>
+        </div>
+        <div class="card-hover bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+          <div class="w-10 h-10 bg-teal-100 rounded-xl flex items-center justify-center mb-4"><i data-lucide="code" class="w-5 h-5 text-teal-500"></i></div>
+          <h4 class="font-bold text-gray-900 mb-2">アプリ開発</h4>
+          <p class="text-gray-500 text-sm leading-relaxed">iOS・Androidアプリの企画から開発・リリースまでワンストップで対応。学生目線のUXを強みとします。</p>
+        </div>
+        <div class="card-hover bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+          <div class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center mb-4"><i data-lucide="layout-template" class="w-5 h-5 text-purple-500"></i></div>
+          <h4 class="font-bold text-gray-900 mb-2">HP・採用ページ作成</h4>
+          <p class="text-gray-500 text-sm leading-relaxed">企業のホームページや採用サイトの制作を承ります。学生に刺さるデザイン・コピーで採用力を高めます。</p>
+        </div>
+        <div class="card-hover bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+          <div class="w-10 h-10 bg-pink-100 rounded-xl flex items-center justify-center mb-4"><i data-lucide="share-2" class="w-5 h-5 text-pink-500"></i></div>
+          <h4 class="font-bold text-gray-900 mb-2">SNS運用代行</h4>
+          <p class="text-gray-500 text-sm leading-relaxed">Instagram・X（Twitter）などのSNSアカウントの運用・投稿・分析を代行。Z世代へのリーチを最大化します。</p>
+        </div>
+        <div class="card-hover bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+          <div class="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center mb-4"><i data-lucide="clapperboard" class="w-5 h-5 text-amber-500"></i></div>
+          <h4 class="font-bold text-gray-900 mb-2">ショート動画作成</h4>
+          <p class="text-gray-500 text-sm leading-relaxed">Instagramリール・TikTok・YouTube Shorts向けの縦型ショート動画を、企画・台本から編集・ナレーションまで一貫して制作します。</p>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
 
 <!-- ========================================
-     事業紹介
+     お問い合わせ
 ======================================== -->
-<section id="business" class="px-4 py-20 scroll-mt-16">
-  <div class="max-w-5xl mx-auto">
-    <div class="text-center mb-12">
-      <p class="text-orange-500 text-xs font-bold tracking-widest uppercase mb-2">Business</p>
-      <h2 class="text-2xl md:text-3xl font-black text-gray-900">事業紹介</h2>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-
-      <!-- アプリ事業 -->
-      <a href="/apps" class="card-hover group bg-white rounded-2xl border border-gray-100 shadow-sm p-7 flex flex-col">
-        <div class="flex items-center gap-2 text-orange-500 text-xs font-bold mb-4">
-          <i data-lucide="smartphone" class="w-4 h-4"></i>アプリ事業
+<section id="contact" class="px-4 pb-24 scroll-mt-20">
+  <div class="max-w-6xl mx-auto">
+    <div class="relative overflow-hidden orange-gradient rounded-[2rem] px-6 py-14 md:px-16 md:py-16 text-white">
+      <div class="blob" style="width:300px;height:300px;background:#FFD166;top:-120px;right:-60px;opacity:.5;"></div>
+      <div class="relative flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+        <div>
+          <p class="text-white/80 text-xs font-bold tracking-widest uppercase mb-2">Contact</p>
+          <h2 class="text-3xl md:text-4xl font-black mb-3">お問い合わせ</h2>
+          <p class="text-white/90 text-sm leading-relaxed">サービスの詳細・お見積もり・取材のご依頼は、<br class="hidden sm:block">お気軽にご連絡ください。</p>
         </div>
-        <h3 class="text-xl font-black text-gray-900 mb-3"><span class="inline-block">就活生のための</span><span class="inline-block">アプリを開発・運営</span></h3>
-        <p class="text-gray-500 text-sm leading-relaxed mb-6">就活生が本音で情報交換できるSNSと、選考をシンプルに管理できるアプリ。どちらもApp Storeで無料配信中です。</p>
-        <div class="space-y-3 mb-6">
-          <div class="flex items-center gap-3">
-            <img src="shutalk-icon.png" alt="就トーク" class="w-11 h-11 rounded-xl shadow object-cover" />
-            <div>
-              <p class="font-bold text-gray-900 text-sm">就トーク</p>
-              <p class="text-xs text-gray-500">就活生のための本音SNS</p>
-            </div>
-          </div>
-          <div class="flex items-center gap-3">
-            <img src="simpleshukatsu-icon.png" alt="シンプル就活" class="w-11 h-11 rounded-xl shadow object-cover" />
-            <div>
-              <p class="font-bold text-gray-900 text-sm">シンプル就活</p>
-              <p class="text-xs text-gray-500">就活の選考、一画面で管理</p>
-            </div>
-          </div>
-        </div>
-        <span class="mt-auto inline-flex items-center gap-1 text-orange-500 text-sm font-bold group-hover:gap-2 transition-all">アプリ紹介を見る <i data-lucide="arrow-right" class="w-4 h-4"></i></span>
-      </a>
-
-      <!-- BizMatch -->
-      <a href="https://bizmatch.nobia-lab.com/" target="_blank" rel="noopener" class="card-hover group bg-white rounded-2xl border border-gray-100 shadow-sm p-7 flex flex-col">
-        <div class="flex items-center gap-2 text-pink-500 text-xs font-bold mb-4">
-          <i data-lucide="search" class="w-4 h-4"></i>就活支援事業
-        </div>
-        <h3 class="text-xl font-black text-gray-900 mb-3">
-          <span class="inline-block">就活イベント・</span><span class="inline-block">エージェント検索ナビ</span>
-        </h3>
-        <p class="text-gray-500 text-sm leading-relaxed mb-6">就活イベント・就活エージェント・就活サービスを条件で絞り込んで探せる「BizMatch」を運営。京都・東京・関西の就活生向けInstagramアカウントでも情報を発信しています。</p>
-        <div class="flex items-center gap-3 mb-6">
-          <img src="bizmatch-icon.png" alt="BizMatch" class="w-11 h-11 rounded-xl shadow object-cover" />
-          <div>
-            <p class="font-bold text-gray-900 text-sm">BizMatch</p>
-            <p class="text-xs text-gray-500">bizmatch.nobia-lab.com</p>
-          </div>
-        </div>
-        <span class="mt-auto inline-flex items-center gap-1 text-pink-500 text-sm font-bold group-hover:gap-2 transition-all">サイトを見る <i data-lucide="arrow-up-right" class="w-4 h-4"></i></span>
-      </a>
-    </div>
-
-    <!-- 受託・代行事業 -->
-    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-7">
-      <div class="flex items-center gap-2 text-blue-500 text-xs font-bold mb-4">
-        <i data-lucide="briefcase" class="w-4 h-4"></i>受託・代行事業
+        <a href="mailto:nobia.lab.official@gmail.com" class="btn-primary inline-flex items-center justify-center gap-2 bg-white text-orange-600 font-bold px-7 py-4 rounded-full shadow-lg text-sm md:text-base">
+          <i data-lucide="mail" class="w-5 h-5"></i>nobia.lab.official@gmail.com
+        </a>
       </div>
-      <h3 class="text-xl font-black text-gray-900 mb-3"><span class="inline-block">学生に届く発信・採用を、</span><span class="inline-block">企業と一緒に</span></h3>
-      <p class="text-gray-500 text-sm leading-relaxed mb-6">学生目線と自社サービスの運営ノウハウを活かして、企業の採用・集客・発信を支援します。</p>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mb-6">
-        <div class="flex items-center gap-2.5 bg-gray-50 rounded-xl px-4 py-3">
-          <i data-lucide="megaphone" class="w-4 h-4 text-blue-500 flex-shrink-0"></i><span class="text-sm font-bold text-gray-800">広告・求人広告</span>
-        </div>
-        <div class="flex items-center gap-2.5 bg-gray-50 rounded-xl px-4 py-3">
-          <i data-lucide="users" class="w-4 h-4 text-orange-500 flex-shrink-0"></i><span class="text-sm font-bold text-gray-800">学生送客</span>
-        </div>
-        <div class="flex items-center gap-2.5 bg-gray-50 rounded-xl px-4 py-3">
-          <i data-lucide="code" class="w-4 h-4 text-teal-500 flex-shrink-0"></i><span class="text-sm font-bold text-gray-800">アプリ開発</span>
-        </div>
-        <div class="flex items-center gap-2.5 bg-gray-50 rounded-xl px-4 py-3">
-          <i data-lucide="layout-template" class="w-4 h-4 text-purple-500 flex-shrink-0"></i><span class="text-sm font-bold text-gray-800">HP・採用ページ作成</span>
-        </div>
-        <div class="flex items-center gap-2.5 bg-gray-50 rounded-xl px-4 py-3">
-          <i data-lucide="share-2" class="w-4 h-4 text-pink-500 flex-shrink-0"></i><span class="text-sm font-bold text-gray-800">SNS運用代行</span>
-        </div>
-        <div class="flex items-center gap-2.5 bg-gray-50 rounded-xl px-4 py-3">
-          <i data-lucide="clapperboard" class="w-4 h-4 text-amber-500 flex-shrink-0"></i><span class="text-sm font-bold text-gray-800">ショート動画作成</span>
-        </div>
-      </div>
-      <a href="/business" class="inline-flex items-center gap-1 text-blue-500 text-sm font-bold hover:gap-2 transition-all">事業内容の詳細を見る <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
     </div>
-
   </div>
 </section>
 
@@ -248,23 +423,27 @@
      FOOTER
 ======================================== -->
 <footer class="bg-gray-900 text-gray-400 py-10 px-4">
-  <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-    <div class="flex items-center gap-2">
-      <div class="w-8 h-8 orange-gradient rounded-xl flex items-center justify-center">
-        <span class="text-white font-black text-sm">N</span>
+  <div class="max-w-6xl mx-auto">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 orange-gradient rounded-xl flex items-center justify-center">
+          <span class="text-white font-black text-sm">N</span>
+        </div>
+        <span class="text-white font-black text-lg">Nobia</span>
+        <span class="text-gray-500 text-xs ml-1 whitespace-nowrap">学生アプリラボ</span>
       </div>
-      <span class="text-white font-black text-lg">Nobia</span>
-      <span class="text-gray-500 text-xs ml-1">学生アプリラボ</span>
+      <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs">
+        <a href="/apps#apps" class="hover:text-white transition-colors">アプリ紹介</a>
+        <a href="/apps#story" class="hover:text-white transition-colors">開発ストーリー</a>
+        <a href="/apps#team" class="hover:text-white transition-colors">チーム</a>
+        <a href="#contact" class="hover:text-white transition-colors">お問い合わせ</a>
+        <a href="#business" class="hover:text-white transition-colors">事業内容</a>
+        <a href="/press" class="hover:text-white transition-colors">プレスルーム</a>
+        <a href="/privacy" class="hover:text-white transition-colors">プライバシーポリシー</a>
+        <a href="/terms" class="hover:text-white transition-colors">利用規約</a>
+      </nav>
+      <p class="text-xs text-gray-500">© 2026 学生アプリラボ Nobia. All rights reserved.</p>
     </div>
-    <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs">
-      <a href="/apps" class="hover:text-white transition-colors">アプリ紹介</a>
-      <a href="/business" class="hover:text-white transition-colors">事業内容</a>
-      <a href="/press" class="hover:text-white transition-colors">プレスルーム</a>
-      <a href="/privacy" class="hover:text-white transition-colors">プライバシーポリシー</a>
-      <a href="/terms" class="hover:text-white transition-colors">利用規約</a>
-      <a href="mailto:nobia.lab.official@gmail.com" class="hover:text-white transition-colors">お問い合わせ</a>
-    </nav>
-    <p class="text-xs text-gray-500">© 2026 学生アプリラボ Nobia. All rights reserved.</p>
   </div>
 </footer>
 
