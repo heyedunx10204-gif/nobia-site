@@ -55,6 +55,10 @@
   }
   </script>
 
+  <!-- 見出し用フォント（使う文字だけ読み込み） -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@700&display=swap&text=%E3%80%81%E3%80%82%E3%81%98%E3%81%99%E3%81%A6%E3%81%AE%E3%81%B8%E3%81%B9%E3%82%92%E3%82%A4%E3%82%B9%E3%82%BF%E3%83%88%E3%83%A9%E3%83%B3%E3%83%BC%E5%90%8C%E5%B0%B1%E6%B4%BB%E7%94%9F" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <style>
@@ -81,6 +85,7 @@
     #mobile-menu.open { display: block; }
 
     /* HERO */
+    .hero-title { font-family: 'Zen Kaku Gothic New', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', sans-serif; font-weight: 700; letter-spacing: 0.03em; }
     .hero { position: relative; overflow: hidden; background: #FFF7EE; }
     .hero::before {               /* 細かいドットの地模様 */
       content: ""; position: absolute; inset: 0;
@@ -181,7 +186,7 @@
       <p class="fade-up inline-flex items-center gap-2 text-xs font-bold tracking-widest text-orange-600 bg-white/80 border border-orange-100 rounded-full px-4 py-1.5 mb-6 shadow-sm">
         <span class="w-1.5 h-1.5 rounded-full bg-orange-500"></span>student app lab Nobia
       </p>
-      <h1 class="fade-up d1 text-[2rem] sm:text-5xl font-black text-gray-900 leading-[1.15] tracking-tight mb-6">
+      <h1 class="hero-title fade-up d1 text-[1.8rem] sm:text-5xl text-gray-900 leading-[1.2] mb-6">
         <span class="inline-block">すべての就活生を、</span><br>
         <span class="inline-block"><span class="text-gradient">同じスタートライン</span>へ。</span>
       </h1>
