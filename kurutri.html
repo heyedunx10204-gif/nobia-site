@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KuruTri（クルトリ）｜行きたい場所を入れるだけの旅程作成サイト | 学生アプリラボ Nobia</title>
+  <meta name="description" content="行きたい場所と時刻を入れるだけで、回る順番・乗り物・時刻を1本の旅程にまとめる旅程作成サイト「KuruTri（クルトリ）」。学生アプリラボNobiaが開発中です（京都向け試作版）。" />
+  <link rel="canonical" href="https://nobia-lab.com/kurutri" />
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <!-- OGP -->
+  <meta property="og:title" content="KuruTri（クルトリ）｜行きたい場所を入れるだけの旅程作成サイト" />
+  <meta property="og:description" content="行きたい場所と時刻を入れるだけで、回る順番・乗り物・時刻を1本の旅程にまとめる旅程作成サイト「KuruTri（クルトリ）」。学生アプリラボNobiaが開発中です（京都向け試作版）。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://nobia-lab.com/kurutri" />
+  <meta property="og:site_name" content="学生アプリラボ Nobia" />
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:image" content="https://nobia-lab.com/ogp.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="KuruTri（クルトリ）｜行きたい場所を入れるだけの旅程作成サイト" />
+  <meta name="twitter:description" content="行きたい場所と時刻を入れるだけで、回る順番・乗り物・時刻を1本の旅程にまとめる旅程作成サイト「KuruTri（クルトリ）」。学生アプリラボNobiaが開発中です（京都向け試作版）。" />
+  <meta name="twitter:image" content="https://nobia-lab.com/ogp.png" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+    {"@type":"ListItem","position":1,"name":"Nobia","item":"https://nobia-lab.com/"},
+    {"@type":"ListItem","position":2,"name":"KuruTri","item":"https://nobia-lab.com/kurutri"}]}
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style>
+    [data-lucide] { display: inline-block; vertical-align: middle; }
+    html { scroll-behavior: smooth; }
+    body { background-color: #FFFAF5; font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', sans-serif; color: #1f2937; }
+    .orange-gradient { background: linear-gradient(135deg, #FF6B2C, #FF8F5A); }
+    .pink-gradient { background: linear-gradient(135deg, #E1306C, #F77737); }
+    .kt-bg { background-color: #c93068; }
+    .kt-text { color: #c93068; }
+    .kt-border { border-color: #f3c2d3; }
+    .btn-primary { transition: transform 0.15s, box-shadow 0.2s; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,107,44,0.35); }
+    .card-hover { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(17,24,39,0.10); }
+    a:focus-visible, button:focus-visible { outline: 2px solid #FF6B2C; outline-offset: 2px; }
+    #mobile-menu { display: none; }
+    #mobile-menu.open { display: block; }
+    .en-label { font-family: 'Helvetica Neue', Arial, sans-serif; font-weight: 800; font-size: 0.95rem; letter-spacing: 0.04em; color: #FF6B2C; }
+    .num { font-family: 'Helvetica Neue', Arial, sans-serif; font-weight: 900; letter-spacing: -0.04em; line-height: 1; }
+    .page-hero { position: relative; overflow: hidden; background: #FFF7EE; }
+    .page-hero::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(rgba(255,107,44,0.16) 1px, transparent 1px); background-size: 22px 22px; -webkit-mask-image: linear-gradient(180deg,#000,transparent 90%); mask-image: linear-gradient(180deg,#000,transparent 90%); }
+    .blob { position: absolute; border-radius: 9999px; filter: blur(60px); opacity: .5; pointer-events: none; }
+    .prose-pr h2 { font-size: 1.15rem; font-weight: 900; color: #111827; margin: 2.5rem 0 0.9rem; }
+    .prose-pr p { color: #4b5563; line-height: 2; margin: 0 0 1rem; font-size: 0.95rem; }
+    .prose-pr ol, .prose-pr ul { margin: 0 0 1rem; }
+  </style>
+</head>
+<body>
+
+<header class="sticky top-0 z-50 bg-white shadow-sm">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-2 group">
+      <div class="w-9 h-9 orange-gradient rounded-xl flex items-center justify-center shadow">
+        <span class="text-white font-black text-base leading-none">N</span>
+      </div>
+      <span class="text-xl font-black" style="color: #FF6B2C;">Nobia</span>
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-5 xl:gap-7 text-sm font-medium text-gray-600">
+      <a href="/#business" class="hover:text-orange-500 transition-colors">事業内容</a>
+      <a href="/apps" class="hover:text-orange-500 transition-colors">アプリ紹介</a>
+      <a href="/bizmatch" class="hover:text-orange-500 transition-colors">BizMatch</a>
+      <a href="/kurutri" class="hover:text-orange-500 transition-colors">KuruTri</a>
+      <a href="/service" class="hover:text-orange-500 transition-colors">受託・代行事業</a>
+      <a href="/press" class="hover:text-orange-500 transition-colors">プレスルーム</a>
+      <a href="/#contact" class="hover:text-orange-500 transition-colors">お問い合わせ</a>
+    </nav>
+
+    <a href="/apps#download" class="hidden lg:inline-flex items-center gap-2 btn-primary orange-gradient text-white text-sm font-bold px-5 py-2.5 rounded-full shadow">
+      アプリを入手 <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+
+    <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="メニュー">
+      <span class="block w-6 h-0.5 bg-gray-700"></span>
+      <span class="block w-6 h-0.5 bg-gray-700"></span>
+      <span class="block w-6 h-0.5 bg-gray-700"></span>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="lg:hidden bg-white border-t border-gray-100 px-4 py-4 space-y-3 text-sm font-medium text-gray-700">
+    <a href="/#business" class="block hover:text-orange-500">事業内容</a>
+    <a href="/apps" class="block hover:text-orange-500">アプリ紹介</a>
+    <a href="/bizmatch" class="block hover:text-orange-500">BizMatch</a>
+    <a href="/kurutri" class="block hover:text-orange-500">KuruTri</a>
+    <a href="/service" class="block hover:text-orange-500">受託・代行事業</a>
+    <a href="/press" class="block hover:text-orange-500">プレスルーム</a>
+    <a href="/#contact" class="block hover:text-orange-500">お問い合わせ</a>
+    <a href="/apps#download" class="flex w-full btn-primary orange-gradient text-white font-bold px-4 py-2.5 rounded-full mt-2 items-center justify-center gap-1.5">アプリを入手 <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+  </div>
+</header>
+
+<script>
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  });
+  document.querySelectorAll('#mobile-menu a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('mobile-menu').classList.remove('open'));
+  });
+</script>
+
+<main>
+
+<section class="page-hero px-4 pt-12 pb-16 md:pt-16 md:pb-24">
+  <div class="blob" style="width:380px;height:380px;background:#F4A3BF;top:-140px;right:-80px;opacity:.35;"></div>
+  <div class="relative max-w-6xl mx-auto">
+    <nav class="text-xs text-gray-400 mb-6 flex flex-wrap items-center gap-1.5" aria-label="パンくず"><a href="/" class="hover:text-orange-500">Nobia</a><i data-lucide="chevron-right" class="w-3 h-3"></i><a href="/#business" class="hover:text-orange-500">事業内容</a><i data-lucide="chevron-right" class="w-3 h-3"></i><span class="text-gray-600">KuruTri</span></nav>
+    <div class="grid md:grid-cols-[1.2fr_1fr] gap-10 items-center">
+      <div>
+        <p class="en-label">kurutri</p>
+        <h1 class="text-3xl md:text-[2.6rem] font-black text-gray-900 leading-tight mt-2 mb-5"><span class="inline-block">行きたい場所を入れるだけで、</span><br><span class="inline-block">1日の旅程が</span><span class="inline-block">できあがる。</span></h1>
+        <p class="text-gray-600 text-sm md:text-base leading-loose mb-4">KuruTri（クルトリ）は、行きたい場所と時刻を入れるだけで、回る順番・乗り物・時刻を1本の旅程にまとめる旅程作成サイトです。</p>
+        <p class="inline-flex items-center gap-2 text-xs font-bold kt-text bg-white border kt-border rounded-full px-3 py-1.5 mb-8"><i data-lucide="flask-conical" class="w-3.5 h-3.5"></i>開発中：京都を旅行する人向けの試作版</p>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href="https://kurutri.nobia-lab.com/" target="_blank" rel="noopener" class="btn-primary kt-bg text-white font-bold px-7 py-3.5 rounded-full shadow-lg inline-flex items-center justify-center gap-2">KuruTriを使ってみる <i data-lucide="arrow-up-right" class="w-4 h-4"></i></a>
+          <a href="#partner" class="bg-white text-gray-800 font-bold px-7 py-3.5 rounded-full border border-gray-200 hover:border-orange-300 transition-colors inline-flex items-center justify-center gap-2">宿・体験・お店の方へ</a>
+        </div>
+      </div>
+
+      <!-- 旅程のイメージ -->
+      <div class="bg-white rounded-[2rem] border border-gray-100 shadow-2xl p-6 md:p-7" aria-label="旅程のイメージ">
+        <div class="flex items-center justify-between mb-5">
+          <div class="flex items-center gap-2"><span class="w-9 h-9 kt-bg rounded-xl flex items-center justify-center"><i data-lucide="route" class="w-5 h-5 text-white"></i></span><p class="font-black text-gray-900">京都 日帰りの旅程</p></div>
+          <span class="text-[11px] font-bold text-gray-400">イメージ</span>
+        </div>
+        <ol class="text-sm">
+          <li class="flex gap-3"><span class="num w-12 text-gray-900 pt-0.5">09:00</span><span class="font-bold text-gray-800">京都駅（出発）</span></li>
+          <li class="flex gap-3 py-2"><span class="w-12"></span><span class="text-xs text-gray-400 inline-flex items-center gap-1.5"><i data-lucide="train-front" class="w-3.5 h-3.5"></i>電車 約5分</span></li>
+          <li class="flex gap-3"><span class="num w-12 text-gray-900 pt-0.5">09:10</span><span class="font-bold text-gray-800">伏見稲荷大社</span></li>
+          <li class="flex gap-3 py-2"><span class="w-12"></span><span class="text-xs text-gray-400 inline-flex items-center gap-1.5"><i data-lucide="bus" class="w-3.5 h-3.5"></i>バス 約25分</span></li>
+          <li class="flex gap-3"><span class="num w-12 text-gray-900 pt-0.5">11:30</span><span class="font-bold text-gray-800">清水寺</span></li>
+          <li class="flex gap-3 py-2"><span class="w-12"></span><span class="text-xs kt-text bg-pink-50 rounded-lg px-2.5 py-1.5 inline-flex items-center gap-1.5"><i data-lucide="clock" class="w-3.5 h-3.5"></i>空き時間 40分：近くの寄り道を提案</span></li>
+          <li class="flex gap-3"><span class="num w-12 text-gray-900 pt-0.5">13:00</span><span class="font-bold text-gray-800">ランチの予約</span></li>
+        </ol>
+        <a href="https://kurutri.nobia-lab.com/" target="_blank" rel="noopener" class="mt-5 inline-flex items-center gap-1 text-xs font-bold kt-text hover:underline">kurutri.nobia-lab.com で旅程をつくる <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i></a>
+        <p class="text-[11px] text-gray-400 mt-3">※ 表示は画面のイメージです。移動時間は試作版では距離からの概算です。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="feature" class="px-4 py-20 scroll-mt-16">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+      <div><p class="en-label">feature</p><h2 class="text-2xl md:text-3xl font-black text-gray-900 mt-1">KuruTriでできること</h2></div>
+      <p class="text-gray-500 text-sm leading-relaxed md:max-w-md">「どこに行きたいか」と「何時に出るか」だけで、順番・乗り物・時刻の入った旅程をつくります。</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-5 mb-5">
+      <div class="bg-white rounded-3xl border border-gray-100 shadow-sm p-7">
+        <p class="num text-4xl text-orange-200 mb-4">01</p>
+        <div class="flex items-center gap-2 mb-3"><i data-lucide="shuffle" class="w-5 h-5 kt-text"></i><h3 class="font-black text-gray-900 text-lg">回る順番をおまかせ</h3></div>
+        <p class="text-gray-500 text-sm leading-relaxed">行きたい場所を足すと、移動がいちばん短くなる位置に自動で入ります。「最短ルート順に」で全体の並べ替えもできます。</p>
+      </div>
+      <div class="bg-white rounded-3xl border border-gray-100 shadow-sm p-7">
+        <p class="num text-4xl text-orange-200 mb-4">02</p>
+        <div class="flex items-center gap-2 mb-3"><i data-lucide="train-front" class="w-5 h-5 kt-text"></i><h3 class="font-black text-gray-900 text-lg">乗り物を区間ごとに選べる</h3></div>
+        <p class="text-gray-500 text-sm leading-relaxed">電車・バス・徒歩・タクシー・車から、区間ごとに行き方を切り替えられます。レンタカーの借りる・返す場所と時刻にも対応しています。</p>
+      </div>
+      <div class="bg-white rounded-3xl border border-gray-100 shadow-sm p-7">
+        <p class="num text-4xl text-orange-200 mb-4">03</p>
+        <div class="flex items-center gap-2 mb-3"><i data-lucide="map-pin-plus" class="w-5 h-5 kt-text"></i><h3 class="font-black text-gray-900 text-lg">空き時間に寄り道を提案</h3></div>
+        <p class="text-gray-500 text-sm leading-relaxed">予定と予定のあいだに30分以上の空きがあると、近くで立ち寄れる場所を提案します。</p>
+      </div>
+    </div>
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="flex gap-4 bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+        <span class="w-10 h-10 rounded-xl bg-pink-50 flex items-center justify-center flex-shrink-0"><i data-lucide="search" class="w-5 h-5 kt-text"></i></span>
+        <div><h3 class="font-bold text-gray-900 mb-1">名前・駅名・住所で探せる</h3><p class="text-gray-500 text-sm leading-relaxed">ひらがな・カタカナの読みでも検索できます。自宅やホテルの住所も登録できます。</p></div>
+      </div>
+      <div class="flex gap-4 bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+        <span class="w-10 h-10 rounded-xl bg-pink-50 flex items-center justify-center flex-shrink-0"><i data-lucide="triangle-alert" class="w-5 h-5 kt-text"></i></span>
+        <div><h3 class="font-bold text-gray-900 mb-1">間に合わないときは警告</h3><p class="text-gray-500 text-sm leading-relaxed">到着時刻を決めた予定、予約した便、レンタカーの返却に間に合わない場合に知らせます。</p></div>
+      </div>
+      <div class="flex gap-4 bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+        <span class="w-10 h-10 rounded-xl bg-pink-50 flex items-center justify-center flex-shrink-0"><i data-lucide="share-2" class="w-5 h-5 kt-text"></i></span>
+        <div><h3 class="font-bold text-gray-900 mb-1">旅程を共有</h3><p class="text-gray-500 text-sm leading-relaxed">共有リンクの発行や、LINE・メールに貼れるテキストのコピーで、同行者に送れます。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="px-4 pb-20">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+      <div><p class="en-label">flow</p><h2 class="text-2xl md:text-3xl font-black text-gray-900 mt-1">旅程ができるまで</h2></div>
+    </div>
+    <ol class="grid md:grid-cols-3 gap-5 pt-3">
+      <li class="relative bg-white rounded-3xl border border-gray-100 shadow-sm p-6">
+        <span class="absolute -top-3 left-6 kt-bg text-white text-xs font-black rounded-full px-3 py-1">STEP 1</span>
+        <i data-lucide="flag" class="w-6 h-6 kt-text mb-3 mt-2"></i>
+        <h3 class="font-black text-gray-900 mb-2">出発地と時刻を入れる</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">駅やホテルなど、どこから何時に出るかを入れます。</p>
+      </li>
+      <li class="relative bg-white rounded-3xl border border-gray-100 shadow-sm p-6">
+        <span class="absolute -top-3 left-6 kt-bg text-white text-xs font-black rounded-full px-3 py-1">STEP 2</span>
+        <i data-lucide="map-pin" class="w-6 h-6 kt-text mb-3 mt-2"></i>
+        <h3 class="font-black text-gray-900 mb-2">行きたい場所を足す</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">場所を足すたびに、順番・乗り物・時刻が入った旅程が組み上がります。</p>
+      </li>
+      <li class="relative bg-white rounded-3xl border border-gray-100 shadow-sm p-6">
+        <span class="absolute -top-3 left-6 kt-bg text-white text-xs font-black rounded-full px-3 py-1">STEP 3</span>
+        <i data-lucide="grip-vertical" class="w-6 h-6 kt-text mb-3 mt-2"></i>
+        <h3 class="font-black text-gray-900 mb-2">調整して共有する</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">ドラッグで並べ替えたり、区間の行き方を変えたりして、できた旅程を共有します。</p>
+      </li>
+    </ol>
+    <div class="mt-8 text-center"><a href="https://kurutri.nobia-lab.com/" target="_blank" rel="noopener" class="btn-primary kt-bg text-white font-bold px-7 py-3.5 rounded-full shadow-lg inline-flex items-center justify-center gap-2">KuruTriで旅程をつくる <i data-lucide="arrow-up-right" class="w-4 h-4"></i></a></div>
+  </div>
+</section>
+
+<section class="px-4 pb-20">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+      <div><p class="en-label">roadmap</p><h2 class="text-2xl md:text-3xl font-black text-gray-900 mt-1">開発状況</h2></div>
+      <p class="text-gray-500 text-sm leading-relaxed md:max-w-md">まずはアプリではなくWebサイトとして、京都を旅行する人向けに使い勝手を確かめています。</p>
+    </div>
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="bg-white rounded-3xl border border-gray-100 shadow-sm p-7">
+        <h3 class="font-black text-gray-900 mb-4 flex items-center gap-2"><i data-lucide="circle-check" class="w-5 h-5 kt-text"></i>試作版でできること</h3>
+        <ul class="space-y-2.5 text-sm text-gray-600">
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 kt-text flex-shrink-0 mt-0.5"></i>京都の観光地・寄り道候補を使った旅程づくり</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 kt-text flex-shrink-0 mt-0.5"></i>順番の自動調整・区間ごとの乗り物の切り替え</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 kt-text flex-shrink-0 mt-0.5"></i>間に合わないときの警告・空き時間の寄り道提案</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 kt-text flex-shrink-0 mt-0.5"></i>共有リンク・LINE／メール用テキストでの共有</li>
+        </ul>
+      </div>
+      <div class="bg-white rounded-3xl border border-gray-100 shadow-sm p-7">
+        <h3 class="font-black text-gray-900 mb-4 flex items-center gap-2"><i data-lucide="hourglass" class="w-5 h-5 text-gray-400"></i>これから取り組むこと</h3>
+        <ul class="space-y-2.5 text-sm text-gray-600">
+          <li class="flex gap-2"><i data-lucide="minus" class="w-4 h-4 text-gray-300 flex-shrink-0 mt-0.5"></i>京都以外の地域への対応</li>
+          <li class="flex gap-2"><i data-lucide="minus" class="w-4 h-4 text-gray-300 flex-shrink-0 mt-0.5"></i>実際の時刻表・運賃との連携（現在は距離からの概算）</li>
+          <li class="flex gap-2"><i data-lucide="minus" class="w-4 h-4 text-gray-300 flex-shrink-0 mt-0.5"></i>体験・お店の予約と支払い</li>
+          <li class="flex gap-2"><i data-lucide="minus" class="w-4 h-4 text-gray-300 flex-shrink-0 mt-0.5"></i>多言語への対応</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="partner" class="scroll-mt-20"></div>
+<section class="px-4 pb-24">
+  <div class="max-w-6xl mx-auto">
+    <div class="relative overflow-hidden orange-gradient rounded-[2rem] px-6 py-12 md:px-16 md:py-14 text-white">
+      <div class="blob" style="width:300px;height:300px;background:#FFD166;top:-120px;right:-60px;"></div>
+      <div class="relative flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+        <div>
+          <p class="en-label !text-white/80">for partners</p>
+          <h2 class="text-2xl md:text-3xl font-black mb-3 mt-1"><span class="inline-block">旅行者向けの宿・体験・お店を</span><span class="inline-block">運営している方へ</span></h2>
+          <p class="text-white/90 text-sm leading-relaxed">KuruTriでは、旅程の空き時間に、近くで当日参加できる体験やお店を<br class="hidden lg:block">提案する仕組みを準備しています。掲載の条件は準備中です。<br class="hidden lg:block">試作版へのご意見や、取材のご依頼もお気軽にお寄せください。</p>
+        </div>
+        <div class="flex flex-col items-center md:items-end gap-3">
+          <a href="mailto:nobia.lab.official@gmail.com?subject=%E3%80%90KuruTri%E3%80%91%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B&body=%E4%BC%9A%E7%A4%BE%E5%90%8D%E3%83%BB%E5%BA%97%E8%88%97%E5%90%8D%EF%BC%9A%0A%E3%81%8A%E5%90%8D%E5%89%8D%EF%BC%9A%0A%E3%81%94%E7%9B%B8%E8%AB%87%E5%86%85%E5%AE%B9%EF%BC%9A%0A" class="btn-primary inline-flex items-center justify-center gap-2 bg-white text-orange-600 font-bold px-7 py-4 rounded-full shadow-lg text-sm md:text-base">
+            <i data-lucide="mail" class="w-5 h-5"></i>メールで問い合わせる</a>
+          <div class="flex items-center gap-4 text-xs text-white/90">
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=nobia.lab.official@gmail.com&su=%E3%80%90KuruTri%E3%80%91%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B&body=%E4%BC%9A%E7%A4%BE%E5%90%8D%E3%83%BB%E5%BA%97%E8%88%97%E5%90%8D%EF%BC%9A%0A%E3%81%8A%E5%90%8D%E5%89%8D%EF%BC%9A%0A%E3%81%94%E7%9B%B8%E8%AB%87%E5%86%85%E5%AE%B9%EF%BC%9A%0A" target="_blank" rel="noopener" class="inline-flex items-center gap-1 hover:text-white underline-offset-4 hover:underline"><i data-lucide="external-link" class="w-3.5 h-3.5"></i>Gmailで作成</a>
+            <button type="button" id="copyMail" class="inline-flex items-center gap-1 hover:text-white underline-offset-4 hover:underline"><i data-lucide="copy" class="w-3.5 h-3.5"></i><span>アドレスをコピー</span></button>
+          </div>
+          <p class="text-xs text-white/80">nobia.lab.official@gmail.com</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="bg-gray-900 text-gray-400 px-4 pt-14 pb-8">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex flex-col lg:flex-row gap-10 lg:gap-16 pb-10 border-b border-white/10">
+      <div class="lg:w-64 flex-shrink-0">
+        <a href="/" class="flex items-center gap-2 mb-4">
+          <div class="w-8 h-8 orange-gradient rounded-xl flex items-center justify-center">
+            <span class="text-white font-black text-sm">N</span>
+          </div>
+          <span class="text-white font-black text-lg">Nobia</span>
+          <span class="text-gray-500 text-xs ml-1 whitespace-nowrap">学生アプリラボ</span>
+        </a>
+        <p class="text-xs leading-relaxed text-gray-500">すべての就活生を、同じスタートラインへ。</p>
+      </div>
+      <nav class="flex-1 grid grid-cols-2 md:grid-cols-4 gap-8 text-sm">
+        <div>
+          <a href="/#business" class="block text-white font-bold mb-3 hover:text-orange-400 transition-colors">事業内容</a>
+          <ul class="space-y-2 text-xs">
+            <li><a href="/#app" class="hover:text-white transition-colors">アプリ事業</a></li>
+            <li><a href="/bizmatch" class="hover:text-white transition-colors">BizMatch</a></li>
+            <li><a href="/kurutri" class="hover:text-white transition-colors">KuruTri</a></li>
+            <li><a href="/service" class="hover:text-white transition-colors">受託・代行事業</a></li>
+          </ul>
+        </div>
+        <div>
+          <a href="/apps" class="block text-white font-bold mb-3 hover:text-orange-400 transition-colors">アプリ紹介</a>
+          <ul class="space-y-2 text-xs">
+            <li><a href="/apps#apps" class="hover:text-white transition-colors">就トーク・シンプル就活</a></li>
+            <li><a href="/apps#story" class="hover:text-white transition-colors">開発ストーリー</a></li>
+            <li><a href="/apps#team" class="hover:text-white transition-colors">チーム</a></li>
+          </ul>
+        </div>
+        <div>
+          <a href="/press" class="block text-white font-bold mb-3 hover:text-orange-400 transition-colors">プレスルーム</a>
+          <ul class="space-y-2 text-xs">
+            <li><a href="/press" class="hover:text-white transition-colors">プレスリリース・お知らせ</a></li>
+          </ul>
+        </div>
+        <div>
+          <a href="/#contact" class="block text-white font-bold mb-3 hover:text-orange-400 transition-colors">お問い合わせ</a>
+          <ul class="space-y-2 text-xs">
+            <li><a href="mailto:nobia.lab.official@gmail.com" class="hover:text-white transition-colors break-all">nobia.lab.official@gmail.com</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4 pt-6 text-xs">
+      <div class="flex gap-6">
+        <a href="/privacy" class="hover:text-white transition-colors">プライバシーポリシー</a>
+        <a href="/terms" class="hover:text-white transition-colors">利用規約</a>
+      </div>
+      <p class="text-gray-500">© 2026 学生アプリラボ Nobia.</p>
+      <a href="#" class="inline-flex items-center gap-1 hover:text-white transition-colors"><i data-lucide="arrow-up" class="w-3.5 h-3.5"></i>Pagetop</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  lucide.createIcons();
+  document.getElementById('copyMail')?.addEventListener('click', async (e) => {
+    const label = e.currentTarget.querySelector('span');
+    try { await navigator.clipboard.writeText('nobia.lab.official@gmail.com'); label.textContent = 'コピーしました'; }
+    catch { label.textContent = 'nobia.lab.official@gmail.com'; }
+    setTimeout(() => { label.textContent = 'アドレスをコピー'; }, 2000);
+  });
+</script>
+</body>
+</html>
